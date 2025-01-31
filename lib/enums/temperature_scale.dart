@@ -1,0 +1,4 @@
+enum TemperatureScale {
+  C,
+  F
+}

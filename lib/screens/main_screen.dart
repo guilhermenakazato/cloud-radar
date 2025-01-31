@@ -1,4 +1,6 @@
 import 'package:cloud_radar/components/prediction.dart';
+import 'package:cloud_radar/screens/config_screen.dart';
+import 'package:cloud_radar/utils/navigate.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatelessWidget {
@@ -21,7 +23,7 @@ class MainScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Column(
@@ -89,62 +91,99 @@ class MainScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Column(
-                    children: [
-                      // SingleChildScrollView(
-                      //   scrollDirection: Axis.horizontal,
-                      //   child: Row(
-                      //     children: [
-                      //       Prediction(
-                      //         day: "Hoje",
-                      //         iconPath: "assets/icons/rain.png",
-                      //         temperature: 30,
-                      //         temperatureScale: "C",
-                      //       ),
-                      //       Prediction(
-                      //         day: "Amanhã",
-                      //         iconPath: "assets/icons/sunny.png",
-                      //         temperature: 30,
-                      //         temperatureScale: "C",
-                      //       ),
-                      //       Prediction(
-                      //         day: "18/12",
-                      //         iconPath: "assets/icons/cloudy.png",
-                      //         temperature: 32,
-                      //         temperatureScale: "C",
-                      //       ),
-                      //       Prediction(
-                      //         day: "19/12",
-                      //         iconPath: "assets/icons/melting.png",
-                      //         temperature: 42,
-                      //         temperatureScale: "C",
-                      //       ),
-                      //       Prediction(
-                      //         day: "20/12",
-                      //         iconPath: "assets/icons/cloudy.png",
-                      //         temperature: 34,
-                      //         temperatureScale: "C",
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      // Row(
-                      //   children: [
-                      //     TextField(
-                      //       decoration: InputDecoration(
-                      //         prefixIcon: Image.asset("assets/icons/map.png"),
-                      //         suffixIcon: Image.asset("assets/icons/search.png"),
-                      //       ),
-                      //     ),
-                      //     IconButton(
-                      //       onPressed: () {},
-                      //       icon: Image.asset(
-                      //         "assets/icons/settings.png",
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                    ],
+                  Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.sizeOf(context).height * 0.04),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: SizedBox(
+                            width: MediaQuery.sizeOf(context).width * 0.9,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                spacing: 8,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Prediction(
+                                    day: "Hoje",
+                                    iconPath: "assets/icons/rain.png",
+                                    temperature: 30,
+                                    temperatureScale: "C",
+                                  ),
+                                  Prediction(
+                                    day: "Amanhã",
+                                    iconPath: "assets/icons/sunny.png",
+                                    temperature: 30,
+                                    temperatureScale: "C",
+                                  ),
+                                  Prediction(
+                                    day: "18/12",
+                                    iconPath: "assets/icons/cloudy.png",
+                                    temperature: 32,
+                                    temperatureScale: "C",
+                                  ),
+                                  Prediction(
+                                    day: "19/12",
+                                    iconPath: "assets/icons/melting.png",
+                                    temperature: 42,
+                                    temperatureScale: "C",
+                                  ),
+                                  Prediction(
+                                    day: "20/12",
+                                    iconPath: "assets/icons/cloudy.png",
+                                    temperature: 34,
+                                    temperatureScale: "C",
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  prefixIcon:
+                                      Image.asset("assets/icons/map.png"),
+                                  suffixIcon:
+                                      Image.asset("assets/icons/search.png"),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: IconButton(
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        WidgetStatePropertyAll<Color>(
+                                      Colors.black,
+                                    ),
+                                    padding: WidgetStatePropertyAll<
+                                        EdgeInsetsGeometry>(
+                                      EdgeInsets.all(16),
+                                    ),
+                                    shape: WidgetStatePropertyAll<
+                                        RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                    )),
+                                onPressed: () {
+                                  Navigate.to(context, ConfigScreen());
+                                },
+                                icon: Image.asset(
+                                  "assets/icons/settings.png",
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
