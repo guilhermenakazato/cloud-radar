@@ -1,5 +1,7 @@
+import 'package:cloud_radar/components/config_tile.dart';
 import 'package:cloud_radar/enums/temperature_scale.dart';
 import 'package:cloud_radar/enums/wind_speed.dart';
+import 'package:cloud_radar/theme/application_colors.dart';
 import 'package:flutter/material.dart';
 
 class ConfigScreen extends StatefulWidget {
@@ -12,10 +14,12 @@ class ConfigScreen extends StatefulWidget {
 class _ConfigScreenState extends State<ConfigScreen> {
   TemperatureScale? _chosenTemperatureScale = TemperatureScale.C;
   WindSpeed? _chosenWindSpeedUnit = WindSpeed.km;
+  bool _activateWidget = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ApplicationColors.black,
       appBar: AppBar(
         leading: Image.asset("assets/icons/back.png"),
         title: Text("Configurações"),
@@ -23,11 +27,9 @@ class _ConfigScreenState extends State<ConfigScreen> {
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Container(
           padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: Colors.black,
-          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
@@ -99,8 +101,18 @@ class _ConfigScreenState extends State<ConfigScreen> {
                       horizontal: 10,
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Ativar widget"),
+                        Switch(
+                          value: _activateWidget,
+                          activeColor: ApplicationColors.red400,
+                          onChanged: (bool value) {
+                            setState(() {
+                            _activateWidget = value;
+                            });
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -122,66 +134,37 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   ),
                   Column(
                     children: [
-                      Material(
-                        color: Colors.black,
-                        child: RadioListTile<TemperatureScale>(
-                          contentPadding: EdgeInsets.all(10),
-                          value: TemperatureScale.C,
-                          selected:
-                              _chosenTemperatureScale == TemperatureScale.C,
-                          selectedTileColor: Colors.amber,
-                          tileColor: Colors.black,
-                          title: Text(
-                            "Celsius (C)",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          subtitle: Text(
-                            "Será representado com a letra C",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          groupValue: _chosenTemperatureScale,
-                          controlAffinity: ListTileControlAffinity.trailing,
-                          onChanged: (TemperatureScale? value) {
-                            setState(() {
-                              _chosenTemperatureScale = value;
-                            });
-                          },
-                        ),
+                      ConfigTile<TemperatureScale>(
+                        groupValue: _chosenTemperatureScale,
+                        tileValue: TemperatureScale.C,
+                        titleText: 'Celsius (C)',
+                        subtitleText: 'Será representado com a letra C',
+                        onTileTap: () {
+                          setState(() {
+                            _chosenTemperatureScale = TemperatureScale.C;
+                          });
+                        },
+                        onRadioTap: (TemperatureScale? value) {
+                          setState(() {
+                            _chosenTemperatureScale = value;
+                          });
+                        },
                       ),
-                      Material(
-                        child: ListTileTheme(
-                          child: RadioListTile<TemperatureScale>(
-                            contentPadding: EdgeInsets.all(10),
-                            value: TemperatureScale.F,
-                            title: Text(
-                              "Fahrenheit (F)",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            subtitle: Text(
-                              "Será representado com a letra F",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            tileColor: Colors.black,
-                            groupValue: _chosenTemperatureScale,
-                            selectedTileColor: Colors.amber,
-                            selected:
-                                _chosenTemperatureScale == TemperatureScale.F,
-                            controlAffinity: ListTileControlAffinity.trailing,
-                            onChanged: (TemperatureScale? value) {
-                              setState(() {
-                                _chosenTemperatureScale = value;
-                              });
-                            },
-                          ),
-                        ),
+                      ConfigTile<TemperatureScale>(
+                        groupValue: _chosenTemperatureScale,
+                        tileValue: TemperatureScale.F,
+                        titleText: 'Celsius (F)',
+                        subtitleText: 'Será representado com a letra F',
+                        onTileTap: () {
+                          setState(() {
+                            _chosenTemperatureScale = TemperatureScale.F;
+                          });
+                        },
+                        onRadioTap: (TemperatureScale? value) {
+                          setState(() {
+                            _chosenTemperatureScale = value;
+                          });
+                        },
                       ),
                     ],
                   ),
@@ -198,63 +181,57 @@ class _ConfigScreenState extends State<ConfigScreen> {
                       Text("Velocidade")
                     ],
                   ),
-                  Material(
-                    color: Colors.black,
-                    child: RadioListTile<WindSpeed>(
-                      contentPadding: EdgeInsets.all(10),
-                      value: WindSpeed.km,
-                      selected: _chosenWindSpeedUnit == WindSpeed.km,
-                      selectedTileColor: Colors.amber,
-                      tileColor: Colors.black,
-                      title: Text(
-                        "Km/h",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                  Column(
+                    children: [
+                      ConfigTile<WindSpeed>(
+                        groupValue: _chosenWindSpeedUnit,
+                        tileValue: WindSpeed.km,
+                        onTileTap: () {
+                          setState(() {
+                            _chosenWindSpeedUnit = WindSpeed.km;
+                          });
+                        },
+                        onRadioTap: (WindSpeed? value) {
+                          setState(() {
+                            _chosenWindSpeedUnit = value;
+                          });
+                        },
+                        titleText: 'Km/h',
+                        subtitleText: 'Quilômetro por hora',
                       ),
-                      subtitle: Text(
-                        "Quilômetro por hora",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                      ConfigTile<WindSpeed>(
+                        groupValue: _chosenWindSpeedUnit,
+                        tileValue: WindSpeed.m,
+                        onTileTap: () {
+                          setState(() {
+                            _chosenWindSpeedUnit = WindSpeed.m;
+                          });
+                        },
+                        onRadioTap: (WindSpeed? value) {
+                          setState(() {
+                            _chosenWindSpeedUnit = value;
+                          });
+                        },
+                        titleText: 'M/s',
+                        subtitleText: 'Metro por segundo',
                       ),
-                      groupValue: _chosenWindSpeedUnit,
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      onChanged: (WindSpeed? value) {
-                        setState(() {
-                          _chosenWindSpeedUnit = value;
-                        });
-                      },
-                    ),
-                  ),
-                  Material(
-                    color: Colors.black,
-                    child: RadioListTile<WindSpeed>(
-                      contentPadding: EdgeInsets.all(10),
-                      value: WindSpeed.m,
-                      selected: _chosenWindSpeedUnit == WindSpeed.m,
-                      selectedTileColor: Colors.amber,
-                      tileColor: Colors.black,
-                      title: Text(
-                        "M/s",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                      ConfigTile<WindSpeed>(
+                        groupValue: _chosenWindSpeedUnit,
+                        tileValue: WindSpeed.mph,
+                        onTileTap: () {
+                          setState(() {
+                            _chosenWindSpeedUnit = WindSpeed.mph;
+                          });
+                        },
+                        onRadioTap: (WindSpeed? value) {
+                          setState(() {
+                            _chosenWindSpeedUnit = value;
+                          });
+                        },
+                        titleText: 'Km/h',
+                        subtitleText: 'Milha por hora',
                       ),
-                      subtitle: Text(
-                        "Metro por segundo",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      groupValue: _chosenWindSpeedUnit,
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      onChanged: (WindSpeed? value) {
-                        setState(() {
-                          _chosenWindSpeedUnit = value;
-                        });
-                      },
-                    ),
+                    ],
                   ),
                 ],
               ),

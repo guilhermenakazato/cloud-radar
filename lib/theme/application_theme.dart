@@ -5,15 +5,14 @@ class ApplicationThemes {
   static final defaultTheme = ThemeData(
     colorScheme: const ColorScheme(
       brightness: Brightness.dark,
-      primary: ApplicationColors.primary,
-      onPrimary: Colors.white,
-      secondary: ApplicationColors.secondary,
-      onSecondary: Colors.black,
-      error: ApplicationColors.error,
+      primary: ApplicationColors.blue,
+      onPrimary: ApplicationColors.white,
+      secondary: ApplicationColors.green,
+      onSecondary: ApplicationColors.black,
+      error: ApplicationColors.red,
       onError: Colors.white,
       surface: Colors.white,
-      onSurface: ApplicationColors.primary,
+      onSurface: ApplicationColors.blue,
     ),
-    fontFamily: "Roboto",
   );
 }
