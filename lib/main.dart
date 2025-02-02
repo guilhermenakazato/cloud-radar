@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ApplicationThemes.defaultTheme,
       title: 'Cloud Radar',
+      themeMode: ThemeMode.dark,
       home: Scaffold(
         body: StartScreen()
       ),

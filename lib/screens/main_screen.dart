@@ -51,7 +51,7 @@ class MainScreen extends StatelessWidget {
                                 Text("C"),
                               ],
                             ),
-                            Image.asset("assets/icons/rain.png"),
+                            Image.asset("assets/icons/chuva.png"),
                             Text("Tempo chuvoso"),
                             Text("Chuvinha boa"),
                           ],
@@ -63,20 +63,20 @@ class MainScreen extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Image.asset("assets/icons/wind.png"),
+                                Image.asset("assets/icons/vento.png"),
                                 Text("2.60 Km/h Norte"),
                               ],
                             ),
                             Row(
                               children: [
-                                Image.asset("assets/icons/humidity.png"),
+                                Image.asset("assets/icons/umidade.png"),
                                 Text("Umidade 73%"),
                               ],
                             ),
                             Row(
                               children: [
                                 Image.asset(
-                                  "assets/icons/thermal-sensation.png",
+                                  "assets/icons/sensasao.png",
                                 ),
                                 Text(
                                   "Sensação de 26°",
@@ -93,7 +93,8 @@ class MainScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        bottom: MediaQuery.sizeOf(context).height * 0.04),
+                      bottom: MediaQuery.sizeOf(context).height * 0.04,
+                    ),
                     child: Column(
                       children: [
                         Padding(
@@ -102,6 +103,7 @@ class MainScreen extends StatelessWidget {
                             width: MediaQuery.sizeOf(context).width * 0.9,
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
+                              physics: BouncingScrollPhysics(),
                               child: Row(
                                 spacing: 8,
                                 mainAxisAlignment:
@@ -109,31 +111,31 @@ class MainScreen extends StatelessWidget {
                                 children: [
                                   Prediction(
                                     day: "Hoje",
-                                    iconPath: "assets/icons/rain.png",
+                                    iconPath: "assets/icons/chuva.png",
                                     temperature: 30,
                                     temperatureScale: "C",
                                   ),
                                   Prediction(
                                     day: "Amanhã",
-                                    iconPath: "assets/icons/sunny.png",
+                                    iconPath: "assets/icons/solPraCaralho.png",
                                     temperature: 30,
                                     temperatureScale: "C",
                                   ),
                                   Prediction(
                                     day: "18/12",
-                                    iconPath: "assets/icons/cloudy.png",
+                                    iconPath: "assets/icons/solComNuvens.png",
                                     temperature: 32,
                                     temperatureScale: "C",
                                   ),
                                   Prediction(
                                     day: "19/12",
-                                    iconPath: "assets/icons/melting.png",
+                                    iconPath: "assets/icons/40graus+.png",
                                     temperature: 42,
                                     temperatureScale: "C",
                                   ),
                                   Prediction(
                                     day: "20/12",
-                                    iconPath: "assets/icons/cloudy.png",
+                                    iconPath: "assets/icons/solComNuvens.png",
                                     temperature: 34,
                                     temperatureScale: "C",
                                   ),
@@ -148,9 +150,9 @@ class MainScreen extends StatelessWidget {
                               child: TextField(
                                 decoration: InputDecoration(
                                   prefixIcon:
-                                      Image.asset("assets/icons/map.png"),
+                                      Image.asset("assets/icons/mapa.png"),
                                   suffixIcon:
-                                      Image.asset("assets/icons/search.png"),
+                                      Image.asset("assets/icons/procurar.png"),
                                 ),
                               ),
                             ),
@@ -176,7 +178,7 @@ class MainScreen extends StatelessWidget {
                                   Navigate.to(context, ConfigScreen());
                                 },
                                 icon: Image.asset(
-                                  "assets/icons/settings.png",
+                                  "assets/icons/configuracao.png",
                                 ),
                               ),
                             ),

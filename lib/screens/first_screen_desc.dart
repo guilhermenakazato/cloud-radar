@@ -12,8 +12,21 @@ class FirstScreenDesc extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            "assets/presentation2-1.png",
+          SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            child: FittedBox(
+              child: Row(
+                children: [
+                  Hero(
+                    tag: "image-2",
+                    child: Image.asset(
+                      "assets/presentation2-1.png",
+                    ),
+                  ),
+                  Image.asset("assets/presentation3-1.png",),
+                ],
+              ),
+            ),
           ),
           Row(
             children: [

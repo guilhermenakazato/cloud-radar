@@ -14,11 +14,26 @@ class StartScreen extends StatelessWidget {
       children: [
         Column(
           children: [
-            Image.asset(
-              "assets/presentation1.png",
+            SizedBox(
+              width: MediaQuery.sizeOf(context).width,
+              child: FittedBox(
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/presentation1.png",
+                    ),
+                    Hero(
+                      tag: "image-2",
+                      child: Image.asset(
+                        "assets/presentation2-1.png"
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
             Row(
-              children: [Text("Opa!",), Text("1/4",)],
+              children: [Text("Opa!",), Text("1/4",),],
             ),
             Text(
               "Bom, aqui é uma etapa rápida. Você entendera informações básicas e diretas sobre o tempo em sua região, ou a qual você deseja.",

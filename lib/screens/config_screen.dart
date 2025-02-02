@@ -2,6 +2,7 @@ import 'package:cloud_radar/components/config_tile.dart';
 import 'package:cloud_radar/enums/temperature_scale.dart';
 import 'package:cloud_radar/enums/wind_speed.dart';
 import 'package:cloud_radar/theme/application_colors.dart';
+import 'package:cloud_radar/utils/cloud_radar_dialog.dart';
 import 'package:flutter/material.dart';
 
 class ConfigScreen extends StatefulWidget {
@@ -14,14 +15,14 @@ class ConfigScreen extends StatefulWidget {
 class _ConfigScreenState extends State<ConfigScreen> {
   TemperatureScale? _chosenTemperatureScale = TemperatureScale.C;
   WindSpeed? _chosenWindSpeedUnit = WindSpeed.km;
-  bool _activateWidget = false;
+  bool _activateWidget = false, _hasMembership = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ApplicationColors.black,
       appBar: AppBar(
-        leading: Image.asset("assets/icons/back.png"),
+        leading: Image.asset("assets/icons/setaEsquerda.png"),
         title: Text("Configurações"),
         centerTitle: true,
         backgroundColor: Colors.black,
@@ -41,8 +42,30 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   Row(
                     spacing: 10,
                     children: [
-                      Image.asset("assets/icons/money.png"),
-                      Text("Seu plano - Não assinante"),
+                      Image.asset("assets/icons/inscreva-se.png"),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Seu plano - ",
+                          ),
+                          !_hasMembership
+                              ? Text(
+                                  "Não assinante",
+                                )
+                              : Row(
+                                  spacing: 8,
+                                  children: [
+                                    Text(
+                                      "Assinante",
+                                    ),
+                                    Image.asset(
+                                      "assets/icons/guardaChuva.png",
+                                    ),
+                                  ],
+                                ),
+                        ],
+                      ),
                     ],
                   ),
                   Text(
@@ -92,7 +115,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   Row(
                     spacing: 10,
                     children: [
-                      Image.asset("assets/icons/widget.png"),
+                      Image.asset("assets/icons/style.png"),
                       Text("Opções estilizadas"),
                     ],
                   ),
@@ -109,8 +132,37 @@ class _ConfigScreenState extends State<ConfigScreen> {
                           activeColor: ApplicationColors.red400,
                           onChanged: (bool value) {
                             setState(() {
-                            _activateWidget = value;
+                              _activateWidget = value;
                             });
+
+                            if (_activateWidget && !_hasMembership) {
+                              CloudRadarDialog.showDialog(
+                                context: context,
+                                title: Center(
+                                  child: Text(
+                                    "Atenção!",
+                                  ),
+                                ),
+                                content: Text(
+                                  "Parece que você não é assinante premium.",
+                                  textAlign: TextAlign.center,
+                                ),
+                                confirmButtonText: "Assine",
+                                declineButtonText: "Agora não",
+                                onConfirm: () {
+                                  Navigator.pop(context);
+                                  setState(() {
+                                    _hasMembership = true;
+                                  });
+                                },
+                                onDecline: () {
+                                  Navigator.pop(context);
+                                  setState(() {
+                                    _activateWidget = false;
+                                  });
+                                },
+                              );
+                            }
                           },
                         ),
                       ],
@@ -128,7 +180,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   Row(
                     spacing: 10,
                     children: [
-                      Image.asset("assets/icons/thermometer.png"),
+                      Image.asset("assets/icons/temperatura.png"),
                       Text("Temperatura")
                     ],
                   ),
@@ -177,7 +229,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   Row(
                     spacing: 10,
                     children: [
-                      Image.asset("assets/icons/wind-speed.png"),
+                      Image.asset("assets/icons/wind.png"),
                       Text("Velocidade")
                     ],
                   ),
