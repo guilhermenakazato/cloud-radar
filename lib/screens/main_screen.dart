@@ -1,5 +1,6 @@
 import 'package:cloud_radar/components/prediction.dart';
 import 'package:cloud_radar/screens/config_screen.dart';
+import 'package:cloud_radar/theme/cloud_radar_icons.dart';
 import 'package:cloud_radar/utils/navigate.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,7 @@ class MainScreen extends StatelessWidget {
                                 Text("C"),
                               ],
                             ),
-                            Image.asset("assets/icons/chuva.png"),
+                            Icon(CloudRadarIcons.chuva),
                             Text("Tempo chuvoso"),
                             Text("Chuvinha boa"),
                           ],
@@ -63,21 +64,19 @@ class MainScreen extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Image.asset("assets/icons/vento.png"),
+                                Icon(CloudRadarIcons.vento),
                                 Text("2.60 Km/h Norte"),
                               ],
                             ),
                             Row(
                               children: [
-                                Image.asset("assets/icons/umidade.png"),
+                                Icon(CloudRadarIcons.umidade),
                                 Text("Umidade 73%"),
                               ],
                             ),
                             Row(
                               children: [
-                                Image.asset(
-                                  "assets/icons/sensasao.png",
-                                ),
+                                Icon(CloudRadarIcons.sensacao),
                                 Text(
                                   "Sensação de 26°",
                                 ),
@@ -108,31 +107,31 @@ class MainScreen extends StatelessWidget {
                                 children: [
                                   Prediction(
                                     day: "Hoje",
-                                    iconPath: "assets/icons/chuva.png",
+                                    icon: CloudRadarIcons.chuva,
                                     temperature: 30,
                                     temperatureScale: "C",
                                   ),
                                   Prediction(
                                     day: "Amanhã",
-                                    iconPath: "assets/icons/solPraCaralho.png",
+                                    icon: CloudRadarIcons.sol,
                                     temperature: 30,
                                     temperatureScale: "C",
                                   ),
                                   Prediction(
                                     day: "18/12",
-                                    iconPath: "assets/icons/solComNuvens.png",
+                                    icon: CloudRadarIcons.solComNuvens,
                                     temperature: 32,
                                     temperatureScale: "C",
                                   ),
                                   Prediction(
                                     day: "19/12",
-                                    iconPath: "assets/icons/40graus+.png",
+                                    icon: CloudRadarIcons.inferno,
                                     temperature: 42,
                                     temperatureScale: "C",
                                   ),
                                   Prediction(
                                     day: "20/12",
-                                    iconPath: "assets/icons/solComNuvens.png",
+                                    icon: CloudRadarIcons.solComNuvens,
                                     temperature: 34,
                                     temperatureScale: "C",
                                   ),
@@ -146,10 +145,12 @@ class MainScreen extends StatelessWidget {
                             Expanded(
                               child: TextField(
                                 decoration: InputDecoration(
-                                  prefixIcon:
-                                      Image.asset("assets/icons/mapa.png"),
-                                  suffixIcon:
-                                      Image.asset("assets/icons/procurar.png"),
+                                  prefixIcon: Icon(
+                                    CloudRadarIcons.mapa,
+                                  ),
+                                  suffixIcon: Icon(
+                                    CloudRadarIcons.procurar,
+                                  ),
                                 ),
                               ),
                             ),
@@ -170,13 +171,11 @@ class MainScreen extends StatelessWidget {
                                       RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
-                                    )),
+                                    ),),
                                 onPressed: () {
                                   Navigate.to(context, ConfigScreen());
                                 },
-                                icon: Image.asset(
-                                  "assets/icons/configuracao.png",
-                                ),
+                                icon: Icon(CloudRadarIcons.configuracao),
                               ),
                             ),
                           ],

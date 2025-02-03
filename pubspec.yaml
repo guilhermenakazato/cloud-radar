@@ -61,10 +61,6 @@ flutter:
     - assets/
     - assets/2x/
     - assets/3x/
-    - assets/icons/
-    - assets/2x/icons/
-    - assets/3x/icons/
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -85,3 +81,6 @@ flutter:
           weight: 700
         - asset: fonts/Inter-Italic-VariableFont_opsz,wght.ttf
           style: italic
+    - family: CloudRadarIcons
+      fonts: 
+        - asset: fonts/CloudRadarIcons.ttf

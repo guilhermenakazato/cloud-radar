@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class Prediction extends StatelessWidget {
   const Prediction({
     super.key,
-    required this.iconPath,
+    required this.icon,
     required this.day,
     required this.temperature,
     required this.temperatureScale,
   });
 
-  final String iconPath;
+  final IconData icon;
   final String day;
   final int temperature;
   final String temperatureScale;
@@ -28,7 +28,7 @@ class Prediction extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(day),
-          Image.asset(iconPath),
+          Icon(icon),
           Text("$temperature°$temperatureScale"),
         ],
       ),

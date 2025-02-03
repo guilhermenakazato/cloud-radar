@@ -2,6 +2,7 @@ import 'package:cloud_radar/components/config_tile.dart';
 import 'package:cloud_radar/enums/temperature_scale.dart';
 import 'package:cloud_radar/enums/wind_speed.dart';
 import 'package:cloud_radar/theme/application_colors.dart';
+import 'package:cloud_radar/theme/cloud_radar_icons.dart';
 import 'package:cloud_radar/utils/cloud_radar_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
     return Scaffold(
       backgroundColor: ApplicationColors.black,
       appBar: AppBar(
-        leading: Image.asset("assets/icons/setaEsquerda.png"),
+        leading: Icon(CloudRadarIcons.setaEsquerda),
         title: Text("Configurações"),
         centerTitle: true,
         backgroundColor: Colors.black,
@@ -42,7 +43,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   Row(
                     spacing: 10,
                     children: [
-                      Image.asset("assets/icons/inscreva-se.png"),
+                      Icon(CloudRadarIcons.assinatura),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -59,9 +60,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                                     Text(
                                       "Assinante",
                                     ),
-                                    Image.asset(
-                                      "assets/icons/guardaChuva.png",
-                                    ),
+                                    Icon(CloudRadarIcons.guardaChuva),
                                   ],
                                 ),
                         ],
@@ -115,7 +114,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   Row(
                     spacing: 10,
                     children: [
-                      Image.asset("assets/icons/style.png"),
+                      Icon(CloudRadarIcons.widget),
                       Text("Opções estilizadas"),
                     ],
                   ),
@@ -180,7 +179,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   Row(
                     spacing: 10,
                     children: [
-                      Image.asset("assets/icons/temperatura.png"),
+                      Icon(CloudRadarIcons.temperatura),
                       Text("Temperatura")
                     ],
                   ),
@@ -229,7 +228,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   Row(
                     spacing: 10,
                     children: [
-                      Image.asset("assets/icons/wind.png"),
+                      Icon(CloudRadarIcons.velocidadeVento),
                       Text("Velocidade")
                     ],
                   ),

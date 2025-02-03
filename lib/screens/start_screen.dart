@@ -35,7 +35,14 @@ class StartScreen extends StatelessWidget {
               ),
             ),
             Row(
-              children: [Text("Opa!",), Text("1/4",),],
+              children: [
+                Text(
+                  "Opa!",
+                ),
+                Text(
+                  "1/4",
+                ),
+              ],
             ),
             Text(
               "Bom, aqui é uma etapa rápida. Você entendera informações básicas e diretas sobre o tempo em sua região, ou a qual você deseja.",
