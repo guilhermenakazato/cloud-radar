@@ -13,8 +13,10 @@ class FirstScreenDesc extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: MediaQuery.sizeOf(context).width,
-            child: FittedBox(
+            height: MediaQuery.sizeOf(context).height * 0.5,
+            child: OverflowBox(
+              alignment: Alignment.centerLeft,
+              maxWidth: double.infinity,
               child: Row(
                 children: [
                   Hero(
@@ -23,7 +25,12 @@ class FirstScreenDesc extends StatelessWidget {
                       "assets/presentation2-1.png",
                     ),
                   ),
-                  Image.asset("assets/presentation3-1.png",),
+                  Hero(
+                    tag: "image-3",
+                    child: Image.asset(
+                      "assets/presentation3-1.png",
+                    ),
+                  ),
                 ],
               ),
             ),

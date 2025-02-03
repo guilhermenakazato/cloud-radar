@@ -3,11 +3,11 @@ import 'package:cloud_radar/theme/application_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const CloudRadar());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class CloudRadar extends StatelessWidget {
+  const CloudRadar({super.key});
 
   @override
   Widget build(BuildContext context) {

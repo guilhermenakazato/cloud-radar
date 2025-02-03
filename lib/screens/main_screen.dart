@@ -80,9 +80,6 @@ class MainScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   "Sensação de 26°",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                  ),
                                 ),
                               ],
                             ),

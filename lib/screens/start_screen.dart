@@ -15,8 +15,10 @@ class StartScreen extends StatelessWidget {
         Column(
           children: [
             SizedBox(
-              width: MediaQuery.sizeOf(context).width,
-              child: FittedBox(
+              height: MediaQuery.sizeOf(context).height * 0.5,
+              child: OverflowBox(
+                alignment: Alignment.centerLeft,
+                maxWidth: double.infinity,
                 child: Row(
                   children: [
                     Image.asset(
@@ -25,7 +27,7 @@ class StartScreen extends StatelessWidget {
                     Hero(
                       tag: "image-2",
                       child: Image.asset(
-                        "assets/presentation2-1.png"
+                        "assets/presentation2-1.png",
                       ),
                     )
                   ],

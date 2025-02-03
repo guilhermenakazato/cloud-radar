@@ -12,8 +12,28 @@ class ConfigDesc extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            "assets/presentation3-1.png",
+          SizedBox(
+            height: MediaQuery.sizeOf(context).height * 0.5,
+            child: OverflowBox(
+              maxWidth: double.infinity,
+              alignment: Alignment.centerLeft,
+              child: Row(
+                children: [
+                  Hero(
+                    tag: "image-3",
+                    child: Image.asset(
+                      "assets/presentation3-1.png",
+                    ),
+                  ),
+                  Hero(
+                    tag: "image-4",
+                    child: Image.asset(
+                      "assets/presentation4.png"
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
           Row(
             children: [

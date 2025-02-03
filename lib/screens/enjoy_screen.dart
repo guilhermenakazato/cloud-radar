@@ -14,8 +14,14 @@ class EnjoyScreen extends StatelessWidget {
         children: [
           Column(
             children: [
-              Image.asset(
-                "assets/presentation4.png",
+              Hero(
+                tag: "image-4",
+                child: Image.asset(
+                  "assets/presentation4.png",
+                  height: MediaQuery.sizeOf(context).height * 0.5,
+                  width: MediaQuery.sizeOf(context).width,
+                  fit: BoxFit.cover,
+                ),
               ),
               Row(
                 children: [
