@@ -81,6 +81,12 @@ flutter:
           weight: 700
         - asset: fonts/Inter-Italic-VariableFont_opsz,wght.ttf
           style: italic
+    - family: Jaldi
+      fonts: 
+        - asset: fonts/Jaldi-Regular.ttf
+          weight: 400
+        - asset: fonts/Jaldi-Bold.ttf
+          weight: 700
     - family: CloudRadarIcons
       fonts: 
         - asset: fonts/CloudRadarIcons.ttf
