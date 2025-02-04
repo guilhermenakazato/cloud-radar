@@ -28,10 +28,30 @@ class OutlinedCloudButton extends StatelessWidget {
       iconAlignment: IconAlignment.end,
       icon: icon,
       style: ButtonStyle(
-        side: WidgetStateProperty.all(
-          BorderSide(
-            color: ApplicationColors.blue,
-          ),
+        backgroundColor: WidgetStateProperty.fromMap(
+          <WidgetStatesConstraint, Color> {
+            //TODO: fazer state pressed e focused
+            WidgetState.any: Colors.transparent,
+          }
+        ),
+        side: WidgetStateProperty.fromMap(
+          <WidgetStatesConstraint, BorderSide>{
+            WidgetState.hovered: BorderSide(
+              color: ApplicationColors.blue500,
+            ),
+            WidgetState.focused: BorderSide(
+              color: ApplicationColors.blue600,
+            ),
+            WidgetState.pressed: BorderSide(
+              color: ApplicationColors.blue,
+            ),
+            WidgetState.disabled: BorderSide(
+              color: ApplicationColors.black600,
+            ),
+            WidgetState.any: BorderSide(
+              color: ApplicationColors.blue,
+            ),
+          },
         ),
         padding: WidgetStateProperty.all(
           EdgeInsets.all(20),

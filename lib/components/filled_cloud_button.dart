@@ -14,19 +14,6 @@ class FilledCloudButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilledButton(
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(
-          ApplicationColors.blue,
-        ),
-        padding: WidgetStateProperty.all(
-          EdgeInsets.all(20),
-        ),
-        shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-      ),
       onPressed: onPressed,
       child: Text(
         text,
