@@ -1,24 +1,56 @@
 import 'package:cloud_radar/theme/application_colors.dart';
 import 'package:cloud_radar/theme/cloud_radar_icons.dart';
+import 'package:cloud_radar/theme/input_map_icon_color.dart';
+import 'package:cloud_radar/theme/input_search_icon_color.dart';
 import 'package:flutter/material.dart';
 
-class SearchInput extends StatelessWidget {
-  const SearchInput({super.key});
+class SearchInput extends StatefulWidget {
+  const SearchInput({super.key, this.enabled = true});
+  final bool enabled;
+
+  @override
+  State<SearchInput> createState() => _SearchInputState();
+}
+
+class _SearchInputState extends State<SearchInput> {
+  final FocusNode _focus = FocusNode();
+  double _opacity = 0.25;
+
+  @override
+  void initState() {
+    super.initState();
+    _focus.addListener(_onFocusChange);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _focus.removeListener(_onFocusChange);
+    _focus.dispose();
+  }
+
+  void _onFocusChange() {
+    double newOpacity = _focus.hasFocus ? 1 : 0.25;
+
+    setState(() {
+      _opacity = newOpacity;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: TextField(
+        focusNode: _focus,
+        enabled: widget.enabled,
+        style: TextStyle(
+          color: ApplicationColors.white,
+          fontSize: 16,
+          fontFamily: "DM Sans",
+          fontWeight: FontWeight.w400,
+        ),
+        cursorColor: ApplicationColors.white100,
         decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(12),
-            ),
-            borderSide: BorderSide(
-              color: ApplicationColors.orange,
-              width: 10,
-            ),
-          ),
           hintText: "digite aqui",
           hintStyle: TextStyle(
             color: ApplicationColors.white.withValues(alpha: 0.3),
@@ -26,10 +58,8 @@ class SearchInput extends StatelessWidget {
             fontFamily: "DM Sans",
             fontWeight: FontWeight.w400,
           ),
-          prefixIconColor: ApplicationColors.white,
-          suffixIconColor: ApplicationColors.white,
-          filled: true,
-          fillColor: ApplicationColors.blue400,
+          prefixIconColor: InputMapIconColor(),
+          suffixIconColor: InputSearchIconColor(),
           prefixIcon: Padding(
             padding: const EdgeInsets.only(
               left: 4,
@@ -37,16 +67,17 @@ class SearchInput extends StatelessWidget {
               bottom: 4,
               right: 10,
             ),
-            child: Container(
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: ApplicationColors.blue,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8),
+            child: Opacity(
+              opacity: _opacity,
+              child: Container(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: ApplicationColors.blue900,
+                  borderRadius: BorderRadius.circular(8),
                 ),
-              ),
-              child: Icon(
-                CloudRadarIcons.mapa,
+                child: Icon(
+                  CloudRadarIcons.mapa,
+                ),
               ),
             ),
           ),
@@ -59,12 +90,6 @@ class SearchInput extends StatelessWidget {
             ),
             child: Container(
               padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: ApplicationColors.blue,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8),
-                ),
-              ),
               child: Icon(
                 CloudRadarIcons.procurar,
               ),
