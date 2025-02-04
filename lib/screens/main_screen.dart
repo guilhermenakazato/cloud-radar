@@ -1,4 +1,5 @@
 import 'package:cloud_radar/components/prediction.dart';
+import 'package:cloud_radar/components/search_input.dart';
 import 'package:cloud_radar/screens/config_screen.dart';
 import 'package:cloud_radar/theme/application_colors.dart';
 import 'package:cloud_radar/theme/cloud_radar_icons.dart';
@@ -260,40 +261,35 @@ class MainScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                prefixIcon: Icon(
-                                  CloudRadarIcons.mapa,
-                                ),
-                                suffixIcon: Icon(
-                                  CloudRadarIcons.procurar,
-                                ),
-                              ),
-                            ),
-                          ),
+                          SearchInput(),
                           Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: IconButton(
                               style: ButtonStyle(
                                 backgroundColor: WidgetStatePropertyAll<Color>(
-                                  Colors.black,
+                                  ApplicationColors.blue,
                                 ),
                                 padding:
                                     WidgetStatePropertyAll<EdgeInsetsGeometry>(
-                                  EdgeInsets.all(16),
+                                  EdgeInsets.all(
+                                    16,
+                                  ),
                                 ),
                                 shape: WidgetStatePropertyAll<
                                     RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
+                                    borderRadius: BorderRadius.circular(
+                                      8,
+                                    ),
                                   ),
                                 ),
                               ),
                               onPressed: () {
                                 Navigate.to(context, ConfigScreen());
                               },
-                              icon: Icon(CloudRadarIcons.configuracao),
+                              icon: Icon(
+                                CloudRadarIcons.configuracao,
+                              ),
                             ),
                           ),
                         ],

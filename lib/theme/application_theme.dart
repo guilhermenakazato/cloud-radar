@@ -14,5 +14,8 @@ class ApplicationThemes {
       surface: Colors.white,
       onSurface: ApplicationColors.black,
     ),
+    iconTheme: IconThemeData(
+      color: ApplicationColors.white,
+    )
   );
 }
