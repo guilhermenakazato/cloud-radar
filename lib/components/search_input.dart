@@ -49,7 +49,7 @@ class _SearchInputState extends State<SearchInput> {
           fontFamily: "DM Sans",
           fontWeight: FontWeight.w400,
         ),
-        cursorColor: ApplicationColors.white100,
+        cursorColor: ApplicationColors.white,
         decoration: InputDecoration(
           hintText: "digite aqui",
           hintStyle: TextStyle(

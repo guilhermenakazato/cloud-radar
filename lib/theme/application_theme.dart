@@ -67,6 +67,79 @@ class ApplicationThemes {
         ),
       ),
     ),
-    outlinedButtonTheme: OutlinedButtonThemeData(),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: WidgetStateProperty.fromMap(
+          <WidgetStatesConstraint, Color>{
+            WidgetState.pressed: ApplicationColors.white,
+            WidgetState.any: ApplicationColors.black,
+          },
+        ),
+        backgroundColor: WidgetStateProperty.fromMap(
+          <WidgetStatesConstraint, Color>{
+            WidgetState.pressed: ApplicationColors.blue700,
+            WidgetState.any: Colors.transparent,
+          },
+        ),
+        side: WidgetStateProperty.fromMap(
+          <WidgetStatesConstraint, BorderSide>{
+            WidgetState.hovered: BorderSide(
+              color: ApplicationColors.blue500,
+            ),
+            WidgetState.focused: BorderSide(
+              color: ApplicationColors.blue600,
+            ),
+            WidgetState.pressed: BorderSide(
+              color: ApplicationColors.blue,
+            ),
+            WidgetState.disabled: BorderSide(
+              color: ApplicationColors.black600,
+            ),
+            WidgetState.any: BorderSide(
+              color: ApplicationColors.blue,
+            ),
+          },
+        ),
+        padding: WidgetStateProperty.all(
+          EdgeInsets.all(20),
+        ),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      ),
+    ),
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.fromMap(
+          <WidgetStatesConstraint, Color>{
+            WidgetState.hovered: ApplicationColors.blue500,
+            WidgetState.focused: ApplicationColors.blue600,
+            WidgetState.pressed: ApplicationColors.blue700,
+            WidgetState.disabled: ApplicationColors.black600,
+            WidgetState.any: ApplicationColors.blue,
+          },
+        ),
+        foregroundColor: WidgetStateProperty.fromMap(
+          <WidgetStatesConstraint, Color>{
+            WidgetState.disabled: ApplicationColors.white500,
+            WidgetState.any: ApplicationColors.white,
+          },
+        ),
+        padding: WidgetStateProperty.all(
+          EdgeInsets.all(
+            16,
+          ),
+        ),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              8,
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 }

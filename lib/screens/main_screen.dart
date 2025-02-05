@@ -35,7 +35,8 @@ class MainScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(10),
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: ApplicationColors.black.withValues(alpha: 0.9),
+                          color:
+                              ApplicationColors.black900.withValues(alpha: 0.9),
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(20),
                           ),
@@ -68,7 +69,7 @@ class MainScreen extends StatelessWidget {
                               fontFamily: "DM Sans",
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: ApplicationColors.black200,
+                              color: ApplicationColors.white,
                             ),
                           ),
                           Row(
@@ -88,7 +89,7 @@ class MainScreen extends StatelessWidget {
                               Text(
                                 "C",
                                 style: TextStyle(
-                                  color: ApplicationColors.orange,
+                                  color: ApplicationColors.orange500,
                                   fontFamily: "DM Sans",
                                   fontSize: 40,
                                   fontWeight: FontWeight.w500,
@@ -111,7 +112,7 @@ class MainScreen extends StatelessWidget {
                             child: Text(
                               "Chuvinha boa",
                               style: TextStyle(
-                                color: ApplicationColors.orange100,
+                                color: ApplicationColors.orange200,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: "Jaldi",
@@ -125,7 +126,8 @@ class MainScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 4.0),
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                          color: ApplicationColors.black.withValues(alpha: 0.9),
+                          color:
+                              ApplicationColors.black900.withValues(alpha: 0.9),
                           borderRadius: BorderRadius.vertical(
                             bottom: Radius.circular(12),
                           ),
@@ -265,25 +267,6 @@ class MainScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: IconButton(
-                              style: ButtonStyle(
-                                backgroundColor: WidgetStatePropertyAll<Color>(
-                                  ApplicationColors.blue,
-                                ),
-                                padding:
-                                    WidgetStatePropertyAll<EdgeInsetsGeometry>(
-                                  EdgeInsets.all(
-                                    16,
-                                  ),
-                                ),
-                                shape: WidgetStatePropertyAll<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                      8,
-                                    ),
-                                  ),
-                                ),
-                              ),
                               onPressed: () {
                                 Navigate.to(context, ConfigScreen());
                               },
