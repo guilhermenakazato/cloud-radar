@@ -17,7 +17,7 @@ class OutlinedCloudButton extends StatelessWidget {
     return OutlinedButton.icon(
       label: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w400,
           fontFamily: "DM Sans",

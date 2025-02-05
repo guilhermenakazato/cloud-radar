@@ -11,33 +11,37 @@ class EnjoyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        gradient: RadialGradient(
-          colors: [
-            Color(0xfffcccd9),
-            Color(0xffffdeed),
-            Color(0xffffd89c),
-            Color(0xfffff0d9),
-            Color(0xffffc4b7)
-          ],
-          stops: [0, 0.39, 0.68, 0.84, 1],
-          focalRadius: 0.1,
-          radius: 2.5,
-          center: Alignment.topCenter
-        ),
+      decoration: const BoxDecoration(
+        gradient: RadialGradient(colors: [
+          Color(0xfffcccd9),
+          Color(0xffffdeed),
+          Color(0xffffd89c),
+          Color(0xfffff0d9),
+          Color(0xffffc4b7)
+        ], stops: [
+          0,
+          0.39,
+          0.68,
+          0.84,
+          1
+        ], focalRadius: 0.1, radius: 2.5, center: Alignment.topCenter),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Hero(
-              tag: "image-4",
-              child: Image.asset(
-                "assets/presentation4.png",
-                height: MediaQuery.sizeOf(context).height * 0.5,
-                width: MediaQuery.sizeOf(context).width,
-                fit: BoxFit.cover,
+            SizedBox(
+              height: MediaQuery.sizeOf(context).height * 0.5,
+              width: MediaQuery.sizeOf(context).width,
+              child: const Hero(
+                tag: "image-4",
+                child: Image(
+                  image: AssetImage(
+                    "assets/presentation4.png",
+                  ),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Expanded(
@@ -56,7 +60,7 @@ class EnjoyScreen extends StatelessWidget {
                       children: [
                         SizedBox(
                           height: MediaQuery.sizeOf(context).height * 0.03,
-                          child: Row(
+                          child: const Row(
                             spacing: 10,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -86,7 +90,7 @@ class EnjoyScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Text(
+                        const Text(
                           "Esse é o fim do nosso Onboarding. Aproveite nosso aplicativo, lembre-se estamos na versão beta.",
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -105,7 +109,7 @@ class EnjoyScreen extends StatelessWidget {
                         child: FilledCloudButton(
                           text: "Próximo",
                           onPressed: () {
-                            Navigate.to(context, MainScreen());
+                            Navigate.to(context, const MainScreen());
                           },
                         ),
                       ),

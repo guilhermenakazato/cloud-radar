@@ -29,9 +29,7 @@ class StartScreen extends StatelessWidget {
                   ),
                   Hero(
                     tag: "image-2",
-                    child: Image.asset(
-                      "assets/presentation2-1.png",
-                    ),
+                    child: Image.asset("assets/presentation2-1.png"),
                   )
                 ],
               ),
@@ -53,7 +51,7 @@ class StartScreen extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: MediaQuery.sizeOf(context).height * 0.03,
-                        child: Row(
+                        child: const Row(
                           spacing: 10,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -83,7 +81,7 @@ class StartScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Text(
+                      const Text(
                         "Bom, aqui é uma etapa rápida. Você entenderá informações básicas e diretas sobre o tempo em sua região, ou a qual você deseja.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -103,9 +101,9 @@ class StartScreen extends StatelessWidget {
                         child: OutlinedCloudButton(
                           text: "Pular tutorial",
                           onPressed: () {
-                            Navigate.to(context, EnjoyScreen());
+                            Navigate.to(context, const EnjoyScreen());
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             CloudRadarIcons.setaDireita,
                             color: ApplicationColors.black,
                           ),
@@ -115,7 +113,7 @@ class StartScreen extends StatelessWidget {
                         child: FilledCloudButton(
                           text: "Iniciar",
                           onPressed: () {
-                            Navigate.to(context, FirstScreenDesc());
+                            Navigate.to(context, const FirstScreenDesc());
                           },
                         ),
                       ),

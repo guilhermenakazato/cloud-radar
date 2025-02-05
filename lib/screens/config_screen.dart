@@ -23,15 +23,15 @@ class _ConfigScreenState extends State<ConfigScreen> {
     return Scaffold(
       backgroundColor: ApplicationColors.black,
       appBar: AppBar(
-        leading: Icon(CloudRadarIcons.setaEsquerda),
-        title: Text("Configurações"),
+        leading: const Icon(CloudRadarIcons.setaEsquerda),
+        title: const Text("Configurações"),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Container(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
@@ -43,18 +43,18 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   Row(
                     spacing: 10,
                     children: [
-                      Icon(CloudRadarIcons.assinatura),
+                      const Icon(CloudRadarIcons.assinatura),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "Seu plano - ",
                           ),
                           !_hasMembership
-                              ? Text(
+                              ? const Text(
                                   "Não assinante",
                                 )
-                              : Row(
+                              : const Row(
                                   spacing: 8,
                                   children: [
                                     Text(
@@ -67,7 +67,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                       ),
                     ],
                   ),
-                  Text(
+                  const Text(
                     "Assine qualquer um dos planos e tenha acesso ao Widget para visualizar informações detalhadas em sua tela de desbloqueio.",
                   ),
                   Row(
@@ -78,7 +78,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                           height: MediaQuery.sizeOf(context).height * 0.15,
                           child: TextButton(
                             onPressed: () {},
-                            child: Column(
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text("Plano anual"),
@@ -93,7 +93,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                           height: MediaQuery.sizeOf(context).height * 0.15,
                           child: TextButton(
                             onPressed: () {},
-                            child: Column(
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text("Plano mensal"),
@@ -107,11 +107,11 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   ),
                 ],
               ),
-              Divider(),
+              const Divider(),
               Column(
                 spacing: 10,
                 children: [
-                  Row(
+                  const Row(
                     spacing: 10,
                     children: [
                       Icon(CloudRadarIcons.widget),
@@ -125,7 +125,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Ativar widget"),
+                        const Text("Ativar widget"),
                         Switch(
                           value: _activateWidget,
                           activeColor: ApplicationColors.red400,
@@ -137,12 +137,12 @@ class _ConfigScreenState extends State<ConfigScreen> {
                             if (_activateWidget && !_hasMembership) {
                               CloudRadarDialog.showDialog(
                                 context: context,
-                                title: Center(
+                                title: const Center(
                                   child: Text(
                                     "Atenção!",
                                   ),
                                 ),
-                                content: Text(
+                                content: const Text(
                                   "Parece que você não é assinante premium.",
                                   textAlign: TextAlign.center,
                                 ),
@@ -167,16 +167,16 @@ class _ConfigScreenState extends State<ConfigScreen> {
                       ],
                     ),
                   ),
-                  Text(
+                  const Text(
                     "Ative essa opção para deixar o aplicativo sempre ativo na tela inicial do seu celular. Requer assinatura mensal. Necessário ser assinante.",
                   ),
                 ],
               ),
-              Divider(),
+              const Divider(),
               Column(
                 spacing: 10,
                 children: [
-                  Row(
+                  const Row(
                     spacing: 10,
                     children: [
                       Icon(CloudRadarIcons.temperatura),
@@ -221,11 +221,11 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   ),
                 ],
               ),
-              Divider(),
+              const Divider(),
               Column(
                 spacing: 10,
                 children: [
-                  Row(
+                  const Row(
                     spacing: 10,
                     children: [
                       Icon(CloudRadarIcons.velocidadeVento),

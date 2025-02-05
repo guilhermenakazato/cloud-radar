@@ -15,7 +15,7 @@ class CloudRadar extends StatelessWidget {
       theme: ApplicationThemes.defaultTheme,
       title: 'Cloud Radar',
       themeMode: ThemeMode.dark,
-      home: StartScreen(),
+      home: const StartScreen(),
     );
   }
 }

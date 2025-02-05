@@ -35,12 +35,12 @@ class CloudRadarDialog {
           ),
         );
       },
-      transitionDuration: Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 400),
       barrierDismissible: false,
       context: context,
       pageBuilder: (context, animation1, animation2) {
         return AlertDialog(
-          contentPadding: EdgeInsets.all(20),
+          contentPadding: const EdgeInsets.all(20),
           title: title,
           content: content,
           actions: <Widget>[

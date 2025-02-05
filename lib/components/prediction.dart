@@ -30,7 +30,7 @@ class Prediction extends StatelessWidget {
         children: [
           Text(
             day,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: "DM Sans",
               fontWeight: FontWeight.w500,
               color: ApplicationColors.white,
@@ -40,7 +40,7 @@ class Prediction extends StatelessWidget {
           Icon(icon),
           Text(
             "$temperature°$temperatureScale",
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: "DM Sans",
               fontWeight: FontWeight.w500,
               color: ApplicationColors.white,

@@ -12,7 +12,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage("assets/rainbg.png"),
           fit: BoxFit.cover,
@@ -37,11 +37,11 @@ class MainScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           color:
                               ApplicationColors.black900.withValues(alpha: 0.9),
-                          borderRadius: BorderRadius.vertical(
+                          borderRadius: const BorderRadius.vertical(
                             top: Radius.circular(20),
                           ),
                         ),
-                        child: Text(
+                        child: const Text(
                           "Água Clara - MS",
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -54,14 +54,14 @@ class MainScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
                         color: ApplicationColors.black900,
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(10),
                         ),
                       ),
-                      child: Column(
+                      child: const Column(
                         children: [
                           Text(
                             "Segunda 16 de Dezembro",
@@ -108,7 +108,7 @@ class MainScreen extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 14.0),
+                            padding: EdgeInsets.only(top: 14.0),
                             child: Text(
                               "Chuvinha boa",
                               style: TextStyle(
@@ -128,12 +128,12 @@ class MainScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           color:
                               ApplicationColors.black900.withValues(alpha: 0.9),
-                          borderRadius: BorderRadius.vertical(
+                          borderRadius: const BorderRadius.vertical(
                             bottom: Radius.circular(12),
                           ),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Row(
                             spacing: 8,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -219,7 +219,7 @@ class MainScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: SizedBox(
                           width: MediaQuery.sizeOf(context).width * 0.9,
-                          child: SingleChildScrollView(
+                          child: const SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             physics: BouncingScrollPhysics(),
                             child: Row(
@@ -263,14 +263,14 @@ class MainScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          SearchInput(),
+                          const SearchInput(),
                           Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: IconButton(
                               onPressed: () {
-                                Navigate.to(context, ConfigScreen());
+                                Navigate.to(context, const ConfigScreen());
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 CloudRadarIcons.configuracao,
                               ),
                             ),

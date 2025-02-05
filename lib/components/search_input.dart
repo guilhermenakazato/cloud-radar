@@ -43,7 +43,7 @@ class _SearchInputState extends State<SearchInput> {
       child: TextField(
         focusNode: _focus,
         enabled: widget.enabled,
-        style: TextStyle(
+        style: const TextStyle(
           color: ApplicationColors.white,
           fontSize: 16,
           fontFamily: "DM Sans",
@@ -58,8 +58,8 @@ class _SearchInputState extends State<SearchInput> {
             fontFamily: "DM Sans",
             fontWeight: FontWeight.w400,
           ),
-          prefixIconColor: InputMapIconColor(),
-          suffixIconColor: InputSearchIconColor(),
+          prefixIconColor: const InputMapIconColor(),
+          suffixIconColor: const InputSearchIconColor(),
           prefixIcon: Padding(
             padding: const EdgeInsets.only(
               left: 4,
@@ -70,12 +70,12 @@ class _SearchInputState extends State<SearchInput> {
             child: Opacity(
               opacity: _opacity,
               child: Container(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: ApplicationColors.blue900,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(
+                child: const Icon(
                   CloudRadarIcons.mapa,
                 ),
               ),
@@ -89,8 +89,8 @@ class _SearchInputState extends State<SearchInput> {
               right: 4,
             ),
             child: Container(
-              padding: EdgeInsets.all(12),
-              child: Icon(
+              padding: const EdgeInsets.all(12),
+              child: const Icon(
                 CloudRadarIcons.procurar,
               ),
             ),

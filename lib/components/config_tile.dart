@@ -23,7 +23,7 @@ class ConfigTile<T> extends StatelessWidget {
     return Material(
       color: ApplicationColors.black,
       child: ListTile(
-        contentPadding: EdgeInsets.symmetric(
+        contentPadding: const EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 5,
         ),
@@ -32,7 +32,7 @@ class ConfigTile<T> extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 10.0),
           child: Text(
             titleText,
-            style: TextStyle(
+            style: const TextStyle(
               color: ApplicationColors.white,
               height: 1,
               fontSize: 16,
@@ -43,7 +43,7 @@ class ConfigTile<T> extends StatelessWidget {
         selectedTileColor: ApplicationColors.green500,
         subtitle: Text(
           subtitleText,
-          style: TextStyle(
+          style: const TextStyle(
             color: ApplicationColors.white,
             height: 1,
             fontSize: 12,

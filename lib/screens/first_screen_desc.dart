@@ -17,21 +17,25 @@ class FirstScreenDesc extends StatelessWidget {
         children: [
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.5,
-            child: OverflowBox(
+            child: const OverflowBox(
               alignment: Alignment.centerLeft,
               maxWidth: double.infinity,
               child: Row(
                 children: [
                   Hero(
                     tag: "image-2",
-                    child: Image.asset(
-                      "assets/presentation2-1.png",
+                    child: Image(
+                      image: AssetImage(
+                        "assets/presentation2-1.png",
+                      ),
                     ),
                   ),
                   Hero(
                     tag: "image-3",
-                    child: Image.asset(
-                      "assets/presentation3-1.png",
+                    child: Image(
+                      image: AssetImage(
+                        "assets/presentation3-1.png",
+                      ),
                     ),
                   ),
                 ],
@@ -54,7 +58,7 @@ class FirstScreenDesc extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: MediaQuery.sizeOf(context).height * 0.03,
-                        child: Row(
+                        child: const Row(
                           spacing: 10,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -84,7 +88,7 @@ class FirstScreenDesc extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Text(
+                      const Text(
                         "A tela principal é composta por informações, como temperatura, sensação térmica, umidade e muito mais informações.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -115,7 +119,7 @@ class FirstScreenDesc extends StatelessWidget {
                         child: FilledCloudButton(
                           text: "Próximo",
                           onPressed: () {
-                            Navigate.to(context, ConfigDesc());
+                            Navigate.to(context, const ConfigDesc());
                           },
                         ),
                       ),

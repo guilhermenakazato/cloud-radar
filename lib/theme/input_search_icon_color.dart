@@ -10,10 +10,10 @@ class InputSearchIconColor extends WidgetStateColor {
   @override
   Color resolve(Set<WidgetState> states) {
     if (states.contains(WidgetState.pressed) || states.contains(WidgetState.focused) || states.contains(WidgetState.hovered)) {
-      return Color(_mainColor);
+      return const Color(_mainColor);
     }
   
-    if (states.contains(WidgetState.disabled)) return Color(_disabledColor);
+    if (states.contains(WidgetState.disabled)) return const Color(_disabledColor);
     return const Color(_defaultColor);
   }
 }

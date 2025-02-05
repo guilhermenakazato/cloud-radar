@@ -17,20 +17,26 @@ class ConfigDesc extends StatelessWidget {
         children: [
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.5,
-            child: OverflowBox(
+            child: const OverflowBox(
               maxWidth: double.infinity,
               alignment: Alignment.centerLeft,
               child: Row(
                 children: [
                   Hero(
                     tag: "image-3",
-                    child: Image.asset(
-                      "assets/presentation3-1.png",
+                    child: Image(
+                      image: AssetImage(
+                        "assets/presentation3-1.png",
+                      ),
                     ),
                   ),
                   Hero(
                     tag: "image-4",
-                    child: Image.asset("assets/presentation4.png"),
+                    child: Image(
+                      image: AssetImage(
+                        "assets/presentation4.png",
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -52,7 +58,7 @@ class ConfigDesc extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: MediaQuery.sizeOf(context).height * 0.03,
-                        child: Row(
+                        child: const Row(
                           spacing: 10,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -82,7 +88,7 @@ class ConfigDesc extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Text(
+                      const Text(
                         "Você possuirá informações essenciais para customizar da forma desejada. As configurações disponíveis são simples, mas potentes!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -113,7 +119,7 @@ class ConfigDesc extends StatelessWidget {
                         child: FilledCloudButton(
                           text: "Próximo",
                           onPressed: () {
-                            Navigate.to(context, EnjoyScreen());
+                            Navigate.to(context, const EnjoyScreen());
                           },
                         ),
                       ),

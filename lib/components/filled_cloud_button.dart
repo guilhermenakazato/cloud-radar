@@ -17,7 +17,7 @@ class FilledCloudButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           color: ApplicationColors.white,
           fontSize: 16,
           fontWeight: FontWeight.w400,

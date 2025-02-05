@@ -8,7 +8,7 @@ class InputMapIconColor extends WidgetStateColor {
 
   @override
   Color resolve(Set<WidgetState> states) {
-    if (states.contains(WidgetState.disabled)) return Color(_disabledColor);
+    if (states.contains(WidgetState.disabled)) return const Color(_disabledColor);
     return const Color(_defaultColor);
   }
 }

@@ -16,39 +16,39 @@ class ApplicationThemes {
       surface: Colors.white,
       onSurface: ApplicationColors.black,
     ),
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: ApplicationColors.white,
     ),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: ApplicationColors.blue,
           )),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: ApplicationColors.blue,
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: ApplicationColors.blue600,
         ),
       ),
       disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: ApplicationColors.black600,
           )),
-      fillColor: InputBackgroundColor(),
+      fillColor: const InputBackgroundColor(),
       hoverColor: ApplicationColors.blue500,
       filled: true,
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.fromMap(
+        backgroundColor: const WidgetStateProperty.fromMap(
           <WidgetStatesConstraint, Color>{
             WidgetState.hovered: ApplicationColors.blue500,
             WidgetState.focused: ApplicationColors.blue600,
@@ -58,7 +58,7 @@ class ApplicationThemes {
           },
         ),
         padding: WidgetStateProperty.all(
-          EdgeInsets.all(20),
+          const EdgeInsets.all(20),
         ),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
@@ -69,19 +69,19 @@ class ApplicationThemes {
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: ButtonStyle(
-        foregroundColor: WidgetStateProperty.fromMap(
+        foregroundColor: const WidgetStateProperty.fromMap(
           <WidgetStatesConstraint, Color>{
             WidgetState.pressed: ApplicationColors.white,
             WidgetState.any: ApplicationColors.black,
           },
         ),
-        backgroundColor: WidgetStateProperty.fromMap(
+        backgroundColor: const WidgetStateProperty.fromMap(
           <WidgetStatesConstraint, Color>{
             WidgetState.pressed: ApplicationColors.blue700,
             WidgetState.any: Colors.transparent,
           },
         ),
-        side: WidgetStateProperty.fromMap(
+        side: const WidgetStateProperty.fromMap(
           <WidgetStatesConstraint, BorderSide>{
             WidgetState.hovered: BorderSide(
               color: ApplicationColors.blue500,
@@ -101,7 +101,7 @@ class ApplicationThemes {
           },
         ),
         padding: WidgetStateProperty.all(
-          EdgeInsets.all(20),
+          const EdgeInsets.all(20),
         ),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
@@ -112,7 +112,7 @@ class ApplicationThemes {
     ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.fromMap(
+        backgroundColor: const WidgetStateProperty.fromMap(
           <WidgetStatesConstraint, Color>{
             WidgetState.hovered: ApplicationColors.blue500,
             WidgetState.focused: ApplicationColors.blue600,
@@ -121,14 +121,14 @@ class ApplicationThemes {
             WidgetState.any: ApplicationColors.blue,
           },
         ),
-        foregroundColor: WidgetStateProperty.fromMap(
+        foregroundColor: const WidgetStateProperty.fromMap(
           <WidgetStatesConstraint, Color>{
             WidgetState.disabled: ApplicationColors.white500,
             WidgetState.any: ApplicationColors.white,
           },
         ),
         padding: WidgetStateProperty.all(
-          EdgeInsets.all(
+          const EdgeInsets.all(
             16,
           ),
         ),
