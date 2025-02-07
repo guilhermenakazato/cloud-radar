@@ -1,4 +1,3 @@
-import 'package:cloud_radar/theme/application_colors.dart';
 import 'package:flutter/material.dart';
 
 class ConfigTile<T> extends StatelessWidget {
@@ -20,46 +19,25 @@ class ConfigTile<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: ApplicationColors.black,
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 5,
+    return ListTile(
+      title: Padding(
+        padding: const EdgeInsets.only(
+          bottom: 14.0,
         ),
-        tileColor: ApplicationColors.black,
-        title: Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
-          child: Text(
-            titleText,
-            style: const TextStyle(
-              color: ApplicationColors.white,
-              height: 1,
-              fontSize: 16,
-            ),
-          ),
+        child: Text(
+          titleText,
         ),
-        selected: groupValue == tileValue,
-        selectedTileColor: ApplicationColors.green500,
-        subtitle: Text(
-          subtitleText,
-          style: const TextStyle(
-            color: ApplicationColors.white,
-            height: 1,
-            fontSize: 12,
-          ),
-        ),
-        onTap: onTileTap,
-        trailing: Column(
-          children: [
-            Radio<T>(
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              value: tileValue,
-              groupValue: groupValue,
-              onChanged: onRadioTap,
-            ),
-          ],
-        ),
+      ),
+      selected: groupValue == tileValue,
+      subtitle: Text(
+        subtitleText,
+      ),
+      onTap: onTileTap,
+      trailing: Radio<T>(
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        value: tileValue,
+        groupValue: groupValue,
+        onChanged: onRadioTap,
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:cloud_radar/theme/input_background_color.dart';
+import 'package:cloud_radar/theme/input_map_icon_color.dart';
+import 'package:cloud_radar/theme/input_search_icon_color.dart';
 import 'package:flutter/material.dart';
 import 'application_colors.dart';
 
@@ -20,6 +22,14 @@ class ApplicationThemes {
       color: ApplicationColors.white,
     ),
     inputDecorationTheme: InputDecorationTheme(
+      prefixIconColor: const InputMapIconColor(),
+      suffixIconColor: const InputSearchIconColor(),
+      hintStyle: TextStyle(
+        color: ApplicationColors.white.withValues(alpha: 0.3),
+        fontSize: 16,
+        fontFamily: "DM Sans",
+        fontWeight: FontWeight.w400,
+      ),
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(
@@ -139,6 +149,24 @@ class ApplicationThemes {
             ),
           ),
         ),
+      ),
+    ),
+    listTileTheme: const ListTileThemeData(
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 5,
+      ),
+      tileColor: ApplicationColors.black800,
+      selectedTileColor: ApplicationColors.green,
+      titleTextStyle: TextStyle(
+        color: ApplicationColors.white,
+        height: 1,
+        fontSize: 16,
+      ),
+      subtitleTextStyle: TextStyle(
+        color: ApplicationColors.white,
+        height: 1,
+        fontSize: 12,
       ),
     ),
   );

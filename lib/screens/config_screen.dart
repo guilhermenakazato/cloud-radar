@@ -1,3 +1,4 @@
+import 'package:cloud_radar/components/cloud_appbar.dart';
 import 'package:cloud_radar/components/config_tile.dart';
 import 'package:cloud_radar/enums/temperature_scale.dart';
 import 'package:cloud_radar/enums/wind_speed.dart';
@@ -22,11 +23,8 @@ class _ConfigScreenState extends State<ConfigScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ApplicationColors.black,
-      appBar: AppBar(
-        leading: const Icon(CloudRadarIcons.setaEsquerda),
-        title: const Text("Configurações"),
-        centerTitle: true,
-        backgroundColor: Colors.black,
+      appBar: const CloudAppbar(
+        titleText: "Configurações",
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -60,7 +58,9 @@ class _ConfigScreenState extends State<ConfigScreen> {
                                     Text(
                                       "Assinante",
                                     ),
-                                    Icon(CloudRadarIcons.guardaChuva),
+                                    Icon(
+                                      CloudRadarIcons.guardaChuva,
+                                    ),
                                   ],
                                 ),
                         ],

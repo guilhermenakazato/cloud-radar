@@ -17,25 +17,27 @@ class FirstScreenDesc extends StatelessWidget {
         children: [
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.5,
-            child: const OverflowBox(
+            child: OverflowBox(
               alignment: Alignment.centerLeft,
               maxWidth: double.infinity,
               child: Row(
                 children: [
                   Hero(
                     tag: "image-2",
-                    child: Image(
-                      image: AssetImage(
-                        "assets/presentation2-1.png",
-                      ),
+                    child: Image.asset(
+                      "assets/presentation2-1.png",
+                      height: MediaQuery.sizeOf(context).height * 0.5,
+                      width: MediaQuery.sizeOf(context).width * 0.8,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   Hero(
                     tag: "image-3",
-                    child: Image(
-                      image: AssetImage(
-                        "assets/presentation3-1.png",
-                      ),
+                    child: Image.asset(
+                      "assets/presentation3-1.png",
+                      height: MediaQuery.sizeOf(context).height * 0.5,
+                      width: MediaQuery.sizeOf(context).width * 0.8,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ],

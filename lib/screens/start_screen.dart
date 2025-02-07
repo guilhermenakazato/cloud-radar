@@ -26,10 +26,18 @@ class StartScreen extends StatelessWidget {
                 children: [
                   Image.asset(
                     "assets/presentation1.png",
+                    height: MediaQuery.sizeOf(context).height * 0.5,
+                    width: MediaQuery.sizeOf(context).width * 0.8,
+                    fit: BoxFit.fill,
                   ),
                   Hero(
                     tag: "image-2",
-                    child: Image.asset("assets/presentation2-1.png"),
+                    child: Image.asset(
+                      "assets/presentation2-1.png",
+                      height: MediaQuery.sizeOf(context).height * 0.5,
+                      width: MediaQuery.sizeOf(context).width * 0.8,
+                      fit: BoxFit.fill,
+                    ),
                   )
                 ],
               ),

@@ -1,13 +1,43 @@
 import 'package:cloud_radar/components/prediction.dart';
 import 'package:cloud_radar/components/search_input.dart';
 import 'package:cloud_radar/screens/config_screen.dart';
+import 'package:cloud_radar/screens/search_screen.dart';
 import 'package:cloud_radar/theme/application_colors.dart';
 import 'package:cloud_radar/theme/cloud_radar_icons.dart';
 import 'package:cloud_radar/utils/navigate.dart';
 import 'package:flutter/material.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  final FocusNode _inputFocus = FocusNode();
+  double _iconOpacity = 0.25;
+
+  @override
+  void initState() {
+    super.initState();
+    _inputFocus.addListener(_onFocusChange);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _inputFocus.removeListener(_onFocusChange);
+    _inputFocus.dispose();
+  }
+
+  void _onFocusChange() {
+    double newOpacity = _inputFocus.hasFocus ? 1 : 0.25;
+
+    setState(() {
+      _iconOpacity = newOpacity;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +65,9 @@ class MainScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(10),
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color:
-                              ApplicationColors.black900.withValues(alpha: 0.9),
+                          color: ApplicationColors.black900.withValues(
+                            alpha: 0.9,
+                          ),
                           borderRadius: const BorderRadius.vertical(
                             top: Radius.circular(20),
                           ),
@@ -126,8 +157,9 @@ class MainScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 4.0),
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                          color:
-                              ApplicationColors.black900.withValues(alpha: 0.9),
+                          color: ApplicationColors.black900.withValues(
+                            alpha: 0.9,
+                          ),
                           borderRadius: const BorderRadius.vertical(
                             bottom: Radius.circular(12),
                           ),
@@ -263,7 +295,23 @@ class MainScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const SearchInput(),
+                          Expanded(
+                            child: SearchInput(
+                              iconOpacity: _iconOpacity,
+                              inputFocus: _inputFocus,
+                              onTap: () {
+                                _inputFocus.unfocus();
+                                showModalBottomSheet<void>(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  enableDrag: false,
+                                  builder: (BuildContext modalContext) {
+                                    return SearchScreen(appContext: context);
+                                  },
+                                );
+                              },
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: IconButton(

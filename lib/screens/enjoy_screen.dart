@@ -34,13 +34,11 @@ class EnjoyScreen extends StatelessWidget {
             SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.5,
               width: MediaQuery.sizeOf(context).width,
-              child: const Hero(
+              child: Hero(
                 tag: "image-4",
-                child: Image(
-                  image: AssetImage(
-                    "assets/presentation4.png",
-                  ),
-                  fit: BoxFit.cover,
+                child: Image.asset(
+                  "assets/presentation4.png",
+                  fit: BoxFit.fill,
                 ),
               ),
             ),

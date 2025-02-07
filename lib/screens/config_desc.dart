@@ -17,25 +17,27 @@ class ConfigDesc extends StatelessWidget {
         children: [
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.5,
-            child: const OverflowBox(
+            child: OverflowBox(
               maxWidth: double.infinity,
               alignment: Alignment.centerLeft,
               child: Row(
                 children: [
                   Hero(
                     tag: "image-3",
-                    child: Image(
-                      image: AssetImage(
-                        "assets/presentation3-1.png",
-                      ),
+                    child: Image.asset(
+                      "assets/presentation3-1.png",
+                      height: MediaQuery.sizeOf(context).height * 0.5,
+                      width: MediaQuery.sizeOf(context).width * 0.8,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   Hero(
                     tag: "image-4",
-                    child: Image(
-                      image: AssetImage(
-                        "assets/presentation4.png",
-                      ),
+                    child: Image.asset(
+                      "assets/presentation4.png",
+                      height: MediaQuery.sizeOf(context).height * 0.5,
+                      width: MediaQuery.sizeOf(context).width * 0.8,
+                      fit: BoxFit.fill,
                     ),
                   )
                 ],
