@@ -66,5 +66,5 @@ class ApplicationColors {
       green600 = Color(0xFF00B34A),
       green700 = Color(0xFF008035),
       green800 = Color(0xFF004D20),
-      green90 = Color(0xFF001A0B);
+      green900 = Color(0xFF001A0B);
 }

@@ -20,6 +20,7 @@ class ConfigTile<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      titleAlignment: ListTileTitleAlignment.top,
       title: Padding(
         padding: const EdgeInsets.only(
           bottom: 14.0,

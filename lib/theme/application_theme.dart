@@ -1,10 +1,6 @@
-import 'package:cloud_radar/theme/input_background_color.dart';
-import 'package:cloud_radar/theme/input_map_icon_color.dart';
-import 'package:cloud_radar/theme/input_search_icon_color.dart';
 import 'package:flutter/material.dart';
 import 'application_colors.dart';
 
-// nem uso esse colorScheme direito lol
 class ApplicationThemes {
   static final defaultTheme = ThemeData(
     colorScheme: const ColorScheme(
@@ -22,8 +18,30 @@ class ApplicationThemes {
       color: ApplicationColors.white,
     ),
     inputDecorationTheme: InputDecorationTheme(
-      prefixIconColor: const InputMapIconColor(),
-      suffixIconColor: const InputSearchIconColor(),
+      prefixIconColor: const WidgetStateColor.fromMap(
+        <WidgetStatesConstraint, Color>{
+          WidgetState.disabled: ApplicationColors.black500,
+          WidgetState.any: ApplicationColors.white,
+        },
+      ),
+      suffixIconColor: WidgetStateColor.fromMap(
+        <WidgetStatesConstraint, Color> {
+          WidgetState.pressed: ApplicationColors.white,
+          WidgetState.focused: ApplicationColors.white,
+          WidgetState.hovered: ApplicationColors.white,
+          WidgetState.disabled: ApplicationColors.black500,
+          WidgetState.any: ApplicationColors.white.withValues(alpha: 0.25),
+        }
+      ),
+      fillColor: const WidgetStateColor.fromMap(
+        <WidgetStatesConstraint, Color>{
+          WidgetState.pressed: ApplicationColors.blue900,
+          WidgetState.focused: ApplicationColors.blue600,
+          WidgetState.hovered: ApplicationColors.blue500,
+          WidgetState.disabled: ApplicationColors.black600,
+          WidgetState.any: ApplicationColors.blue,
+        },
+      ),
       hintStyle: TextStyle(
         color: ApplicationColors.white.withValues(alpha: 0.3),
         fontSize: 16,
@@ -31,10 +49,11 @@ class ApplicationThemes {
         fontWeight: FontWeight.w400,
       ),
       border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: ApplicationColors.blue,
-          )),
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(
+          color: ApplicationColors.blue,
+        ),
+      ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: const BorderSide(
@@ -52,7 +71,6 @@ class ApplicationThemes {
           borderSide: const BorderSide(
             color: ApplicationColors.black600,
           )),
-      fillColor: const InputBackgroundColor(),
       hoverColor: ApplicationColors.blue500,
       filled: true,
     ),

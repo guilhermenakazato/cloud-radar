@@ -1,8 +1,9 @@
 import 'package:cloud_radar/components/cloud_appbar.dart';
-import 'package:cloud_radar/components/search_input.dart';
-import 'package:cloud_radar/components/search_result.dart';
+import 'package:cloud_radar/components/cloud_autocomplete.dart';
+import 'package:cloud_radar/components/list_item.dart';
 import 'package:cloud_radar/models/city.dart';
 import 'package:cloud_radar/theme/application_colors.dart';
+import 'package:cloud_radar/theme/cloud_radar_icons.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -15,19 +16,21 @@ class SearchScreen extends StatefulWidget {
 
 // TODO: arrumar opacity..................
 class _SearchScreenState extends State<SearchScreen> {
-  static final List<City> _kOptions = <City>[
+  static final List<City> _cityOptions = <City>[
     City(cityName: "Água Clara", cityState: "Mato Grosso do Sul"),
     City(cityName: "Alcinópolis", cityState: "Mato Grosso do Sul"),
     City(cityName: "Amambai", cityState: "Mato Grosso do Sul"),
   ];
 
-  final FocusNode _inputFocus = FocusNode();
+  final _inputFocus = FocusNode();
   double _iconOpacity = 0.25;
+  final controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _inputFocus.addListener(_onFocusChange);
+    _inputFocus.requestFocus();
   }
 
   @override
@@ -60,50 +63,39 @@ class _SearchScreenState extends State<SearchScreen> {
             const CloudAppbar(
               titleText: "Escolha a cidade",
             ),
-            Autocomplete<City>(
-              fieldViewBuilder: (
-                context,
-                textEditingController,
-                focusNode,
-                onFieldSubmitted,
-              ) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: SearchInput(
-                    iconOpacity: _iconOpacity,
-                    controller: textEditingController,
-                    inputFocus: focusNode,
-                  ),
-                );
-              },
-              optionsBuilder: (
-                TextEditingValue textEditingValue,
-              ) {
-                debugPrint(textEditingValue.text);
-                if (textEditingValue.text == '') {
-                  return _kOptions;
+            CloudAutocomplete<City>(
+              inputFocus: _inputFocus,
+              controller: controller,
+              iconOpacity: _iconOpacity,
+              displayTextWhenOptionTapped: (city) => city.cityName,
+              optionsBuilder: (textEditingValue) {
+                if (textEditingValue.text == "") {
+                  return _cityOptions;
                 }
-                return _kOptions.where(
-                  (
-                    City option,
-                  ) {
-                    return option.cityName
-                        .toLowerCase()
-                        .startsWith(textEditingValue.text.toLowerCase());
-                  },
-                );
+
+                return _cityOptions.where((City option) {
+                  return option.cityName
+                      .toLowerCase()
+                      .startsWith(textEditingValue.text.toLowerCase());
+                });
               },
               optionsViewBuilder: (context, onSelected, options) {
                 return ListView.builder(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 12,
+                    vertical: 10,
                   ),
                   itemCount: options.length,
                   itemBuilder: (context, index) {
                     City currentCity = options.elementAt(index);
-                    return SearchResult(
+
+                    return ListItem(
+                      trailing: const Icon(CloudRadarIcons.local),
                       titleText: currentCity.cityName,
                       subtitleText: currentCity.cityState,
+                      onTap: () {
+                        onSelected(currentCity);
+                      },
                     );
                   },
                 );

@@ -10,17 +10,20 @@ class SearchInput extends StatelessWidget {
     required this.iconOpacity,
     this.inputFocus,
     this.controller,
+    this.onFieldSubmitted,
   });
 
   final bool enabled;
   final Function()? onTap;
+  final Function(String)? onFieldSubmitted;
   final double iconOpacity;
   final FocusNode? inputFocus;
   final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      onFieldSubmitted: onFieldSubmitted,
       controller: controller,
       focusNode: inputFocus,
       onTap: onTap,
