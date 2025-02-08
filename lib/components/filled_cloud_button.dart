@@ -6,16 +6,19 @@ class FilledCloudButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.text,
+    this.icon, this.textColor = ApplicationColors.white,
   });
 
   final Function()? onPressed;
   final String text;
+  final Icon? icon;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
+    return FilledButton.icon(
       onPressed: onPressed,
-      child: Text(
+      label: Text(
         text,
         style: const TextStyle(
           color: ApplicationColors.white,
@@ -24,6 +27,8 @@ class FilledCloudButton extends StatelessWidget {
           fontFamily: "DM Sans",
         ),
       ),
+      iconAlignment: IconAlignment.end,
+      icon: icon,
     );
   }
 }

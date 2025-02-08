@@ -20,6 +20,9 @@ class _SearchScreenState extends State<SearchScreen> {
     City(cityName: "Água Clara", cityState: "Mato Grosso do Sul"),
     City(cityName: "Alcinópolis", cityState: "Mato Grosso do Sul"),
     City(cityName: "Amambai", cityState: "Mato Grosso do Sul"),
+    City(cityName: "Anastácio", cityState: "Mato Grosso do Sul"),
+    City(cityName: "Aquidauana", cityState: "Mato Grosso do Sul"),
+    City(cityName: "Brasilândia", cityState: "Mato Grosso do Sul"),
   ];
 
   final _inputFocus = FocusNode();

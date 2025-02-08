@@ -1,8 +1,5 @@
 import 'dart:async';
-
-import 'package:cloud_radar/components/list_item.dart';
 import 'package:cloud_radar/components/search_input.dart';
-import 'package:cloud_radar/theme/cloud_radar_icons.dart';
 import 'package:flutter/material.dart';
 
 class CloudAutocomplete<T extends Object> extends StatelessWidget {

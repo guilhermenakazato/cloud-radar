@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class ListItem extends StatelessWidget {
   const ListItem({
     super.key,
-    required this.trailing,
     required this.titleText,
     required this.subtitleText,
+    required this.trailing,
     this.selected = false,
     this.enabled = true,
     this.onTap,

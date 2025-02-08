@@ -1,3 +1,7 @@
+import 'package:cloud_radar/components/filled_cloud_button.dart';
+import 'package:cloud_radar/components/outlined_cloud_button.dart';
+import 'package:cloud_radar/theme/application_colors.dart';
+import 'package:cloud_radar/theme/cloud_radar_icons.dart';
 import 'package:flutter/material.dart';
 
 class CloudRadarDialog {
@@ -5,8 +9,8 @@ class CloudRadarDialog {
 
   static void showDialog({
     required BuildContext context,
-    required Widget title,
-    required Widget content,
+    required String titleText,
+    required String contentText,
     required String confirmButtonText,
     required String declineButtonText,
     required Function()? onConfirm,
@@ -41,21 +45,46 @@ class CloudRadarDialog {
       pageBuilder: (context, animation1, animation2) {
         return AlertDialog(
           contentPadding: const EdgeInsets.all(20),
-          title: title,
-          content: content,
+          backgroundColor: ApplicationColors.blue900,
+          title: Center(
+            child: Text(
+              titleText,
+              style: const TextStyle(
+                color: ApplicationColors.orange500,
+                fontFamily: "DM Sans",
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          content: Text(
+            contentText,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: ApplicationColors.white,
+              fontFamily: "DM Sans",
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
           actions: <Widget>[
             Row(
+              spacing: 10,
               children: [
                 Expanded(
-                  child: TextButton(
+                  child: FilledCloudButton(
                     onPressed: onConfirm,
-                    child: Text(confirmButtonText),
+                    text: "Ver planos",
+                    icon: const Icon(
+                      CloudRadarIcons.assinatura,
+                    ),
                   ),
                 ),
                 Expanded(
-                  child: TextButton(
+                  child: OutlinedCloudButton(
+                    text: declineButtonText,
                     onPressed: onDecline,
-                    child: Text(declineButtonText),
+                    textColor: ApplicationColors.white,
                   ),
                 ),
               ],

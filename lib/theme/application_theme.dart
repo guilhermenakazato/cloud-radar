@@ -24,15 +24,13 @@ class ApplicationThemes {
           WidgetState.any: ApplicationColors.white,
         },
       ),
-      suffixIconColor: WidgetStateColor.fromMap(
-        <WidgetStatesConstraint, Color> {
-          WidgetState.pressed: ApplicationColors.white,
-          WidgetState.focused: ApplicationColors.white,
-          WidgetState.hovered: ApplicationColors.white,
-          WidgetState.disabled: ApplicationColors.black500,
-          WidgetState.any: ApplicationColors.white.withValues(alpha: 0.25),
-        }
-      ),
+      suffixIconColor: WidgetStateColor.fromMap(<WidgetStatesConstraint, Color>{
+        WidgetState.pressed: ApplicationColors.white,
+        WidgetState.focused: ApplicationColors.white,
+        WidgetState.hovered: ApplicationColors.white,
+        WidgetState.disabled: ApplicationColors.black500,
+        WidgetState.any: ApplicationColors.white.withValues(alpha: 0.25),
+      }),
       fillColor: const WidgetStateColor.fromMap(
         <WidgetStatesConstraint, Color>{
           WidgetState.pressed: ApplicationColors.blue900,
@@ -186,6 +184,20 @@ class ApplicationThemes {
         height: 1,
         fontSize: 12,
       ),
+    ),
+    radioTheme: const RadioThemeData(
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+      fillColor: WidgetStateProperty.fromMap(
+        <WidgetStatesConstraint, Color>{
+          WidgetState.selected: ApplicationColors.green500,
+          WidgetState.disabled: ApplicationColors.white500,
+          WidgetState.any: Colors.white,
+        },
+      ),
+    ),
+    dividerTheme: const DividerThemeData(
+      color: ApplicationColors.black700,
     ),
   );
 }

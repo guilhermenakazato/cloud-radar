@@ -1,10 +1,12 @@
 import 'package:cloud_radar/components/cloud_appbar.dart';
-import 'package:cloud_radar/components/config_tile.dart';
+import 'package:cloud_radar/components/list_item.dart';
 import 'package:cloud_radar/enums/temperature_scale.dart';
 import 'package:cloud_radar/enums/wind_speed.dart';
+import 'package:cloud_radar/screens/subscription_plans_screen.dart';
 import 'package:cloud_radar/theme/application_colors.dart';
 import 'package:cloud_radar/theme/cloud_radar_icons.dart';
 import 'package:cloud_radar/utils/cloud_radar_dialog.dart';
+import 'package:cloud_radar/utils/navigate.dart';
 import 'package:flutter/material.dart';
 
 class ConfigScreen extends StatefulWidget {
@@ -22,7 +24,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ApplicationColors.black,
+      backgroundColor: ApplicationColors.black800,
       appBar: const CloudAppbar(
         titleText: "Configurações",
       ),
@@ -47,19 +49,38 @@ class _ConfigScreenState extends State<ConfigScreen> {
                         children: [
                           const Text(
                             "Seu plano - ",
+                            style: TextStyle(
+                              color: ApplicationColors.white,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "DM Sans",
+                              fontSize: 16,
+                            ),
                           ),
                           !_hasMembership
                               ? const Text(
                                   "Não assinante",
+                                  style: TextStyle(
+                                    color: ApplicationColors.red400,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: "DM Sans",
+                                    fontSize: 16,
+                                  ),
                                 )
                               : const Row(
                                   spacing: 8,
                                   children: [
                                     Text(
                                       "Assinante",
+                                      style: TextStyle(
+                                        color: ApplicationColors.green500,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "DM Sans",
+                                        fontSize: 16,
+                                      ),
                                     ),
                                     Icon(
                                       CloudRadarIcons.guardaChuva,
+                                      color: ApplicationColors.green500,
                                     ),
                                   ],
                                 ),
@@ -69,41 +90,20 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   ),
                   const Text(
                     "Assine qualquer um dos planos e tenha acesso ao Widget para visualizar informações detalhadas em sua tela de desbloqueio.",
+                    style: TextStyle(
+                      color: ApplicationColors.white,
+                      fontFamily: "DM Sans",
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: MediaQuery.sizeOf(context).height * 0.15,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Plano anual"),
-                                Text("R\$ 27,30"),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          height: MediaQuery.sizeOf(context).height * 0.15,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Plano mensal"),
-                                Text("R\$ 2,30"),
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
+                  ListItem(
+                    titleText: "Assine agora",
+                    subtitleText: "Veja benefícios",
+                    trailing: const Icon(CloudRadarIcons.setaDireita),
+                    onTap: () {
+                      Navigate.to(context, const SubscriptionPlansScreen());
+                    },
                   ),
                 ],
               ),
@@ -115,7 +115,15 @@ class _ConfigScreenState extends State<ConfigScreen> {
                     spacing: 10,
                     children: [
                       Icon(CloudRadarIcons.widget),
-                      Text("Opções estilizadas"),
+                      Text(
+                        "Opções estilizadas",
+                        style: TextStyle(
+                          color: ApplicationColors.white,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "DM Sans",
+                          fontSize: 16,
+                        ),
+                      ),
                     ],
                   ),
                   Padding(
@@ -125,10 +133,20 @@ class _ConfigScreenState extends State<ConfigScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text("Ativar widget"),
+                        const Text(
+                          "Ativar widget",
+                          style: TextStyle(
+                            color: ApplicationColors.white,
+                            fontSize: 16,
+                            fontFamily: "DM Sans",
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                         Switch(
                           value: _activateWidget,
-                          activeColor: ApplicationColors.red400,
+                          activeColor: ApplicationColors.green500,
+                          inactiveThumbColor: ApplicationColors.red600,
+                          inactiveTrackColor: ApplicationColors.red100,
                           onChanged: (bool value) {
                             setState(() {
                               _activateWidget = value;
@@ -137,15 +155,9 @@ class _ConfigScreenState extends State<ConfigScreen> {
                             if (_activateWidget && !_hasMembership) {
                               CloudRadarDialog.showDialog(
                                 context: context,
-                                title: const Center(
-                                  child: Text(
-                                    "Atenção!",
-                                  ),
-                                ),
-                                content: const Text(
-                                  "Parece que você não é assinante premium.",
-                                  textAlign: TextAlign.center,
-                                ),
+                                titleText: "Atenção",
+                                contentText:
+                                    "Parece que você não é assinante premium.",
                                 confirmButtonText: "Assine",
                                 declineButtonText: "Agora não",
                                 onConfirm: () {
@@ -169,6 +181,12 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   ),
                   const Text(
                     "Ative essa opção para deixar o aplicativo sempre ativo na tela inicial do seu celular. Requer assinatura mensal. Necessário ser assinante.",
+                    style: TextStyle(
+                      color: ApplicationColors.white,
+                      fontFamily: "DM Sans",
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                    ),
                   ),
                 ],
               ),
@@ -180,42 +198,60 @@ class _ConfigScreenState extends State<ConfigScreen> {
                     spacing: 10,
                     children: [
                       Icon(CloudRadarIcons.temperatura),
-                      Text("Temperatura")
+                      Text(
+                        "Temperatura",
+                        style: TextStyle(
+                          color: ApplicationColors.white,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "DM Sans",
+                          fontSize: 16,
+                        ),
+                      )
                     ],
                   ),
                   Column(
                     children: [
-                      ConfigTile<TemperatureScale>(
-                        groupValue: _chosenTemperatureScale,
-                        tileValue: TemperatureScale.C,
-                        titleText: 'Celsius (C)',
-                        subtitleText: 'Será representado com a letra C',
-                        onTileTap: () {
+                      ListItem(
+                        titleText: "Celsius (C)",
+                        subtitleText: "Será representado com a letra C",
+                        selected: _chosenTemperatureScale == TemperatureScale.C,
+                        onTap: () {
                           setState(() {
                             _chosenTemperatureScale = TemperatureScale.C;
                           });
                         },
-                        onRadioTap: (TemperatureScale? value) {
-                          setState(() {
-                            _chosenTemperatureScale = value;
-                          });
-                        },
+                        trailing: Radio<TemperatureScale>(
+                          value: TemperatureScale.C,
+                          groupValue: _chosenTemperatureScale,
+                          onChanged: (TemperatureScale? value) {
+                            setState(
+                              () {
+                                _chosenTemperatureScale = value;
+                              },
+                            );
+                          },
+                        ),
                       ),
-                      ConfigTile<TemperatureScale>(
-                        groupValue: _chosenTemperatureScale,
-                        tileValue: TemperatureScale.F,
-                        titleText: 'Celsius (F)',
-                        subtitleText: 'Será representado com a letra F',
-                        onTileTap: () {
+                      ListItem(
+                        titleText: "Fahrenheit (F)",
+                        subtitleText: "Será representado com a letra F",
+                        selected: _chosenTemperatureScale == TemperatureScale.F,
+                        onTap: () {
                           setState(() {
                             _chosenTemperatureScale = TemperatureScale.F;
                           });
                         },
-                        onRadioTap: (TemperatureScale? value) {
-                          setState(() {
-                            _chosenTemperatureScale = value;
-                          });
-                        },
+                        trailing: Radio<TemperatureScale>(
+                          value: TemperatureScale.F,
+                          groupValue: _chosenTemperatureScale,
+                          onChanged: (TemperatureScale? value) {
+                            setState(
+                              () {
+                                _chosenTemperatureScale = value;
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
@@ -229,58 +265,81 @@ class _ConfigScreenState extends State<ConfigScreen> {
                     spacing: 10,
                     children: [
                       Icon(CloudRadarIcons.velocidadeVento),
-                      Text("Velocidade")
+                      Text(
+                        "Velocidade",
+                        style: TextStyle(
+                          color: ApplicationColors.white,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "DM Sans",
+                          fontSize: 16,
+                        ),
+                      )
                     ],
                   ),
                   Column(
                     children: [
-                      ConfigTile<WindSpeed>(
-                        groupValue: _chosenWindSpeedUnit,
-                        tileValue: WindSpeed.km,
-                        onTileTap: () {
+                      ListItem(
+                        titleText: "Km/h",
+                        subtitleText: "Quilômetro por hora",
+                        selected: _chosenWindSpeedUnit == WindSpeed.km,
+                        onTap: () {
                           setState(() {
                             _chosenWindSpeedUnit = WindSpeed.km;
                           });
                         },
-                        onRadioTap: (WindSpeed? value) {
-                          setState(() {
-                            _chosenWindSpeedUnit = value;
-                          });
-                        },
-                        titleText: 'Km/h',
-                        subtitleText: 'Quilômetro por hora',
+                        trailing: Radio<WindSpeed>(
+                          value: WindSpeed.km,
+                          groupValue: _chosenWindSpeedUnit,
+                          onChanged: (WindSpeed? value) {
+                            setState(
+                              () {
+                                _chosenWindSpeedUnit = value;
+                              },
+                            );
+                          },
+                        ),
                       ),
-                      ConfigTile<WindSpeed>(
-                        groupValue: _chosenWindSpeedUnit,
-                        tileValue: WindSpeed.m,
-                        onTileTap: () {
+                      ListItem(
+                        titleText: "M/s",
+                        subtitleText: "Metro por segundo",
+                        selected: _chosenWindSpeedUnit == WindSpeed.m,
+                        onTap: () {
                           setState(() {
                             _chosenWindSpeedUnit = WindSpeed.m;
                           });
                         },
-                        onRadioTap: (WindSpeed? value) {
-                          setState(() {
-                            _chosenWindSpeedUnit = value;
-                          });
-                        },
-                        titleText: 'M/s',
-                        subtitleText: 'Metro por segundo',
+                        trailing: Radio<WindSpeed>(
+                          value: WindSpeed.m,
+                          groupValue: _chosenWindSpeedUnit,
+                          onChanged: (WindSpeed? value) {
+                            setState(
+                              () {
+                                _chosenWindSpeedUnit = value;
+                              },
+                            );
+                          },
+                        ),
                       ),
-                      ConfigTile<WindSpeed>(
-                        groupValue: _chosenWindSpeedUnit,
-                        tileValue: WindSpeed.mph,
-                        onTileTap: () {
+                      ListItem(
+                        titleText: "Mph",
+                        subtitleText: "Milha por hora",
+                        selected: _chosenWindSpeedUnit == WindSpeed.mph,
+                        onTap: () {
                           setState(() {
                             _chosenWindSpeedUnit = WindSpeed.mph;
                           });
                         },
-                        onRadioTap: (WindSpeed? value) {
-                          setState(() {
-                            _chosenWindSpeedUnit = value;
-                          });
-                        },
-                        titleText: 'Km/h',
-                        subtitleText: 'Milha por hora',
+                        trailing: Radio<WindSpeed>(
+                          value: WindSpeed.mph,
+                          groupValue: _chosenWindSpeedUnit,
+                          onChanged: (WindSpeed? value) {
+                            setState(
+                              () {
+                                _chosenWindSpeedUnit = value;
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
