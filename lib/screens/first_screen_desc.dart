@@ -10,6 +10,8 @@ class FirstScreenDesc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+    
     return Scaffold(
       backgroundColor: ApplicationColors.orange100,
       body: Column(
@@ -28,6 +30,10 @@ class FirstScreenDesc extends StatelessWidget {
                       "assets/presentation2-1.png",
                       height: MediaQuery.sizeOf(context).height * 0.5,
                       width: MediaQuery.sizeOf(context).width * 0.8,
+                      cacheHeight:
+                          (MediaQuery.sizeOf(context).height * 0.5 * devicePixelRatio).toInt(),
+                      cacheWidth:
+                          (MediaQuery.sizeOf(context).width * 0.8 * devicePixelRatio).toInt(),
                       fit: BoxFit.fill,
                       gaplessPlayback: true,
                     ),
@@ -38,6 +44,10 @@ class FirstScreenDesc extends StatelessWidget {
                       "assets/presentation3-1.png",
                       height: MediaQuery.sizeOf(context).height * 0.5,
                       width: MediaQuery.sizeOf(context).width * 0.8,
+                      cacheHeight:
+                          (MediaQuery.sizeOf(context).height * 0.5 * devicePixelRatio).toInt(),
+                      cacheWidth:
+                          (MediaQuery.sizeOf(context).width * 0.8 * devicePixelRatio).toInt(),
                       fit: BoxFit.fill,
                       gaplessPlayback: true,
                     ),

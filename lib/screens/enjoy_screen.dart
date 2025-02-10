@@ -9,6 +9,8 @@ class EnjoyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+    
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: const BoxDecoration(
@@ -37,6 +39,9 @@ class EnjoyScreen extends StatelessWidget {
               child: Hero(
                 tag: "image-4",
                 child: Image.asset(
+                  cacheWidth: (MediaQuery.sizeOf(context).width * devicePixelRatio).toInt(),
+                  cacheHeight:
+                      (MediaQuery.sizeOf(context).height * 0.5 * devicePixelRatio).toInt(),
                   "assets/presentation4.png",
                   fit: BoxFit.fill,
                   gaplessPlayback: true,
