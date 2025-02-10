@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_native_splash: ^2.4.4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -90,3 +91,14 @@ flutter:
     - family: CloudRadarIcons
       fonts: 
         - asset: fonts/CloudRadarIcons.ttf
+
+flutter_native_splash:
+  color: "#252525"
+  # branding: "assets/icon.png"
+  image: "assets/icon.png"
+
+  android_12:
+    color: "#252525"
+    image: "assets/icon.png"
+    # icon_background_color: "#252525"
+    # branding: "assets/icon.png"

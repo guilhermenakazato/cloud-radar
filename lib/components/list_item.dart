@@ -50,13 +50,13 @@ class ListItem extends StatelessWidget {
       hoverColor: hoveredColor,
       highlightColor: selectedColor,
       splashColor: ApplicationColors.blue800,
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(10),
       onTap: enabled ? onTap : null,
       child: Ink(
         padding: const EdgeInsets.all(10),
         width: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           color: listItemColor,
         ),
         child: Row(
@@ -80,7 +80,7 @@ class ListItem extends StatelessWidget {
                 Text(
                   subtitleText,
                   style: const TextStyle(
-                    color: ApplicationColors.white,
+                    color: ApplicationColors.white300,
                     height: 1,
                     fontSize: 12,
                     fontFamily: "DM Sans",

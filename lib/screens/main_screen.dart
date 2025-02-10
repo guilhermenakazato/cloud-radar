@@ -247,11 +247,11 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 8.0),
                         child: SizedBox(
-                          width: MediaQuery.sizeOf(context).width * 0.9,
-                          child: const SingleChildScrollView(
+                          width: double.infinity,
+                          child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             physics: BouncingScrollPhysics(),
                             child: Row(

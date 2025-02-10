@@ -158,7 +158,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                                 titleText: "Atenção",
                                 contentText:
                                     "Parece que você não é assinante premium.",
-                                confirmButtonText: "Assine",
+                                confirmButtonText: "Ver planos",
                                 declineButtonText: "Agora não",
                                 onConfirm: () {
                                   Navigator.pop(context);
@@ -179,13 +179,24 @@ class _ConfigScreenState extends State<ConfigScreen> {
                       ],
                     ),
                   ),
-                  const Text(
-                    "Ative essa opção para deixar o aplicativo sempre ativo na tela inicial do seu celular. Requer assinatura mensal. Necessário ser assinante.",
-                    style: TextStyle(
-                      color: ApplicationColors.white,
-                      fontFamily: "DM Sans",
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
+                  RichText(
+                    text: const TextSpan(
+                      text:
+                          "Ative essa opção para deixar o aplicativo sempre ativo na tela inicial do seu celular. Requer assinatura mensal. ",
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: "Necessário ser assinante.",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                      style: TextStyle(
+                        color: ApplicationColors.white,
+                        fontFamily: "DM Sans",
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                 ],

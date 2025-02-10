@@ -44,7 +44,14 @@ class CloudRadarDialog {
       context: context,
       pageBuilder: (context, animation1, animation2) {
         return AlertDialog(
+          insetPadding: EdgeInsets.zero,
           contentPadding: const EdgeInsets.all(20),
+          shape: RoundedRectangleBorder(
+            side: const BorderSide(
+              color: ApplicationColors.black700,
+            ),
+            borderRadius: BorderRadius.circular(20),
+          ),
           backgroundColor: ApplicationColors.blue900,
           title: Center(
             child: Text(
@@ -74,7 +81,7 @@ class CloudRadarDialog {
                 Expanded(
                   child: FilledCloudButton(
                     onPressed: onConfirm,
-                    text: "Ver planos",
+                    text: confirmButtonText,
                     icon: const Icon(
                       CloudRadarIcons.assinatura,
                     ),
@@ -82,13 +89,13 @@ class CloudRadarDialog {
                 ),
                 Expanded(
                   child: OutlinedCloudButton(
-                    text: declineButtonText,
                     onPressed: onDecline,
+                    text: declineButtonText,
                     textColor: ApplicationColors.white,
                   ),
                 ),
               ],
-            )
+            ),
           ],
         );
       },

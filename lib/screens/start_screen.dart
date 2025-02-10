@@ -29,6 +29,7 @@ class StartScreen extends StatelessWidget {
                     height: MediaQuery.sizeOf(context).height * 0.5,
                     width: MediaQuery.sizeOf(context).width * 0.8,
                     fit: BoxFit.fill,
+                    gaplessPlayback: true,
                   ),
                   Hero(
                     tag: "image-2",
@@ -37,6 +38,7 @@ class StartScreen extends StatelessWidget {
                       height: MediaQuery.sizeOf(context).height * 0.5,
                       width: MediaQuery.sizeOf(context).width * 0.8,
                       fit: BoxFit.fill,
+                      gaplessPlayback: true,
                     ),
                   )
                 ],

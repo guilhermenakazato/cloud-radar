@@ -39,6 +39,7 @@ class EnjoyScreen extends StatelessWidget {
                 child: Image.asset(
                   "assets/presentation4.png",
                   fit: BoxFit.fill,
+                  gaplessPlayback: true,
                 ),
               ),
             ),
