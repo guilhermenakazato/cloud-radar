@@ -4,7 +4,6 @@ import 'application_colors.dart';
 
 class ApplicationThemes {
   static final defaultTheme = ThemeData(
-    brightness: Brightness.dark,
     colorScheme: const ColorScheme(
       brightness: Brightness.dark,
       primary: ApplicationColors.white,
