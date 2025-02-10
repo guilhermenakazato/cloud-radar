@@ -25,6 +25,7 @@ class ConfigDesc extends StatelessWidget {
               child: Row(
                 children: [
                   Hero(
+                    transitionOnUserGestures: true,
                     tag: "image-3",
                     child: Image.asset(
                       "assets/presentation3-1.png",
@@ -39,6 +40,7 @@ class ConfigDesc extends StatelessWidget {
                     ),
                   ),
                   Hero(
+                    transitionOnUserGestures: true,
                     tag: "image-4",
                     child: Image.asset(
                       "assets/presentation4.png",

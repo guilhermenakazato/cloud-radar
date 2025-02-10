@@ -38,6 +38,7 @@ class StartScreen extends StatelessWidget {
                     gaplessPlayback: true,
                   ),
                   Hero(
+                    transitionOnUserGestures: true,
                     tag: "image-2",
                     child: Image.asset(
                       "assets/presentation2-1.png",

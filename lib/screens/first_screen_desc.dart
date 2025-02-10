@@ -25,6 +25,7 @@ class FirstScreenDesc extends StatelessWidget {
               child: Row(
                 children: [
                   Hero(
+                    transitionOnUserGestures: true,
                     tag: "image-2",
                     child: Image.asset(
                       "assets/presentation2-1.png",
@@ -39,6 +40,7 @@ class FirstScreenDesc extends StatelessWidget {
                     ),
                   ),
                   Hero(
+                    transitionOnUserGestures: true,
                     tag: "image-3",
                     child: Image.asset(
                       "assets/presentation3-1.png",

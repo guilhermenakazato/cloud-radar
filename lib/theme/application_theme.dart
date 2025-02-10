@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'application_colors.dart';
 
 class ApplicationThemes {
   static final defaultTheme = ThemeData(
+    brightness: Brightness.dark,
     colorScheme: const ColorScheme(
       brightness: Brightness.dark,
       primary: ApplicationColors.white,
@@ -13,6 +15,9 @@ class ApplicationThemes {
       onError: Colors.white,
       surface: Colors.white,
       onSurface: ApplicationColors.black,
+    ),
+    appBarTheme: const AppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     ),
     iconTheme: const IconThemeData(
       color: ApplicationColors.white,

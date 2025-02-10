@@ -37,6 +37,7 @@ class EnjoyScreen extends StatelessWidget {
               height: MediaQuery.sizeOf(context).height * 0.5,
               width: MediaQuery.sizeOf(context).width,
               child: Hero(
+                transitionOnUserGestures: true,
                 tag: "image-4",
                 child: Image.asset(
                   cacheWidth: (MediaQuery.sizeOf(context).width * devicePixelRatio).toInt(),
