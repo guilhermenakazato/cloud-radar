@@ -1,7 +1,7 @@
-import 'package:cloud_radar/components/filled_cloud_button.dart';
-import 'package:cloud_radar/components/outlined_cloud_button.dart';
-import 'package:cloud_radar/theme/application_colors.dart';
-import 'package:cloud_radar/theme/cloud_radar_icons.dart';
+import 'package:cloud_radar/presentation/components/filled_cloud_button.dart';
+import 'package:cloud_radar/presentation/components/outlined_cloud_button.dart';
+import 'package:cloud_radar/presentation/theme/application_colors.dart';
+import 'package:cloud_radar/presentation/theme/cloud_radar_icons.dart';
 import 'package:flutter/material.dart';
 
 class CloudRadarDialog {

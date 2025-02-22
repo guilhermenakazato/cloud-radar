@@ -1,5 +1,5 @@
-import 'package:cloud_radar/theme/application_colors.dart';
-import 'package:cloud_radar/theme/cloud_radar_icons.dart';
+import 'package:cloud_radar/presentation/theme/application_colors.dart';
+import 'package:cloud_radar/presentation/theme/cloud_radar_icons.dart';
 import 'package:flutter/material.dart';
 
 class SearchInput extends StatelessWidget {

@@ -1,29 +1,46 @@
-import 'package:cloud_radar/components/filled_cloud_button.dart';
-import 'package:cloud_radar/components/outlined_cloud_button.dart';
-import 'package:cloud_radar/screens/enjoy_screen.dart';
-import 'package:cloud_radar/theme/application_colors.dart';
-import 'package:cloud_radar/utils/navigate.dart';
+import 'package:cloud_radar/presentation/components/filled_cloud_button.dart';
+import 'package:cloud_radar/presentation/components/outlined_cloud_button.dart';
+import 'package:cloud_radar/presentation/theme/application_colors.dart';
 import 'package:flutter/material.dart';
 
-class ConfigDesc extends StatelessWidget {
-  const ConfigDesc({super.key});
+class FirstScreenDesc extends StatelessWidget {
+  const FirstScreenDesc({super.key});
 
   @override
   Widget build(BuildContext context) {
     final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
-    
+
     return Scaffold(
-      backgroundColor: ApplicationColors.white50,
+      backgroundColor: ApplicationColors.orange100,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.5,
             child: OverflowBox(
-              maxWidth: double.infinity,
               alignment: Alignment.centerLeft,
+              maxWidth: double.infinity,
               child: Row(
                 children: [
+                  Hero(
+                    transitionOnUserGestures: true,
+                    tag: "image-2",
+                    child: Image.asset(
+                      "assets/presentation2-1.png",
+                      height: MediaQuery.sizeOf(context).height * 0.5,
+                      width: MediaQuery.sizeOf(context).width * 0.8,
+                      cacheHeight: (MediaQuery.sizeOf(context).height *
+                              0.5 *
+                              devicePixelRatio)
+                          .toInt(),
+                      cacheWidth: (MediaQuery.sizeOf(context).width *
+                              0.8 *
+                              devicePixelRatio)
+                          .toInt(),
+                      fit: BoxFit.fill,
+                      gaplessPlayback: true,
+                    ),
+                  ),
                   Hero(
                     transitionOnUserGestures: true,
                     tag: "image-3",
@@ -31,29 +48,18 @@ class ConfigDesc extends StatelessWidget {
                       "assets/presentation3-1.png",
                       height: MediaQuery.sizeOf(context).height * 0.5,
                       width: MediaQuery.sizeOf(context).width * 0.8,
-                      cacheHeight:
-                          (MediaQuery.sizeOf(context).height * 0.5 * devicePixelRatio).toInt(),
-                      cacheWidth:
-                          (MediaQuery.sizeOf(context).width * 0.8 * devicePixelRatio).toInt(),
+                      cacheHeight: (MediaQuery.sizeOf(context).height *
+                              0.5 *
+                              devicePixelRatio)
+                          .toInt(),
+                      cacheWidth: (MediaQuery.sizeOf(context).width *
+                              0.8 *
+                              devicePixelRatio)
+                          .toInt(),
                       fit: BoxFit.fill,
                       gaplessPlayback: true,
                     ),
                   ),
-                  Hero(
-                    transitionOnUserGestures: true,
-                    tag: "image-4",
-                    child: Image.asset(
-                      "assets/presentation4.png",
-                      height: MediaQuery.sizeOf(context).height * 0.5,
-                      width: MediaQuery.sizeOf(context).width * 0.8,
-                      cacheHeight:
-                          (MediaQuery.sizeOf(context).height * 0.5 * devicePixelRatio).toInt(),
-                      cacheWidth:
-                          (MediaQuery.sizeOf(context).width * 0.8 * devicePixelRatio).toInt(),
-                      fit: BoxFit.fill,
-                      gaplessPlayback: true,
-                    ),
-                  )
                 ],
               ),
             ),
@@ -79,25 +85,25 @@ class ConfigDesc extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Configurações",
+                              "Primeira tela",
                               style: TextStyle(
                                 fontFamily: "DM Sans",
                                 fontWeight: FontWeight.w500,
                                 fontSize: 18,
                                 decoration: TextDecoration.underline,
-                                decorationColor: ApplicationColors.blue400,
-                                color: ApplicationColors.blue400,
+                                decorationColor: ApplicationColors.orange500,
+                                color: ApplicationColors.orange500,
                               ),
                             ),
                             Align(
                               alignment: Alignment.topCenter,
                               child: Text(
-                                "3/4",
+                                "2/4",
                                 style: TextStyle(
                                   fontFamily: "DM Sans",
                                   fontWeight: FontWeight.w600,
                                   fontSize: 10,
-                                  color: ApplicationColors.blue400,
+                                  color: ApplicationColors.orange500,
                                 ),
                               ),
                             ),
@@ -105,7 +111,7 @@ class ConfigDesc extends StatelessWidget {
                         ),
                       ),
                       const Text(
-                        "Você possuirá informações essenciais para customizar da forma desejada. As configurações disponíveis são simples, mas potentes!",
+                        "A tela principal é composta por informações, como temperatura, sensação térmica, umidade e muito mais informações.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: ApplicationColors.black900,
@@ -117,7 +123,7 @@ class ConfigDesc extends StatelessWidget {
                     ],
                   ),
                   Image.asset(
-                    "assets/presentation3-2.png",
+                    "assets/presentation2-2.png",
                   ),
                   Row(
                     spacing: 2,
@@ -127,7 +133,7 @@ class ConfigDesc extends StatelessWidget {
                         child: OutlinedCloudButton(
                           text: "Voltar",
                           onPressed: () {
-                            Navigate.goBack(context);
+                            Navigator.pop(context);
                           },
                         ),
                       ),
@@ -135,12 +141,12 @@ class ConfigDesc extends StatelessWidget {
                         child: FilledCloudButton(
                           text: "Próximo",
                           onPressed: () {
-                            Navigate.to(context, const EnjoyScreen());
+                            Navigator.pushNamed(context, "/third");
                           },
                         ),
                       ),
                     ],
-                  ),
+                  )
                 ],
               ),
             ),

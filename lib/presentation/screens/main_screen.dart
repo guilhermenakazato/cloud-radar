@@ -1,10 +1,8 @@
-import 'package:cloud_radar/components/prediction.dart';
-import 'package:cloud_radar/components/search_input.dart';
-import 'package:cloud_radar/screens/config_screen.dart';
-import 'package:cloud_radar/screens/search_screen.dart';
-import 'package:cloud_radar/theme/application_colors.dart';
-import 'package:cloud_radar/theme/cloud_radar_icons.dart';
-import 'package:cloud_radar/utils/navigate.dart';
+import 'package:cloud_radar/presentation/components/prediction.dart';
+import 'package:cloud_radar/presentation/components/search_input.dart';
+import 'package:cloud_radar/presentation/screens/search_screen.dart';
+import 'package:cloud_radar/presentation/theme/application_colors.dart';
+import 'package:cloud_radar/presentation/theme/cloud_radar_icons.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -316,7 +314,7 @@ class _MainScreenState extends State<MainScreen> {
                             padding: const EdgeInsets.only(left: 8.0),
                             child: IconButton(
                               onPressed: () {
-                                Navigate.to(context, const ConfigScreen());
+                                Navigator.pushNamed(context, "/config");
                               },
                               icon: const Icon(
                                 CloudRadarIcons.configuracao,

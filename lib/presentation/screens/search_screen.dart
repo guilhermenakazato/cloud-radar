@@ -1,9 +1,9 @@
-import 'package:cloud_radar/components/cloud_appbar.dart';
-import 'package:cloud_radar/components/cloud_autocomplete.dart';
-import 'package:cloud_radar/components/list_item.dart';
-import 'package:cloud_radar/models/city.dart';
-import 'package:cloud_radar/theme/application_colors.dart';
-import 'package:cloud_radar/theme/cloud_radar_icons.dart';
+import 'package:cloud_radar/presentation/components/cloud_appbar.dart';
+import 'package:cloud_radar/presentation/components/cloud_autocomplete.dart';
+import 'package:cloud_radar/presentation/components/list_item.dart';
+import 'package:cloud_radar/data/models/city.dart';
+import 'package:cloud_radar/presentation/theme/application_colors.dart';
+import 'package:cloud_radar/presentation/theme/cloud_radar_icons.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {

@@ -1,5 +1,5 @@
-import 'package:cloud_radar/components/cloud_appbar.dart';
-import 'package:cloud_radar/theme/application_colors.dart';
+import 'package:cloud_radar/presentation/components/cloud_appbar.dart';
+import 'package:cloud_radar/presentation/theme/application_colors.dart';
 import 'package:flutter/material.dart';
 
 class SubscriptionPlansScreen extends StatelessWidget {

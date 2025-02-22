@@ -1,53 +1,61 @@
-import 'package:cloud_radar/components/filled_cloud_button.dart';
-import 'package:cloud_radar/components/outlined_cloud_button.dart';
-import 'package:cloud_radar/screens/enjoy_screen.dart';
-import 'package:cloud_radar/screens/first_screen_desc.dart';
-import 'package:cloud_radar/theme/application_colors.dart';
-import 'package:cloud_radar/theme/cloud_radar_icons.dart';
-import 'package:cloud_radar/utils/navigate.dart';
+import 'package:cloud_radar/presentation/components/filled_cloud_button.dart';
+import 'package:cloud_radar/presentation/components/outlined_cloud_button.dart';
+import 'package:cloud_radar/presentation/theme/application_colors.dart';
 import 'package:flutter/material.dart';
 
-class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
+class ConfigDesc extends StatelessWidget {
+  const ConfigDesc({super.key});
 
   @override
   Widget build(BuildContext context) {
     final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
 
     return Scaffold(
-      backgroundColor: ApplicationColors.orange50,
+      backgroundColor: ApplicationColors.white50,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.5,
             child: OverflowBox(
-              alignment: Alignment.centerLeft,
               maxWidth: double.infinity,
+              alignment: Alignment.centerLeft,
               child: Row(
                 children: [
-                  Image.asset(
-                    "assets/presentation1.png",
-                    height: MediaQuery.sizeOf(context).height * 0.5,
-                    width: MediaQuery.sizeOf(context).width * 0.8,
-                    cacheHeight:
-                          (MediaQuery.sizeOf(context).height * 0.5 * devicePixelRatio).toInt(),
-                      cacheWidth:
-                          (MediaQuery.sizeOf(context).width * 0.8 * devicePixelRatio).toInt(),
-                    fit: BoxFit.fill,
-                    gaplessPlayback: true,
+                  Hero(
+                    transitionOnUserGestures: true,
+                    tag: "image-3",
+                    child: Image.asset(
+                      "assets/presentation3-1.png",
+                      height: MediaQuery.sizeOf(context).height * 0.5,
+                      width: MediaQuery.sizeOf(context).width * 0.8,
+                      cacheHeight: (MediaQuery.sizeOf(context).height *
+                              0.5 *
+                              devicePixelRatio)
+                          .toInt(),
+                      cacheWidth: (MediaQuery.sizeOf(context).width *
+                              0.8 *
+                              devicePixelRatio)
+                          .toInt(),
+                      fit: BoxFit.fill,
+                      gaplessPlayback: true,
+                    ),
                   ),
                   Hero(
                     transitionOnUserGestures: true,
-                    tag: "image-2",
+                    tag: "image-4",
                     child: Image.asset(
-                      "assets/presentation2-1.png",
+                      "assets/presentation4.png",
                       height: MediaQuery.sizeOf(context).height * 0.5,
                       width: MediaQuery.sizeOf(context).width * 0.8,
-                      cacheHeight:
-                          (MediaQuery.sizeOf(context).height * 0.5 * devicePixelRatio).toInt(),
-                      cacheWidth:
-                          (MediaQuery.sizeOf(context).width * 0.8 * devicePixelRatio).toInt(),
+                      cacheHeight: (MediaQuery.sizeOf(context).height *
+                              0.5 *
+                              devicePixelRatio)
+                          .toInt(),
+                      cacheWidth: (MediaQuery.sizeOf(context).width *
+                              0.8 *
+                              devicePixelRatio)
+                          .toInt(),
                       fit: BoxFit.fill,
                       gaplessPlayback: true,
                     ),
@@ -77,25 +85,25 @@ class StartScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Opa!",
+                              "Configurações",
                               style: TextStyle(
                                 fontFamily: "DM Sans",
                                 fontWeight: FontWeight.w500,
                                 fontSize: 18,
                                 decoration: TextDecoration.underline,
-                                decorationColor: ApplicationColors.red200,
-                                color: ApplicationColors.red200,
+                                decorationColor: ApplicationColors.blue400,
+                                color: ApplicationColors.blue400,
                               ),
                             ),
                             Align(
                               alignment: Alignment.topCenter,
                               child: Text(
-                                "1/4",
+                                "3/4",
                                 style: TextStyle(
                                   fontFamily: "DM Sans",
                                   fontWeight: FontWeight.w600,
                                   fontSize: 10,
-                                  color: ApplicationColors.red200,
+                                  color: ApplicationColors.blue400,
                                 ),
                               ),
                             ),
@@ -103,7 +111,7 @@ class StartScreen extends StatelessWidget {
                         ),
                       ),
                       const Text(
-                        "Bom, aqui é uma etapa rápida. Você entenderá informações básicas e diretas sobre o tempo em sua região, ou a qual você deseja.",
+                        "Você possuirá informações essenciais para customizar da forma desejada. As configurações disponíveis são simples, mas potentes!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: ApplicationColors.black900,
@@ -114,32 +122,31 @@ class StartScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                  Image.asset(
+                    "assets/presentation3-2.png",
+                  ),
                   Row(
                     spacing: 2,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
                         child: OutlinedCloudButton(
-                          text: "Pular tutorial",
+                          text: "Voltar",
                           onPressed: () {
-                            Navigate.to(context, const EnjoyScreen());
+                            Navigator.pop(context);
                           },
-                          icon: const Icon(
-                            CloudRadarIcons.setaDireita,
-                            color: ApplicationColors.black,
-                          ),
                         ),
                       ),
                       Expanded(
                         child: FilledCloudButton(
-                          text: "Iniciar",
+                          text: "Próximo",
                           onPressed: () {
-                            Navigate.to(context, const FirstScreenDesc());
+                            Navigator.pushNamed(context, "/fourth");
                           },
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

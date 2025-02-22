@@ -1,12 +1,10 @@
-import 'package:cloud_radar/components/cloud_appbar.dart';
-import 'package:cloud_radar/components/list_item.dart';
-import 'package:cloud_radar/enums/temperature_scale.dart';
-import 'package:cloud_radar/enums/wind_speed.dart';
-import 'package:cloud_radar/screens/subscription_plans_screen.dart';
-import 'package:cloud_radar/theme/application_colors.dart';
-import 'package:cloud_radar/theme/cloud_radar_icons.dart';
+import 'package:cloud_radar/presentation/components/cloud_appbar.dart';
+import 'package:cloud_radar/presentation/components/list_item.dart';
+import 'package:cloud_radar/logic/enums/temperature_scale.dart';
+import 'package:cloud_radar/logic/enums/wind_speed.dart';
+import 'package:cloud_radar/presentation/theme/application_colors.dart';
+import 'package:cloud_radar/presentation/theme/cloud_radar_icons.dart';
 import 'package:cloud_radar/utils/cloud_radar_dialog.dart';
-import 'package:cloud_radar/utils/navigate.dart';
 import 'package:flutter/material.dart';
 
 class ConfigScreen extends StatefulWidget {
@@ -102,7 +100,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                     subtitleText: "Veja benefícios",
                     trailing: const Icon(CloudRadarIcons.setaDireita),
                     onTap: () {
-                      Navigate.to(context, const SubscriptionPlansScreen());
+                      Navigator.pushNamed(context, "/plans");
                     },
                   ),
                 ],
