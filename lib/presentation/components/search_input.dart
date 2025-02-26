@@ -5,29 +5,36 @@ import 'package:flutter/material.dart';
 class SearchInput extends StatelessWidget {
   const SearchInput({
     super.key,
+    this.autofocus = false,
     this.enabled = true,
     this.onTap,
-    required this.iconOpacity,
+    this.canRequestFocus = true,
     this.inputFocus,
     this.controller,
     this.onFieldSubmitted,
+    this.readonly = false,
   });
 
+  final bool readonly;
   final bool enabled;
+  final bool canRequestFocus;
+  final bool autofocus;
   final Function()? onTap;
   final Function(String)? onFieldSubmitted;
-  final double iconOpacity;
   final FocusNode? inputFocus;
   final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      onFieldSubmitted: onFieldSubmitted,
+    return TextField(
+      onSubmitted: onFieldSubmitted,
       controller: controller,
       focusNode: inputFocus,
       onTap: onTap,
       enabled: enabled,
+      autofocus: autofocus,
+      readOnly: readonly,
+      canRequestFocus: canRequestFocus,
       style: const TextStyle(
         color: ApplicationColors.white,
         fontSize: 16,
@@ -44,17 +51,14 @@ class SearchInput extends StatelessWidget {
             bottom: 4,
             right: 10,
           ),
-          child: Opacity(
-            opacity: iconOpacity,
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: ApplicationColors.blue900,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Icon(
-                CloudRadarIcons.mapa,
-              ),
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: ApplicationColors.blue900.withValues(alpha: 0.25),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: const Icon(
+              CloudRadarIcons.mapa,
             ),
           ),
         ),

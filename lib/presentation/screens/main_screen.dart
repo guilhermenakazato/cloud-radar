@@ -8,37 +8,8 @@ import 'package:cloud_radar/presentation/theme/cloud_radar_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  final FocusNode _inputFocus = FocusNode();
-  double _iconOpacity = 0.25;
-
-  @override
-  void initState() {
-    super.initState();
-    _inputFocus.addListener(_onFocusChange);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _inputFocus.removeListener(_onFocusChange);
-    _inputFocus.dispose();
-  }
-
-  void _onFocusChange() {
-    double newOpacity = _inputFocus.hasFocus ? 1 : 0.25;
-
-    setState(() {
-      _iconOpacity = newOpacity;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -259,49 +230,55 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   child: Column(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(bottom: 8.0),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
                         child: SizedBox(
                           width: double.infinity,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            physics: BouncingScrollPhysics(),
-                            child: Row(
-                              spacing: 8,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Prediction(
-                                  day: "Hoje",
-                                  icon: CloudRadarIcons.chuva,
-                                  temperature: 30,
-                                  temperatureScale: "C",
-                                  color: ApplicationColors.blue900,
-                                ),
-                                Prediction(
-                                  day: "Amanhã",
-                                  icon: CloudRadarIcons.sol,
-                                  temperature: 30,
-                                  temperatureScale: "C",
-                                ),
-                                Prediction(
-                                  day: "18/12",
-                                  icon: CloudRadarIcons.solComNuvens,
-                                  temperature: 32,
-                                  temperatureScale: "C",
-                                ),
-                                Prediction(
-                                  day: "19/12",
-                                  icon: CloudRadarIcons.inferno,
-                                  temperature: 42,
-                                  temperatureScale: "C",
-                                ),
-                                Prediction(
-                                  day: "20/12",
-                                  icon: CloudRadarIcons.solComNuvens,
-                                  temperature: 34,
-                                  temperatureScale: "C",
-                                ),
-                              ],
+                            physics: const BouncingScrollPhysics(),
+                            child: BlocBuilder<TemperatureScaleCubit,
+                                TemperatureScaleState>(
+                              builder: (context, state) {
+                                return Row(
+                                  spacing: 8,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Prediction(
+                                      day: "Hoje",
+                                      icon: CloudRadarIcons.chuva,
+                                      temperature: 30,
+                                      temperatureScale: state.chosenTemperatureScale.name,
+                                      color: ApplicationColors.blue900,
+                                    ),
+                                    Prediction(
+                                      day: "Amanhã",
+                                      icon: CloudRadarIcons.sol,
+                                      temperature: 30,
+                                      temperatureScale: state.chosenTemperatureScale.name,
+                                    ),
+                                    Prediction(
+                                      day: "18/12",
+                                      icon: CloudRadarIcons.solComNuvens,
+                                      temperature: 32,
+                                      temperatureScale: state.chosenTemperatureScale.name,
+                                    ),
+                                    Prediction(
+                                      day: "19/12",
+                                      icon: CloudRadarIcons.inferno,
+                                      temperature: 42,
+                                      temperatureScale: state.chosenTemperatureScale.name,
+                                    ),
+                                    Prediction(
+                                      day: "20/12",
+                                      icon: CloudRadarIcons.solComNuvens,
+                                      temperature: 34,
+                                      temperatureScale: state.chosenTemperatureScale.name,
+                                    ),
+                                  ],
+                                );
+                              },
                             ),
                           ),
                         ),
@@ -310,10 +287,9 @@ class _MainScreenState extends State<MainScreen> {
                         children: [
                           Expanded(
                             child: SearchInput(
-                              iconOpacity: _iconOpacity,
-                              inputFocus: _inputFocus,
+                              readonly: true,
+                              canRequestFocus: false,
                               onTap: () {
-                                _inputFocus.unfocus();
                                 showModalBottomSheet<void>(
                                   context: context,
                                   isScrollControlled: true,

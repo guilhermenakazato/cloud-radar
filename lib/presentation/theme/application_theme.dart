@@ -22,19 +22,24 @@ class ApplicationThemes {
       color: ApplicationColors.white,
     ),
     inputDecorationTheme: InputDecorationTheme(
-      prefixIconColor: const WidgetStateColor.fromMap(
+      prefixIconColor: WidgetStateColor.fromMap(
         <WidgetStatesConstraint, Color>{
+          WidgetState.pressed: ApplicationColors.white,
+          WidgetState.focused: ApplicationColors.white,
+          WidgetState.hovered: ApplicationColors.white,
           WidgetState.disabled: ApplicationColors.black500,
-          WidgetState.any: ApplicationColors.white,
+          WidgetState.any: ApplicationColors.white.withValues(alpha: 0.25),
         },
       ),
-      suffixIconColor: WidgetStateColor.fromMap(<WidgetStatesConstraint, Color>{
-        WidgetState.pressed: ApplicationColors.white,
-        WidgetState.focused: ApplicationColors.white,
-        WidgetState.hovered: ApplicationColors.white,
-        WidgetState.disabled: ApplicationColors.black500,
-        WidgetState.any: ApplicationColors.white.withValues(alpha: 0.25),
-      }),
+      suffixIconColor: WidgetStateColor.fromMap(
+        <WidgetStatesConstraint, Color>{
+          WidgetState.pressed: ApplicationColors.white,
+          WidgetState.focused: ApplicationColors.white,
+          WidgetState.hovered: ApplicationColors.white,
+          WidgetState.disabled: ApplicationColors.black500,
+          WidgetState.any: ApplicationColors.white.withValues(alpha: 0.25),
+        },
+      ),
       fillColor: const WidgetStateColor.fromMap(
         <WidgetStatesConstraint, Color>{
           WidgetState.pressed: ApplicationColors.blue900,
@@ -69,10 +74,11 @@ class ApplicationThemes {
         ),
       ),
       disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: ApplicationColors.black600,
-          )),
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(
+          color: ApplicationColors.black600,
+        ),
+      ),
       hoverColor: ApplicationColors.blue500,
       filled: true,
     ),

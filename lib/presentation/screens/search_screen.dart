@@ -14,7 +14,6 @@ class SearchScreen extends StatefulWidget {
   State<SearchScreen> createState() => _SearchScreenState();
 }
 
-// TODO: arrumar opacity..................
 class _SearchScreenState extends State<SearchScreen> {
   static final List<City> _cityOptions = <City>[
     City(cityName: "Água Clara", cityState: "Mato Grosso do Sul"),
@@ -26,30 +25,7 @@ class _SearchScreenState extends State<SearchScreen> {
   ];
 
   final _inputFocus = FocusNode();
-  double _iconOpacity = 0.25;
   final controller = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _inputFocus.addListener(_onFocusChange);
-    _inputFocus.requestFocus();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _inputFocus.removeListener(_onFocusChange);
-    _inputFocus.dispose();
-  }
-
-  void _onFocusChange() {
-    double newOpacity = _inputFocus.hasFocus ? 1 : 0.25;
-
-    setState(() {
-      _iconOpacity = newOpacity;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +45,6 @@ class _SearchScreenState extends State<SearchScreen> {
             CloudAutocomplete<City>(
               inputFocus: _inputFocus,
               controller: controller,
-              iconOpacity: _iconOpacity,
               displayTextWhenOptionTapped: (city) => city.cityName,
               optionsBuilder: (textEditingValue) {
                 if (textEditingValue.text == "") {

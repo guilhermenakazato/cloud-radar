@@ -7,7 +7,6 @@ class CloudAutocomplete<T extends Object> extends StatelessWidget {
     super.key,
     required this.inputFocus,
     required this.controller,
-    required this.iconOpacity,
     required this.displayTextWhenOptionTapped,
     required this.optionsBuilder,
     required this.optionsViewBuilder,
@@ -15,10 +14,10 @@ class CloudAutocomplete<T extends Object> extends StatelessWidget {
 
   final FocusNode inputFocus;
   final TextEditingController controller;
-  final double iconOpacity;
   final String Function(T) displayTextWhenOptionTapped;
   final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
-  final Widget Function(BuildContext, void Function(T), Iterable<T>) optionsViewBuilder;
+  final Widget Function(BuildContext, void Function(T), Iterable<T>)
+      optionsViewBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,7 @@ class CloudAutocomplete<T extends Object> extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: SearchInput(
-            iconOpacity: iconOpacity,
+            autofocus: true,
             controller: textEditingController,
             inputFocus: focusNode,
             onFieldSubmitted: (String value) {
