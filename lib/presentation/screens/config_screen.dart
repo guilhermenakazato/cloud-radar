@@ -1,3 +1,5 @@
+import 'package:cloud_radar/logic/cubit/temperature_scale_cubit.dart';
+import 'package:cloud_radar/logic/cubit/wind_unit_cubit.dart';
 import 'package:cloud_radar/presentation/components/cloud_appbar.dart';
 import 'package:cloud_radar/presentation/components/list_item.dart';
 import 'package:cloud_radar/logic/enums/temperature_scale.dart';
@@ -6,6 +8,7 @@ import 'package:cloud_radar/presentation/theme/application_colors.dart';
 import 'package:cloud_radar/presentation/theme/cloud_radar_icons.dart';
 import 'package:cloud_radar/utils/cloud_radar_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ConfigScreen extends StatefulWidget {
   const ConfigScreen({super.key});
@@ -15,8 +18,7 @@ class ConfigScreen extends StatefulWidget {
 }
 
 class _ConfigScreenState extends State<ConfigScreen> {
-  TemperatureScale? _chosenTemperatureScale = TemperatureScale.C;
-  WindSpeed? _chosenWindSpeedUnit = WindSpeed.km;
+  // TODO: sumir com isso usando bloc
   bool _activateWidget = false, _hasMembership = false;
 
   @override
@@ -218,51 +220,53 @@ class _ConfigScreenState extends State<ConfigScreen> {
                       )
                     ],
                   ),
-                  Column(
-                    children: [
-                      ListItem(
-                        titleText: "Celsius (C)",
-                        subtitleText: "Será representado com a letra C",
-                        selected: _chosenTemperatureScale == TemperatureScale.C,
-                        onTap: () {
-                          setState(() {
-                            _chosenTemperatureScale = TemperatureScale.C;
-                          });
-                        },
-                        trailing: Radio<TemperatureScale>(
-                          value: TemperatureScale.C,
-                          groupValue: _chosenTemperatureScale,
-                          onChanged: (TemperatureScale? value) {
-                            setState(
-                              () {
-                                _chosenTemperatureScale = value;
+                  BlocBuilder<TemperatureScaleCubit, TemperatureScaleState>(
+                    builder: (context, state) {
+                      return Column(
+                        children: [
+                          ListItem(
+                            titleText: "Celsius (C)",
+                            subtitleText: "Será representado com a letra C",
+                            selected: state.chosenTemperatureScale ==
+                                TemperatureScale.C,
+                            onTap: () {
+                              context
+                                  .read<TemperatureScaleCubit>()
+                                  .changeTemperatureScale(TemperatureScale.C);
+                            },
+                            trailing: Radio<TemperatureScale>(
+                              value: TemperatureScale.C,
+                              groupValue: state.chosenTemperatureScale,
+                              onChanged: (TemperatureScale? value) {
+                                context
+                                    .read<TemperatureScaleCubit>()
+                                    .changeTemperatureScale(value!);
                               },
-                            );
-                          },
-                        ),
-                      ),
-                      ListItem(
-                        titleText: "Fahrenheit (F)",
-                        subtitleText: "Será representado com a letra F",
-                        selected: _chosenTemperatureScale == TemperatureScale.F,
-                        onTap: () {
-                          setState(() {
-                            _chosenTemperatureScale = TemperatureScale.F;
-                          });
-                        },
-                        trailing: Radio<TemperatureScale>(
-                          value: TemperatureScale.F,
-                          groupValue: _chosenTemperatureScale,
-                          onChanged: (TemperatureScale? value) {
-                            setState(
-                              () {
-                                _chosenTemperatureScale = value;
+                            ),
+                          ),
+                          ListItem(
+                            titleText: "Fahrenheit (F)",
+                            subtitleText: "Será representado com a letra F",
+                            selected: state.chosenTemperatureScale ==
+                                TemperatureScale.F,
+                            onTap: () {
+                              context
+                                  .read<TemperatureScaleCubit>()
+                                  .changeTemperatureScale(TemperatureScale.F);
+                            },
+                            trailing: Radio<TemperatureScale>(
+                              value: TemperatureScale.F,
+                              groupValue: state.chosenTemperatureScale,
+                              onChanged: (TemperatureScale? value) {
+                                context
+                                    .read<TemperatureScaleCubit>()
+                                    .changeTemperatureScale(value!);
                               },
-                            );
-                          },
-                        ),
-                      ),
-                    ],
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ],
               ),
@@ -285,72 +289,70 @@ class _ConfigScreenState extends State<ConfigScreen> {
                       )
                     ],
                   ),
-                  Column(
-                    children: [
-                      ListItem(
-                        titleText: "Km/h",
-                        subtitleText: "Quilômetro por hora",
-                        selected: _chosenWindSpeedUnit == WindSpeed.km,
-                        onTap: () {
-                          setState(() {
-                            _chosenWindSpeedUnit = WindSpeed.km;
-                          });
-                        },
-                        trailing: Radio<WindSpeed>(
-                          value: WindSpeed.km,
-                          groupValue: _chosenWindSpeedUnit,
-                          onChanged: (WindSpeed? value) {
-                            setState(
-                              () {
-                                _chosenWindSpeedUnit = value;
+                  BlocBuilder<WindUnitCubit, WindUnitState>(
+                    builder: (context, state) {
+                      return Column(
+                        children: [
+                          ListItem(
+                            titleText: "Km/h",
+                            subtitleText: "Quilômetro por hora",
+                            selected: state.chosenWindUnit == WindSpeed.km,
+                            onTap: () {
+                              context
+                                  .read<WindUnitCubit>()
+                                  .changeWindUnit(WindSpeed.km);
+                            },
+                            trailing: Radio<WindSpeed>(
+                              value: WindSpeed.km,
+                              groupValue: state.chosenWindUnit,
+                              onChanged: (WindSpeed? value) {
+                                context
+                                    .read<WindUnitCubit>()
+                                    .changeWindUnit(value!);
                               },
-                            );
-                          },
-                        ),
-                      ),
-                      ListItem(
-                        titleText: "M/s",
-                        subtitleText: "Metro por segundo",
-                        selected: _chosenWindSpeedUnit == WindSpeed.m,
-                        onTap: () {
-                          setState(() {
-                            _chosenWindSpeedUnit = WindSpeed.m;
-                          });
-                        },
-                        trailing: Radio<WindSpeed>(
-                          value: WindSpeed.m,
-                          groupValue: _chosenWindSpeedUnit,
-                          onChanged: (WindSpeed? value) {
-                            setState(
-                              () {
-                                _chosenWindSpeedUnit = value;
+                            ),
+                          ),
+                          ListItem(
+                            titleText: "M/s",
+                            subtitleText: "Metro por segundo",
+                            selected: state.chosenWindUnit == WindSpeed.m,
+                            onTap: () {
+                              context
+                                  .read<WindUnitCubit>()
+                                  .changeWindUnit(WindSpeed.m);
+                            },
+                            trailing: Radio<WindSpeed>(
+                              value: WindSpeed.m,
+                              groupValue: state.chosenWindUnit,
+                              onChanged: (WindSpeed? value) {
+                                context
+                                    .read<WindUnitCubit>()
+                                    .changeWindUnit(value!);
                               },
-                            );
-                          },
-                        ),
-                      ),
-                      ListItem(
-                        titleText: "Mph",
-                        subtitleText: "Milha por hora",
-                        selected: _chosenWindSpeedUnit == WindSpeed.mph,
-                        onTap: () {
-                          setState(() {
-                            _chosenWindSpeedUnit = WindSpeed.mph;
-                          });
-                        },
-                        trailing: Radio<WindSpeed>(
-                          value: WindSpeed.mph,
-                          groupValue: _chosenWindSpeedUnit,
-                          onChanged: (WindSpeed? value) {
-                            setState(
-                              () {
-                                _chosenWindSpeedUnit = value;
+                            ),
+                          ),
+                          ListItem(
+                            titleText: "Mph",
+                            subtitleText: "Milha por hora",
+                            selected: state.chosenWindUnit == WindSpeed.mph,
+                            onTap: () {
+                              context
+                                  .read<WindUnitCubit>()
+                                  .changeWindUnit(WindSpeed.mph);
+                            },
+                            trailing: Radio<WindSpeed>(
+                              value: WindSpeed.mph,
+                              groupValue: state.chosenWindUnit,
+                              onChanged: (WindSpeed? value) {
+                                context
+                                    .read<WindUnitCubit>()
+                                    .changeWindUnit(value!);
                               },
-                            );
-                          },
-                        ),
-                      ),
-                    ],
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ],
               ),

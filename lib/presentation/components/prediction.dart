@@ -8,12 +8,14 @@ class Prediction extends StatelessWidget {
     required this.day,
     required this.temperature,
     required this.temperatureScale,
+    this.color = ApplicationColors.blue,
   });
 
   final IconData icon;
   final String day;
   final int temperature;
   final String temperatureScale;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class Prediction extends StatelessWidget {
       width: MediaQuery.sizeOf(context).width * 0.2,
       height: MediaQuery.sizeOf(context).height * 0.11,
       decoration: BoxDecoration(
-        color: ApplicationColors.blue,
+        color: color,
         borderRadius: BorderRadius.circular(10),
       ),
       padding: const EdgeInsets.all(10),

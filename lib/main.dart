@@ -1,4 +1,5 @@
-import 'package:cloud_radar/logic/cubit/config_cubit.dart';
+import 'package:cloud_radar/logic/cubit/temperature_scale_cubit.dart';
+import 'package:cloud_radar/logic/cubit/wind_unit_cubit.dart';
 import 'package:cloud_radar/presentation/router/app_router.dart';
 import 'package:cloud_radar/presentation/theme/application_theme.dart';
 import 'package:flutter/material.dart';
@@ -51,8 +52,15 @@ class _CloudRadarState extends State<CloudRadar> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ConfigCubit>(
-      create: (context) => ConfigCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<TemperatureScaleCubit>(
+          create: (context) => TemperatureScaleCubit(),
+        ),
+        BlocProvider<WindUnitCubit>(
+          create: (context) => WindUnitCubit(),
+        ),
+      ],
       child: MaterialApp(
         theme: ApplicationThemes.defaultTheme,
         title: 'Cloud Radar',

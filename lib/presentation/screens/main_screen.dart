@@ -1,9 +1,12 @@
+import 'package:cloud_radar/logic/cubit/temperature_scale_cubit.dart';
+import 'package:cloud_radar/logic/cubit/wind_unit_cubit.dart';
 import 'package:cloud_radar/presentation/components/prediction.dart';
 import 'package:cloud_radar/presentation/components/search_input.dart';
 import 'package:cloud_radar/presentation/screens/search_screen.dart';
 import 'package:cloud_radar/presentation/theme/application_colors.dart';
 import 'package:cloud_radar/presentation/theme/cloud_radar_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -90,9 +93,9 @@ class _MainScreenState extends State<MainScreen> {
                           top: Radius.circular(10),
                         ),
                       ),
-                      child: const Column(
+                      child: Column(
                         children: [
-                          Text(
+                          const Text(
                             "Segunda 16 de Dezembro",
                             style: TextStyle(
                               fontFamily: "DM Sans",
@@ -101,33 +104,38 @@ class _MainScreenState extends State<MainScreen> {
                               color: ApplicationColors.white,
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "30°",
-                                style: TextStyle(
-                                  color: ApplicationColors.white,
-                                  fontFamily: "DM Sans",
-                                  fontSize: 80,
-                                  fontWeight: FontWeight.w500,
-                                  height: 1,
-                                ),
-                              ),
-                              Text(
-                                "C",
-                                style: TextStyle(
-                                  color: ApplicationColors.orange500,
-                                  fontFamily: "DM Sans",
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
+                          BlocBuilder<TemperatureScaleCubit,
+                              TemperatureScaleState>(
+                            builder: (context, state) {
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    "30°",
+                                    style: TextStyle(
+                                      color: ApplicationColors.white,
+                                      fontFamily: "DM Sans",
+                                      fontSize: 80,
+                                      fontWeight: FontWeight.w500,
+                                      height: 1,
+                                    ),
+                                  ),
+                                  Text(
+                                    state.chosenTemperatureScale.name,
+                                    style: const TextStyle(
+                                      color: ApplicationColors.orange500,
+                                      fontFamily: "DM Sans",
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
-                          Icon(CloudRadarIcons.chuva),
-                          Text(
+                          const Icon(CloudRadarIcons.chuva),
+                          const Text(
                             "Tempo chuvoso",
                             style: TextStyle(
                               color: ApplicationColors.white,
@@ -136,7 +144,7 @@ class _MainScreenState extends State<MainScreen> {
                               fontFamily: "DM Sans",
                             ),
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.only(top: 14.0),
                             child: Text(
                               "Chuvinha boa",
@@ -162,35 +170,41 @@ class _MainScreenState extends State<MainScreen> {
                             bottom: Radius.circular(12),
                           ),
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(10.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
                           child: Row(
                             spacing: 8,
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Row(
-                                spacing: 8,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    CloudRadarIcons.vento,
-                                    applyTextScaling: true,
-                                    size: 24,
-                                  ),
-                                  Text(
-                                    "2.60 Km/h Norte",
-                                    style: TextStyle(
-                                      fontFamily: "Inter",
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: ApplicationColors.white,
-                                    ),
-                                    textScaler: TextScaler.linear(0.8),
-                                  ),
-                                ],
+                              BlocBuilder<WindUnitCubit, WindUnitState>(
+                                builder: (context, state) {
+                                  return Row(
+                                    spacing: 8,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      const Icon(
+                                        CloudRadarIcons.vento,
+                                        applyTextScaling: true,
+                                        size: 24,
+                                      ),
+                                      Text(
+                                        "2.60 ${state.chosenWindUnit.speedUnit} Norte",
+                                        style: const TextStyle(
+                                          fontFamily: "Inter",
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                          color: ApplicationColors.white,
+                                        ),
+                                        textScaler:
+                                            const TextScaler.linear(0.8),
+                                      ),
+                                    ],
+                                  );
+                                },
                               ),
-                              Row(
+                              const Row(
                                 spacing: 8,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
@@ -211,7 +225,7 @@ class _MainScreenState extends State<MainScreen> {
                                   ),
                                 ],
                               ),
-                              Row(
+                              const Row(
                                 spacing: 8,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
@@ -261,6 +275,7 @@ class _MainScreenState extends State<MainScreen> {
                                   icon: CloudRadarIcons.chuva,
                                   temperature: 30,
                                   temperatureScale: "C",
+                                  color: ApplicationColors.blue900,
                                 ),
                                 Prediction(
                                   day: "Amanhã",
