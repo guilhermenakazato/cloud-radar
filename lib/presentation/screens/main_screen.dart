@@ -65,6 +65,7 @@ class MainScreen extends StatelessWidget {
                         ),
                       ),
                       child: Column(
+                        spacing: 10,
                         children: [
                           const Text(
                             "Segunda 16 de Dezembro",
@@ -79,28 +80,48 @@ class MainScreen extends StatelessWidget {
                               TemperatureScaleState>(
                             builder: (context, state) {
                               return Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   const Text(
-                                    "30°",
+                                    "Min.: 22",
                                     style: TextStyle(
-                                      color: ApplicationColors.white,
+                                      color: ApplicationColors.blue100,
                                       fontFamily: "DM Sans",
-                                      fontSize: 80,
-                                      fontWeight: FontWeight.w500,
-                                      height: 1,
-                                    ),
-                                  ),
-                                  Text(
-                                    state.chosenTemperatureScale.name,
-                                    style: const TextStyle(
-                                      color: ApplicationColors.orange500,
-                                      fontFamily: "DM Sans",
-                                      fontSize: 40,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        "30°",
+                                        style: TextStyle(
+                                          color: ApplicationColors.white,
+                                          fontFamily: "DM Sans",
+                                          fontSize: 80,
+                                          fontWeight: FontWeight.w500,
+                                          height: 1,
+                                        ),
+                                      ),
+                                      Text(
+                                        state.chosenTemperatureScale.name,
+                                        style: const TextStyle(
+                                          color: ApplicationColors.orange500,
+                                          fontFamily: "DM Sans",
+                                          fontSize: 40,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Text("Máx.: 32",
+                                  style: TextStyle(
+                                      color: ApplicationColors.orange100,
+                                      fontFamily: "DM Sans",
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),),
                                 ],
                               );
                             },
@@ -113,18 +134,6 @@ class MainScreen extends StatelessWidget {
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                               fontFamily: "DM Sans",
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(top: 14.0),
-                            child: Text(
-                              "Chuvinha boa",
-                              style: TextStyle(
-                                color: ApplicationColors.orange200,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "Jaldi",
-                              ),
                             ),
                           ),
                         ],
@@ -196,24 +205,34 @@ class MainScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const Row(
+                              Row(
                                 spacing: 8,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     CloudRadarIcons.sensacao,
                                     size: 24,
                                     applyTextScaling: true,
                                   ),
-                                  Text(
-                                    "Sensação de 26°",
-                                    style: TextStyle(
-                                      fontFamily: "Inter",
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: ApplicationColors.white,
+                                  RichText(
+                                    text: const TextSpan(
+                                      children: [
+                                        TextSpan(text: "Põr do sol "),
+                                        TextSpan(
+                                          text: "18:38",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ],
+                                      style: TextStyle(
+                                        fontFamily: "Inter",
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: ApplicationColors.white,
+                                      ),
                                     ),
-                                    textScaler: TextScaler.linear(0.8),
+                                    textScaler: const TextScaler.linear(0.8),
                                   ),
                                 ],
                               ),
@@ -248,33 +267,43 @@ class MainScreen extends StatelessWidget {
                                     Prediction(
                                       day: "Hoje",
                                       icon: CloudRadarIcons.chuva,
-                                      temperature: 30,
-                                      temperatureScale: state.chosenTemperatureScale.name,
+                                      minTemperature: 22,
+                                      maxTemperature: 32,
+                                      temperatureScale:
+                                          state.chosenTemperatureScale.name,
                                       color: ApplicationColors.blue900,
                                     ),
                                     Prediction(
                                       day: "Amanhã",
                                       icon: CloudRadarIcons.sol,
-                                      temperature: 30,
-                                      temperatureScale: state.chosenTemperatureScale.name,
+                                      minTemperature: 29,
+                                      maxTemperature: 39,
+                                      temperatureScale:
+                                          state.chosenTemperatureScale.name,
                                     ),
                                     Prediction(
                                       day: "18/12",
                                       icon: CloudRadarIcons.solComNuvens,
-                                      temperature: 32,
-                                      temperatureScale: state.chosenTemperatureScale.name,
+                                      minTemperature: 28,
+                                      maxTemperature: 32,
+                                      temperatureScale:
+                                          state.chosenTemperatureScale.name,
                                     ),
                                     Prediction(
                                       day: "19/12",
                                       icon: CloudRadarIcons.inferno,
-                                      temperature: 42,
-                                      temperatureScale: state.chosenTemperatureScale.name,
+                                      minTemperature: 28,
+                                      maxTemperature: 30,
+                                      temperatureScale:
+                                          state.chosenTemperatureScale.name,
                                     ),
                                     Prediction(
                                       day: "20/12",
                                       icon: CloudRadarIcons.solComNuvens,
-                                      temperature: 34,
-                                      temperatureScale: state.chosenTemperatureScale.name,
+                                      minTemperature: 27,
+                                      maxTemperature: 30,
+                                      temperatureScale:
+                                          state.chosenTemperatureScale.name,
                                     ),
                                   ],
                                 );

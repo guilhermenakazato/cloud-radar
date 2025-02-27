@@ -6,21 +6,22 @@ class Prediction extends StatelessWidget {
     super.key,
     required this.icon,
     required this.day,
-    required this.temperature,
+    required this.minTemperature,
+    required this.maxTemperature,
     required this.temperatureScale,
     this.color = ApplicationColors.blue,
   });
 
   final IconData icon;
   final String day;
-  final int temperature;
+  final int minTemperature, maxTemperature;
   final String temperatureScale;
   final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.sizeOf(context).width * 0.2,
+      width: MediaQuery.sizeOf(context).width * 0.23,
       height: MediaQuery.sizeOf(context).height * 0.11,
       decoration: BoxDecoration(
         color: color,
@@ -40,13 +41,23 @@ class Prediction extends StatelessWidget {
             ),
           ),
           Icon(icon),
-          Text(
-            "$temperature°$temperatureScale",
-            style: const TextStyle(
-              fontFamily: "DM Sans",
-              fontWeight: FontWeight.w500,
-              color: ApplicationColors.white,
-              fontSize: 14,
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: "$minTemperature° ",
+                  style: const TextStyle(
+                    color: ApplicationColors.blue200,
+                  ),
+                ),
+                TextSpan(text: "- $maxTemperature°"),
+              ],
+              style: const TextStyle(
+                fontFamily: "DM Sans",
+                fontWeight: FontWeight.w500,
+                color: ApplicationColors.white,
+                fontSize: 14,
+              ),
             ),
           ),
         ],
