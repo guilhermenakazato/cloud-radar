@@ -116,7 +116,7 @@ class EnjoyScreen extends StatelessWidget {
                         child: FilledCloudButton(
                           text: "Próximo",
                           onPressed: () {
-                            Navigator.pushNamed(context, "/home");
+                            Navigator.pushReplacementNamed(context, "/home");
                           },
                         ),
                       ),

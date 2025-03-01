@@ -11,7 +11,7 @@ class CloudAppbar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       centerTitle: true,
       leading: IconButton(
-        icon: const Icon(CloudRadarIcons.setaEsquerda),
+        icon: const Icon(CloudRadarIcons.arrowleft),
         onPressed: () {
           Navigator.pop(context);
         },

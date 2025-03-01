@@ -1,3 +1,5 @@
+import 'package:cloud_radar/data/repositories/weather_repository.dart';
+import 'package:cloud_radar/logic/cubit/forecast_cubit.dart';
 import 'package:cloud_radar/logic/cubit/temperature_scale_cubit.dart';
 import 'package:cloud_radar/logic/cubit/wind_unit_cubit.dart';
 import 'package:cloud_radar/presentation/router/app_router.dart';
@@ -52,20 +54,28 @@ class _CloudRadarState extends State<CloudRadar> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<TemperatureScaleCubit>(
-          create: (context) => TemperatureScaleCubit(),
+    return RepositoryProvider<WeatherRepository>(
+      create: (context) => WeatherRepository(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<TemperatureScaleCubit>(
+            create: (context) => TemperatureScaleCubit(),
+          ),
+          BlocProvider<WindUnitCubit>(
+            create: (context) => WindUnitCubit(),
+          ),
+          BlocProvider<ForecastCubit>(
+            create: (cubitContext) => ForecastCubit(
+              repository: cubitContext.read<WeatherRepository>(),
+            ),
+          ),
+        ],
+        child: MaterialApp(
+          theme: ApplicationThemes.defaultTheme,
+          title: 'Cloud Radar',
+          themeMode: ThemeMode.dark,
+          onGenerateRoute: _appRouter.onGenerateRoute,
         ),
-        BlocProvider<WindUnitCubit>(
-          create: (context) => WindUnitCubit(),
-        ),
-      ],
-      child: MaterialApp(
-        theme: ApplicationThemes.defaultTheme,
-        title: 'Cloud Radar',
-        themeMode: ThemeMode.dark,
-        onGenerateRoute: _appRouter.onGenerateRoute,
       ),
     );
   }

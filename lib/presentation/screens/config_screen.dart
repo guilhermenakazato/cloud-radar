@@ -43,7 +43,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   Row(
                     spacing: 10,
                     children: [
-                      const Icon(CloudRadarIcons.assinatura),
+                      const Icon(CloudRadarIcons.subscribe),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -79,7 +79,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                                       ),
                                     ),
                                     Icon(
-                                      CloudRadarIcons.guardaChuva,
+                                      CloudRadarIcons.umbrella,
                                       color: ApplicationColors.green500,
                                     ),
                                   ],
@@ -100,7 +100,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   ListItem(
                     titleText: "Assine agora",
                     subtitleText: "Veja benefícios",
-                    trailing: const Icon(CloudRadarIcons.setaDireita),
+                    trailing: const Icon(CloudRadarIcons.arrowright),
                     onTap: () {
                       Navigator.pushNamed(context, "/plans");
                     },
@@ -114,7 +114,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   const Row(
                     spacing: 10,
                     children: [
-                      Icon(CloudRadarIcons.widget),
+                      Icon(CloudRadarIcons.style),
                       Text(
                         "Opções estilizadas",
                         style: TextStyle(
@@ -208,7 +208,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   const Row(
                     spacing: 10,
                     children: [
-                      Icon(CloudRadarIcons.temperatura),
+                      Icon(CloudRadarIcons.temperature),
                       Text(
                         "Temperatura",
                         style: TextStyle(
@@ -277,7 +277,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   const Row(
                     spacing: 10,
                     children: [
-                      Icon(CloudRadarIcons.velocidadeVento),
+                      Icon(CloudRadarIcons.windmeasure),
                       Text(
                         "Velocidade",
                         style: TextStyle(

@@ -68,7 +68,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     City currentCity = options.elementAt(index);
 
                     return ListItem(
-                      trailing: const Icon(CloudRadarIcons.local),
+                      trailing: const Icon(CloudRadarIcons.world),
                       titleText: currentCity.cityName,
                       subtitleText: currentCity.cityState,
                       onTap: () {

@@ -130,7 +130,7 @@ class StartScreen extends StatelessWidget {
                             Navigator.pushNamed(context, "/fourth");
                           },
                           icon: const Icon(
-                            CloudRadarIcons.setaDireita,
+                            CloudRadarIcons.arrowright,
                             color: ApplicationColors.black,
                           ),
                         ),

@@ -83,7 +83,7 @@ class CloudRadarDialog {
                     onPressed: onConfirm,
                     text: confirmButtonText,
                     icon: const Icon(
-                      CloudRadarIcons.assinatura,
+                      CloudRadarIcons.subscribe,
                     ),
                   ),
                 ),

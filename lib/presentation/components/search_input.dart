@@ -58,7 +58,7 @@ class SearchInput extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Icon(
-              CloudRadarIcons.mapa,
+              CloudRadarIcons.map,
             ),
           ),
         ),
@@ -72,7 +72,7 @@ class SearchInput extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(12),
             child: const Icon(
-              CloudRadarIcons.procurar,
+              CloudRadarIcons.search,
             ),
           ),
         ),
