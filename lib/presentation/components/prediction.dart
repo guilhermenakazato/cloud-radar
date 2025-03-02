@@ -47,15 +47,19 @@ class Prediction extends StatelessWidget {
                 TextSpan(
                   text: "$minTemperature° ",
                   style: const TextStyle(
-                    color: ApplicationColors.blue200,
+                    color: ApplicationColors.blue100,
                   ),
                 ),
-                TextSpan(text: "- $maxTemperature°"),
+                TextSpan(
+                  text: "- $maxTemperature°",
+                  style: const TextStyle(
+                    color: ApplicationColors.orange100,
+                  ),
+                ),
               ],
               style: const TextStyle(
                 fontFamily: "DM Sans",
                 fontWeight: FontWeight.w500,
-                color: ApplicationColors.white,
                 fontSize: 14,
               ),
             ),

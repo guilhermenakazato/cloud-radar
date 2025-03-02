@@ -8,23 +8,34 @@ import '../models/weather.dart';
 class WeatherRepository {
   final _weatherProvider = WeatherProvider();
 
-  Future<Forecast> getFormattedForecastList() async {
+  Future<Forecast> getFormattedForecastList(String city) async {
     final Response predictionsApiResponse =
-        await _weatherProvider.getPredictions();
+        await _weatherProvider.getPredictions(city);
 
     if (predictionsApiResponse.statusCode != 200) {
       throw Exception(predictionsApiResponse.body);
     }
 
     final String rawPredictions = predictionsApiResponse.body;
-    var forecastJson = jsonDecode(rawPredictions)['forecast'];
-    final List<String> unformattedWeatherPredictions = List.from(forecastJson);
-    final List<Weather> formattedWeatherPredictions =
-        unformattedWeatherPredictions
-            .map<Weather>((element) => Weather.fromJson(element))
-            .toList();
+    Iterable forecastIterable = json.decode(rawPredictions)['forecast'];
 
-    final forecast = Forecast(forecast: formattedWeatherPredictions);
+    List<Weather> weatherPredictions = List<Weather>.from(
+      forecastIterable.map(
+        (unformattedWeatherPrediction) {
+          return Weather.forecastFromJson(unformattedWeatherPrediction, city);
+        },
+      ),
+    );
+
+    final weatherNow = Weather.currentDayFromJson(
+        json.decode(rawPredictions) as Map<String, dynamic>,
+        weatherPredictions.first);
+
+    final forecast = Forecast(
+      forecast: weatherPredictions,
+      weatherNow: weatherNow,
+    );
+
     return forecast;
   }
 }

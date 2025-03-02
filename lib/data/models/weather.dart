@@ -1,23 +1,25 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'package:cloud_radar/utils/formatted_date.dart';
 
 class Weather {
   String city;
   String weekday;
-  String date;
+  String numberDate;
+  String writtenDate;
   String weatherDescription;
   String sunsetTime;
   int minTemperature;
   int maxTemperature;
   int? currentTemperature;
   double windSpeed;
-  double humidity;
+  int humidity;
   DateTime lastUpdated;
 
   Weather({
     required this.city,
     required this.weekday,
-    required this.date,
+    required this.numberDate,
+    required this.writtenDate,
     required this.weatherDescription,
     required this.sunsetTime,
     required this.minTemperature,
@@ -28,78 +30,73 @@ class Weather {
     required this.lastUpdated,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'city': city,
-      'weekday': weekday,
-      'date': date,
-      'weatherDescription': weatherDescription,
-      'sunsetTime': sunsetTime,
-      'minTemperature': minTemperature,
-      'maxTemperature': maxTemperature,
-      'currentTemperature': currentTemperature,
-      'windSpeed': windSpeed,
-      'humidity': humidity,
-      'lastUpdated': lastUpdated.millisecondsSinceEpoch,
-    };
-  }
+  String toJson() => json.encode({
+        'city': city,
+        'weekday': weekday,
+        'numberDate': numberDate,
+        'writtenDate': writtenDate,
+        'weatherDescription': weatherDescription,
+        'sunsetTime': sunsetTime,
+        'minTemperature': minTemperature,
+        'maxTemperature': maxTemperature,
+        'currentTemperature': currentTemperature,
+        'windSpeed': windSpeed,
+        'humidity': humidity,
+        'lastUpdated': lastUpdated.millisecondsSinceEpoch,
+      });
 
-  factory Weather.fromMap(Map<String, dynamic> map) {
+  factory Weather.currentDayFromJson(
+      Map<String, dynamic> jsonMap, Weather forecastForToday) {
+    final city = jsonMap['city'].toString().replaceFirst(",", " -");
+    final windSpeedComplete = jsonMap['wind_speedy'];
+    final double windSpeedValue =
+        double.parse(windSpeedComplete.toString().split(" ").first);
+    final numberDate = jsonMap['date'];
+
     return Weather(
-      city: map['city'],
-      weekday: map['weekday'],
-      date: map['date'],
-      weatherDescription: map['weatherDescription'],
-      sunsetTime: map['sunsetTime'],
-      minTemperature: map['minTemperature'],
-      maxTemperature: map['maxTemperature'],
-      currentTemperature: map['currentTemperature'],
-      windSpeed: map['windSpeed'],
-      humidity: map['humidity'],
-      lastUpdated:
-          DateTime.fromMillisecondsSinceEpoch(map['lastUpdated'] as int),
+      city: city,
+      weekday: FormattedDate.getWeekdayWithDate(numberDate),
+      numberDate: numberDate,
+      writtenDate: FormattedDate.numberDateToWrittenDate(numberDate),
+      weatherDescription: jsonMap['description'],
+      sunsetTime:
+          FormattedDate.getMilitaryTimeFromStandardTime(jsonMap['sunset']),
+      minTemperature: forecastForToday.minTemperature,
+      maxTemperature: forecastForToday.maxTemperature,
+      currentTemperature: jsonMap['temp'],
+      windSpeed: windSpeedValue,
+      humidity: jsonMap['humidity'],
+      lastUpdated: DateTime.now(),
     );
   }
 
-  String toJson() => json.encode(toMap());
+  factory Weather.forecastFromJson(
+    Map<String, dynamic> jsonMap,
+    String cityName,
+  ) {
+    final numberDate = jsonMap['date'];
+    final windSpeedComplete = jsonMap['wind_speedy'];
+    final double windSpeedValue =
+        double.parse(windSpeedComplete.toString().split(" ").first);
 
-  factory Weather.fromJson(String source) =>
-      Weather.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  bool operator ==(covariant Weather other) {
-    if (identical(this, other)) return true;
-
-    return other.city == city &&
-        other.weekday == weekday &&
-        other.date == date &&
-        other.weatherDescription == weatherDescription &&
-        other.sunsetTime == sunsetTime &&
-        other.minTemperature == minTemperature &&
-        other.maxTemperature == maxTemperature &&
-        other.currentTemperature == currentTemperature &&
-        other.windSpeed == windSpeed &&
-        other.humidity == humidity &&
-        other.lastUpdated == lastUpdated;
-  }
-
-  @override
-  int get hashCode {
-    return city.hashCode ^
-        weekday.hashCode ^
-        date.hashCode ^
-        weatherDescription.hashCode ^
-        sunsetTime.hashCode ^
-        minTemperature.hashCode ^
-        maxTemperature.hashCode ^
-        currentTemperature.hashCode ^
-        windSpeed.hashCode ^
-        humidity.hashCode ^
-        lastUpdated.hashCode;
+    return Weather(
+      city: cityName,
+      weekday: FormattedDate.getWeekdayWithAbbreviation(jsonMap['weekday']),
+      numberDate: numberDate,
+      writtenDate: FormattedDate.numberDateToWrittenDate(numberDate),
+      weatherDescription: jsonMap['description'],
+      sunsetTime: jsonMap['sunset'],
+      minTemperature: jsonMap['min'],
+      maxTemperature: jsonMap['max'],
+      currentTemperature: null,
+      windSpeed: windSpeedValue,
+      humidity: jsonMap['humidity'],
+      lastUpdated: DateTime.now(),
+    );
   }
 
   @override
   String toString() {
-    return 'Weather(city: $city, weekday: $weekday, date: $date, weatherDescription: $weatherDescription, sunsetTime: $sunsetTime, minTemperature: $minTemperature, maxTemperature: $maxTemperature, currentTemperature: $currentTemperature, windSpeed: $windSpeed, humidity: $humidity, lastUpdated: $lastUpdated)';
+    return 'Weather(city: $city, weekday: $weekday, numberDate: $numberDate, writtenDate: $writtenDate, weatherDescription: $weatherDescription, sunsetTime: $sunsetTime, minTemperature: $minTemperature, maxTemperature: $maxTemperature, currentTemperature: $currentTemperature, windSpeed: $windSpeed, humidity: $humidity, lastUpdated: $lastUpdated)';
   }
 }

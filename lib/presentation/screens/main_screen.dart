@@ -20,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<ForecastCubit>().fetchForecast("Brasília,DF");
+    context.read<ForecastCubit>().fetchForecast("Aquidauana,MS");
   }
 
   @override
@@ -100,7 +100,7 @@ class _MainScreenState extends State<MainScreen> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       const Text(
-                                        "Min.: 22",
+                                        "Min.: 22°",
                                         style: TextStyle(
                                           color: ApplicationColors.blue100,
                                           fontFamily: "DM Sans",
@@ -135,7 +135,7 @@ class _MainScreenState extends State<MainScreen> {
                                         ],
                                       ),
                                       const Text(
-                                        "Máx.: 32",
+                                        "Máx.: 32°",
                                         style: TextStyle(
                                           color:
                                               ApplicationColors.orange100,
@@ -287,7 +287,7 @@ class _MainScreenState extends State<MainScreen> {
                                     TemperatureScaleState>(
                                   builder: (context, state) {
                                     return Row(
-                                      spacing: 8,
+                                      spacing: 2,
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [

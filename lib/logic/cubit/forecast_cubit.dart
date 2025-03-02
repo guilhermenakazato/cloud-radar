@@ -16,7 +16,7 @@ class ForecastCubit extends Cubit<ForecastState> {
     emit(const ForecastLoadInProgress());
 
     try {
-      Forecast forecast = await repository.getFormattedForecastList();
+      Forecast forecast = await repository.getFormattedForecastList(city);
       print(forecast.toString());
 
       emit(ForecastLoadSuccess(forecast: forecast));
