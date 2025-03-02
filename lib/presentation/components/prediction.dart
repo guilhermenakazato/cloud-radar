@@ -8,21 +8,18 @@ class Prediction extends StatelessWidget {
     required this.day,
     required this.minTemperature,
     required this.maxTemperature,
-    required this.temperatureScale,
     this.color = ApplicationColors.blue,
   });
 
   final IconData icon;
   final String day;
   final int minTemperature, maxTemperature;
-  final String temperatureScale;
   final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.sizeOf(context).width * 0.23,
-      height: MediaQuery.sizeOf(context).height * 0.11,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(10),

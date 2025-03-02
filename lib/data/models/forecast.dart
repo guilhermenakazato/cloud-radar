@@ -1,23 +1,20 @@
 import 'package:cloud_radar/data/models/weather.dart';
 
 class Forecast {
-  List<Weather> forecast;
-  Weather weatherNow;
+  List<Weather> weatherPredictions;
 
   Forecast({
-    required this.forecast,
-    required this.weatherNow,
+    required this.weatherPredictions,
   });
 
   @override
   String toString() {
     String returnString = "";
 
-    for (Weather weather in forecast) {
+    for (Weather weather in weatherPredictions) {
       returnString += "$weather\n";
     }
 
-    returnString += weatherNow.toString();
     return returnString;
   }
 }

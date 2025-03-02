@@ -17,23 +17,29 @@ class WeatherRepository {
     }
 
     final String rawPredictions = predictionsApiResponse.body;
-    Iterable forecastIterable = json.decode(rawPredictions)['forecast'];
+    final wholePrediction = json.decode(rawPredictions);
+    Iterable forecastIterable = wholePrediction['forecast'];
+    final int currentDayTemperature = wholePrediction['temp'];
 
+    int iterableIndex = 0;
     List<Weather> weatherPredictions = List<Weather>.from(
       forecastIterable.map(
         (unformattedWeatherPrediction) {
-          return Weather.forecastFromJson(unformattedWeatherPrediction, city);
+          final weatherPrediction = Weather.forecastFromJson(
+            unformattedWeatherPrediction,
+            city,
+            iterableIndex,
+            currentDayTemperature,
+          );
+
+          iterableIndex++;
+          return weatherPrediction;
         },
       ),
     );
 
-    final weatherNow = Weather.currentDayFromJson(
-        json.decode(rawPredictions) as Map<String, dynamic>,
-        weatherPredictions.first);
-
     final forecast = Forecast(
-      forecast: weatherPredictions,
-      weatherNow: weatherNow,
+      weatherPredictions: weatherPredictions,
     );
 
     return forecast;

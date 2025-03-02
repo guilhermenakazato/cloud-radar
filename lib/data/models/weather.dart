@@ -45,50 +45,44 @@ class Weather {
         'lastUpdated': lastUpdated.millisecondsSinceEpoch,
       });
 
-  factory Weather.currentDayFromJson(
-      Map<String, dynamic> jsonMap, Weather forecastForToday) {
-    final city = jsonMap['city'].toString().replaceFirst(",", " -");
+  factory Weather.forecastFromJson(
+    Map<String, dynamic> jsonMap,
+    String cityName,
+    int weatherPredictionOrder,
+    int currentDayTemperature,
+  ) {
+    final String formattedCityName = cityName.replaceFirst(",", " - ");
+
+    final numberDate = jsonMap['date'];
+    late String predictionComponentDate;
     final windSpeedComplete = jsonMap['wind_speedy'];
     final double windSpeedValue =
         double.parse(windSpeedComplete.toString().split(" ").first);
-    final numberDate = jsonMap['date'];
+    int? currentTemperature;
+
+    switch (weatherPredictionOrder) {
+      case 0:
+        currentTemperature = currentDayTemperature;
+        predictionComponentDate = "Hoje";
+        break;
+      case 1:
+        currentTemperature = null;
+        predictionComponentDate = "Amanhã";
+      default:
+        predictionComponentDate = numberDate;
+    }
 
     return Weather(
-      city: city,
-      weekday: FormattedDate.getWeekdayWithDate(numberDate),
-      numberDate: numberDate,
+      city: formattedCityName,
+      weekday: FormattedDate.getWeekdayWithAbbreviation(jsonMap['weekday']),
+      numberDate: predictionComponentDate,
       writtenDate: FormattedDate.numberDateToWrittenDate(numberDate),
       weatherDescription: jsonMap['description'],
       sunsetTime:
           FormattedDate.getMilitaryTimeFromStandardTime(jsonMap['sunset']),
-      minTemperature: forecastForToday.minTemperature,
-      maxTemperature: forecastForToday.maxTemperature,
-      currentTemperature: jsonMap['temp'],
-      windSpeed: windSpeedValue,
-      humidity: jsonMap['humidity'],
-      lastUpdated: DateTime.now(),
-    );
-  }
-
-  factory Weather.forecastFromJson(
-    Map<String, dynamic> jsonMap,
-    String cityName,
-  ) {
-    final numberDate = jsonMap['date'];
-    final windSpeedComplete = jsonMap['wind_speedy'];
-    final double windSpeedValue =
-        double.parse(windSpeedComplete.toString().split(" ").first);
-
-    return Weather(
-      city: cityName,
-      weekday: FormattedDate.getWeekdayWithAbbreviation(jsonMap['weekday']),
-      numberDate: numberDate,
-      writtenDate: FormattedDate.numberDateToWrittenDate(numberDate),
-      weatherDescription: jsonMap['description'],
-      sunsetTime: jsonMap['sunset'],
       minTemperature: jsonMap['min'],
       maxTemperature: jsonMap['max'],
-      currentTemperature: null,
+      currentTemperature: currentTemperature,
       windSpeed: windSpeedValue,
       humidity: jsonMap['humidity'],
       lastUpdated: DateTime.now(),

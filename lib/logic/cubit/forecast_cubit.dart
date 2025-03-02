@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_radar/data/models/forecast.dart';
 import 'package:cloud_radar/data/repositories/weather_repository.dart';
@@ -17,9 +18,8 @@ class ForecastCubit extends Cubit<ForecastState> {
 
     try {
       Forecast forecast = await repository.getFormattedForecastList(city);
-      print(forecast.toString());
-
       emit(ForecastLoadSuccess(forecast: forecast));
+      debugPrint("Done!");
     } on Exception catch (exception) {
       emit(ForecastLoadFailure(exception: exception));
     }
