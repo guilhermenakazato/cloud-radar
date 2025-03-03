@@ -2,6 +2,8 @@ import 'package:cloud_radar/data/models/weather.dart';
 import 'package:cloud_radar/logic/cubit/forecast_cubit.dart';
 import 'package:cloud_radar/logic/cubit/temperature_scale_cubit.dart';
 import 'package:cloud_radar/logic/cubit/wind_unit_cubit.dart';
+import 'package:cloud_radar/presentation/components/bold_half.dart';
+import 'package:cloud_radar/presentation/components/forecast_list.dart';
 import 'package:cloud_radar/presentation/components/prediction.dart';
 import 'package:cloud_radar/presentation/components/search_input.dart';
 import 'package:cloud_radar/presentation/screens/search_screen.dart';
@@ -73,6 +75,8 @@ class _MainScreenState extends State<MainScreen> {
                       sunsetTime = weatherPredictionCurrentScreen.sunsetTime;
                   int? currentTemperature =
                       weatherPredictionCurrentScreen.currentTemperature;
+                  String? windDirection =
+                      weatherPredictionCurrentScreen.windCardinal;
 
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -228,8 +232,10 @@ class _MainScreenState extends State<MainScreen> {
                                               applyTextScaling: true,
                                               size: 24,
                                             ),
-                                            Text(
-                                              "$windSpeed ${windUnitState.chosenWindUnit.speedUnit} Norte",
+                                            BoldHalf(
+                                              normalText:
+                                                  '$windSpeed ${windUnitState.chosenWindUnit.speedUnit}',
+                                              boldText: windDirection!,
                                               style: const TextStyle(
                                                 fontFamily: "Inter",
                                                 fontSize: 12,
@@ -253,8 +259,9 @@ class _MainScreenState extends State<MainScreen> {
                                           size: 24,
                                           applyTextScaling: true,
                                         ),
-                                        Text(
-                                          "Umidade $humidity%",
+                                        BoldHalf(
+                                          normalText: "Umidade",
+                                          boldText: "$humidity%",
                                           style: const TextStyle(
                                             fontFamily: "Inter",
                                             fontSize: 12,
@@ -276,28 +283,17 @@ class _MainScreenState extends State<MainScreen> {
                                           size: 24,
                                           applyTextScaling: true,
                                         ),
-                                        RichText(
-                                          text: TextSpan(
-                                            children: [
-                                              const TextSpan(
-                                                text: "Pôr do sol ",
-                                              ),
-                                              TextSpan(
-                                                text: sunsetTime,
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ],
-                                            style: const TextStyle(
-                                              fontFamily: "Inter",
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                              color: ApplicationColors.white,
-                                            ),
-                                          ),
+                                        BoldHalf(
+                                          normalText: "Pôr do sol",
+                                          boldText: sunsetTime,
                                           textScaler:
                                               const TextScaler.linear(0.8),
+                                          style: const TextStyle(
+                                            fontFamily: "Inter",
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            color: ApplicationColors.white,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -314,43 +310,8 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: BlocBuilder<TemperatureScaleCubit,
-                                  TemperatureScaleState>(
-                                builder: (context, temperatureState) {
-                                  return SizedBox(
-                                    width: double.infinity,
-                                    height: MediaQuery.sizeOf(context).height *
-                                        0.11,
-                                    child: ListView.separated(
-                                      physics: const BouncingScrollPhysics(),
-                                      itemCount: 5,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        debugPrint(
-                                            "Forecast: ${state.forecast}");
-                                        Weather weatherPrediction = state
-                                            .forecast.weatherPredictions[index];
-
-                                        return Prediction(
-                                          day: weatherPrediction.numberDate,
-                                          minTemperature:
-                                              weatherPrediction.minTemperature,
-                                          maxTemperature:
-                                              weatherPrediction.maxTemperature,
-                                          icon: CloudRadarIcons.rain,
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) {
-                                        return const SizedBox(
-                                          width: 2,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                              ),
+                            ForecastList(
+                              predictions: state.forecast.weatherPredictions,
                             ),
                             Row(
                               children: [

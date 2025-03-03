@@ -1,5 +1,4 @@
-import 'dart:convert';
-import 'package:cloud_radar/utils/formatted_date.dart';
+import 'package:cloud_radar/utils/formatter.dart';
 
 class Weather {
   String city;
@@ -8,6 +7,7 @@ class Weather {
   String writtenDate;
   String weatherDescription;
   String sunsetTime;
+  String? windCardinal;
   int minTemperature;
   int maxTemperature;
   int? currentTemperature;
@@ -28,40 +28,24 @@ class Weather {
     required this.windSpeed,
     required this.humidity,
     required this.lastUpdated,
+    required this.windCardinal,
   });
-
-  String toJson() => json.encode({
-        'city': city,
-        'weekday': weekday,
-        'numberDate': numberDate,
-        'writtenDate': writtenDate,
-        'weatherDescription': weatherDescription,
-        'sunsetTime': sunsetTime,
-        'minTemperature': minTemperature,
-        'maxTemperature': maxTemperature,
-        'currentTemperature': currentTemperature,
-        'windSpeed': windSpeed,
-        'humidity': humidity,
-        'lastUpdated': lastUpdated.millisecondsSinceEpoch,
-      });
 
   factory Weather.forecastFromJson(
     Map<String, dynamic> jsonMap,
     String cityName,
     int weatherPredictionOrder,
     int currentDayTemperature,
+    String currentDayWindDirection,
   ) {
-    final String formattedCityName = cityName.replaceFirst(",", " - ");
-
     final numberDate = jsonMap['date'];
     late String predictionComponentDate;
-    final windSpeedComplete = jsonMap['wind_speedy'];
-    final double windSpeedValue =
-        double.parse(windSpeedComplete.toString().split(" ").first);
     int? currentTemperature;
+    String? windDirection;
 
     switch (weatherPredictionOrder) {
       case 0:
+        windDirection = currentDayWindDirection;
         currentTemperature = currentDayTemperature;
         predictionComponentDate = "Hoje";
         break;
@@ -73,17 +57,17 @@ class Weather {
     }
 
     return Weather(
-      city: formattedCityName,
-      weekday: FormattedDate.getWeekdayWithAbbreviation(jsonMap['weekday']),
+      city: Formatter.formatStringNameToCloudFormat(cityName),
+      weekday: Formatter.getWeekdayWithAbbreviation(jsonMap['weekday']),
       numberDate: predictionComponentDate,
-      writtenDate: FormattedDate.numberDateToWrittenDate(numberDate),
+      writtenDate: Formatter.numberDateToWrittenDate(numberDate),
       weatherDescription: jsonMap['description'],
-      sunsetTime:
-          FormattedDate.getMilitaryTimeFromStandardTime(jsonMap['sunset']),
+      sunsetTime: Formatter.getMilitaryTimeFromStandardTime(jsonMap['sunset']),
+      windCardinal: windDirection,
       minTemperature: jsonMap['min'],
       maxTemperature: jsonMap['max'],
       currentTemperature: currentTemperature,
-      windSpeed: windSpeedValue,
+      windSpeed: Formatter.windSpeedTextToValue(jsonMap['wind_speedy']),
       humidity: jsonMap['humidity'],
       lastUpdated: DateTime.now(),
     );
@@ -91,6 +75,6 @@ class Weather {
 
   @override
   String toString() {
-    return 'Weather(city: $city, weekday: $weekday, numberDate: $numberDate, writtenDate: $writtenDate, weatherDescription: $weatherDescription, sunsetTime: $sunsetTime, minTemperature: $minTemperature, maxTemperature: $maxTemperature, currentTemperature: $currentTemperature, windSpeed: $windSpeed, humidity: $humidity, lastUpdated: $lastUpdated)';
+    return 'Weather(city: $city, weekday: $weekday, numberDate: $numberDate, writtenDate: $writtenDate, weatherDescription: $weatherDescription, sunsetTime: $sunsetTime, minTemperature: $minTemperature, maxTemperature: $maxTemperature, currentTemperature: $currentTemperature, windSpeed: $windSpeed, windCardinal: $windCardinal, humidity: $humidity, lastUpdated: $lastUpdated)';
   }
 }

@@ -20,6 +20,7 @@ class WeatherRepository {
     final wholePrediction = json.decode(rawPredictions);
     Iterable forecastIterable = wholePrediction['forecast'];
     final int currentDayTemperature = wholePrediction['temp'];
+    final String currentDayWindDirection = wholePrediction['wind_cardinal'];
 
     int iterableIndex = 0;
     List<Weather> weatherPredictions = List<Weather>.from(
@@ -30,6 +31,7 @@ class WeatherRepository {
             city,
             iterableIndex,
             currentDayTemperature,
+            currentDayWindDirection,
           );
 
           iterableIndex++;

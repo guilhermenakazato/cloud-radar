@@ -1,5 +1,5 @@
-class FormattedDate {
-  FormattedDate._();
+class Formatter {
+  Formatter._();
 
   static final Map<int, String> _months = {
     1: "Janeiro",
@@ -75,5 +75,13 @@ class FormattedDate {
     if (hour < 12 && timeType == "pm") hour += 12;
 
     return "$hour:$minute";
+  }
+
+  static double windSpeedTextToValue(String windSpeedText) {
+    return double.parse(windSpeedText.toString().split(" ").first);
+  }
+
+  static String formatStringNameToCloudFormat(String cityName) {
+    return cityName.replaceFirst(",", " - ");
   }
 }
