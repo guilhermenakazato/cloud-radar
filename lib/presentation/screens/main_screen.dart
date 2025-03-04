@@ -4,7 +4,6 @@ import 'package:cloud_radar/logic/cubit/temperature_scale_cubit.dart';
 import 'package:cloud_radar/logic/cubit/wind_unit_cubit.dart';
 import 'package:cloud_radar/presentation/components/bold_half.dart';
 import 'package:cloud_radar/presentation/components/forecast_list.dart';
-import 'package:cloud_radar/presentation/components/prediction.dart';
 import 'package:cloud_radar/presentation/components/search_input.dart';
 import 'package:cloud_radar/presentation/screens/search_screen.dart';
 import 'package:cloud_radar/presentation/theme/application_colors.dart';
@@ -55,6 +54,8 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                   );
                 } else if (state is ForecastLoadSuccess) {
+                  
+
                   Weather weatherPredictionCurrentScreen =
                       state.forecast.weatherPredictions.first;
                   String cityName = weatherPredictionCurrentScreen.city,
@@ -326,7 +327,8 @@ class _MainScreenState extends State<MainScreen> {
                                         enableDrag: false,
                                         builder: (BuildContext modalContext) {
                                           return SearchScreen(
-                                              appContext: context);
+                                            appContext: context,
+                                          );
                                         },
                                       );
                                     },

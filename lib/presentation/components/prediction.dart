@@ -8,24 +8,29 @@ class Prediction extends StatelessWidget {
     required this.day,
     required this.minTemperature,
     required this.maxTemperature,
-    this.color = ApplicationColors.blue,
+    this.selected = false,
+    required this.onTap,
   });
 
   final IconData icon;
   final String day;
   final int minTemperature, maxTemperature;
-  final Color color;
+  final bool selected;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
+    final selectedColor = ApplicationColors.blue900;
+    final defaultColor = ApplicationColors.blue600;
+
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       borderRadius: BorderRadius.circular(10),
       child: Ink(
         width: MediaQuery.sizeOf(context).width * 0.23,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: color,
+          color: selected ? selectedColor : defaultColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(

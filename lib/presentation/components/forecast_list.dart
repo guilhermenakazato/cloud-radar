@@ -1,4 +1,6 @@
+import 'package:cloud_radar/data/models/forecast.dart';
 import 'package:cloud_radar/data/models/weather.dart';
+import 'package:cloud_radar/logic/cubit/forecast_cubit.dart';
 import 'package:cloud_radar/logic/cubit/temperature_scale_cubit.dart';
 import 'package:cloud_radar/presentation/components/prediction.dart';
 import 'package:cloud_radar/presentation/theme/cloud_radar_icons.dart';
@@ -25,12 +27,19 @@ class ForecastList extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 Weather weatherPrediction = predictions[index];
+                bool forecastIsSelected =
+                    context.read<ForecastCubit>().state.selectedForecastIndex ==
+                        index;
 
                 return Prediction(
                   day: weatherPrediction.numberDate,
                   minTemperature: weatherPrediction.minTemperature,
                   maxTemperature: weatherPrediction.maxTemperature,
                   icon: CloudRadarIcons.rain,
+                  selected: forecastIsSelected,
+                  onTap: () {
+                    context.read<ForecastCubit>().changeSelectedForecast(index);
+                  },
                 );
               },
               separatorBuilder: (context, index) {
