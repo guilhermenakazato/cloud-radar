@@ -1,13 +1,17 @@
+import 'package:cloud_radar/data/models/current_day_weather.dart';
 import 'package:cloud_radar/data/models/weather.dart';
 import 'package:cloud_radar/logic/cubit/forecast_cubit.dart';
 import 'package:cloud_radar/logic/cubit/temperature_scale_cubit.dart';
 import 'package:cloud_radar/logic/cubit/wind_unit_cubit.dart';
-import 'package:cloud_radar/presentation/components/bold_half.dart';
+import 'package:cloud_radar/presentation/components/current_temperature_text.dart';
 import 'package:cloud_radar/presentation/components/forecast_list.dart';
+import 'package:cloud_radar/presentation/components/gradient_line.dart';
 import 'package:cloud_radar/presentation/components/search_input.dart';
+import 'package:cloud_radar/presentation/components/small_forecast_info.dart';
 import 'package:cloud_radar/presentation/screens/search_screen.dart';
 import 'package:cloud_radar/presentation/theme/application_colors.dart';
 import 'package:cloud_radar/presentation/theme/cloud_radar_icons.dart';
+import 'package:cloud_radar/utils/formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,30 +58,24 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                   );
                 } else if (state is ForecastLoadSuccess) {
-                  
+                  int currentForecastIndex = state.selectedForecastIndex;
+                  Weather weatherPrediction =
+                      state.forecast.weatherPredictions[currentForecastIndex];
+                  String cityName = weatherPrediction.city,
+                      date = Formatter.fullDateWithWeekdayAndDate(
+                        weatherPrediction.weekday,
+                        weatherPrediction.writtenDate,
+                      ),
+                      sunsetTime = weatherPrediction.sunsetTime,
+                      weatherDescription = weatherPrediction.weatherDescription;
 
-                  Weather weatherPredictionCurrentScreen =
-                      state.forecast.weatherPredictions.first;
-                  String cityName = weatherPredictionCurrentScreen.city,
-                      date =
-                          "${weatherPredictionCurrentScreen.weekday} ${weatherPredictionCurrentScreen.writtenDate}",
-                      minTemperature = weatherPredictionCurrentScreen
-                          .minTemperature
-                          .toString(),
-                      maxTemperature = weatherPredictionCurrentScreen
-                          .maxTemperature
-                          .toString(),
-                      weatherDescription =
-                          weatherPredictionCurrentScreen.weatherDescription,
-                      windSpeed =
-                          weatherPredictionCurrentScreen.windSpeed.toString(),
-                      humidity =
-                          weatherPredictionCurrentScreen.humidity.toString(),
-                      sunsetTime = weatherPredictionCurrentScreen.sunsetTime;
+                  int minTemperature = weatherPrediction.minTemperature,
+                      maxTemperature = weatherPrediction.maxTemperature,
+                      humidity = weatherPrediction.humidity;
+                  double windSpeed = weatherPrediction.windSpeed;
                   int? currentTemperature =
-                      weatherPredictionCurrentScreen.currentTemperature;
-                  String? windDirection =
-                      weatherPredictionCurrentScreen.windCardinal;
+                      weatherPrediction.currentTemperature;
+                  String? windDirection = weatherPrediction.windCardinal;
 
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -148,36 +146,15 @@ class _MainScreenState extends State<MainScreen> {
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
-                                        currentTemperature == null
-                                            ? const Text("Opsie")
-                                            : Row(
-                                                children: [
-                                                  Text(
-                                                    "$currentTemperature°",
-                                                    style: const TextStyle(
-                                                      color: ApplicationColors
-                                                          .white,
-                                                      fontFamily: "DM Sans",
-                                                      fontSize: 80,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      height: 1,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    state.chosenTemperatureScale
-                                                        .name,
-                                                    style: const TextStyle(
-                                                      color: ApplicationColors
-                                                          .orange500,
-                                                      fontFamily: "DM Sans",
-                                                      fontSize: 40,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                        weatherPrediction is CurrentDayWeather
+                                            ? CurrentTemperatureText(
+                                                currentTemperature:
+                                                    currentTemperature!,
+                                                temperatureScale: state
+                                                    .chosenTemperatureScale
+                                                    .name,
+                                              )
+                                            : const GradientLine(),
                                         Text(
                                           "Máx.: $maxTemperature°",
                                           style: const TextStyle(
@@ -221,82 +198,28 @@ class _MainScreenState extends State<MainScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    BlocBuilder<WindUnitCubit, WindUnitState>(
-                                      builder: (context, windUnitState) {
-                                        return Row(
-                                          spacing: 8,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            const Icon(
-                                              CloudRadarIcons.wind,
-                                              applyTextScaling: true,
-                                              size: 24,
-                                            ),
-                                            BoldHalf(
-                                              normalText:
-                                                  '$windSpeed ${windUnitState.chosenWindUnit.speedUnit}',
-                                              boldText: windDirection!,
-                                              style: const TextStyle(
-                                                fontFamily: "Inter",
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                                color: ApplicationColors.white,
-                                              ),
-                                              textScaler:
-                                                  const TextScaler.linear(0.8),
-                                            ),
-                                          ],
-                                        );
-                                      },
+                                    weatherPrediction is CurrentDayWeather
+                                        ? BlocBuilder<WindUnitCubit,
+                                            WindUnitState>(
+                                            builder: (context, windUnitState) {
+                                              return SmallForecastInfo(
+                                                normalText:
+                                                    '$windSpeed ${windUnitState.chosenWindUnit.speedUnit}',
+                                                boldText: windDirection!,
+                                                icon: CloudRadarIcons.wind,
+                                              );
+                                            },
+                                          )
+                                        : Container(),
+                                    SmallForecastInfo(
+                                      normalText: "Umidade",
+                                      boldText: "$humidity%",
+                                      icon: CloudRadarIcons.humidity,
                                     ),
-                                    Row(
-                                      spacing: 8,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        const Icon(
-                                          CloudRadarIcons.humidity,
-                                          size: 24,
-                                          applyTextScaling: true,
-                                        ),
-                                        BoldHalf(
-                                          normalText: "Umidade",
-                                          boldText: "$humidity%",
-                                          style: const TextStyle(
-                                            fontFamily: "Inter",
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
-                                            color: ApplicationColors.white,
-                                          ),
-                                          textScaler:
-                                              const TextScaler.linear(0.8),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      spacing: 8,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        const Icon(
-                                          CloudRadarIcons.sunset,
-                                          size: 24,
-                                          applyTextScaling: true,
-                                        ),
-                                        BoldHalf(
-                                          normalText: "Pôr do sol",
-                                          boldText: sunsetTime,
-                                          textScaler:
-                                              const TextScaler.linear(0.8),
-                                          style: const TextStyle(
-                                            fontFamily: "Inter",
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
-                                            color: ApplicationColors.white,
-                                          ),
-                                        ),
-                                      ],
+                                    SmallForecastInfo(
+                                      normalText: "Pôr do sol",
+                                      boldText: sunsetTime,
+                                      icon: CloudRadarIcons.sunset,
                                     ),
                                   ],
                                 ),

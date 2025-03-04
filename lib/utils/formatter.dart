@@ -84,4 +84,8 @@ class Formatter {
   static String formatStringNameToCloudFormat(String cityName) {
     return cityName.replaceFirst(",", " - ");
   }
+
+  static String fullDateWithWeekdayAndDate(String weekday, String writtenDate) {
+    return "$weekday $writtenDate";
+  }
 }

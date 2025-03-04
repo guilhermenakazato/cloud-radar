@@ -1,4 +1,3 @@
-import 'package:cloud_radar/data/models/forecast.dart';
 import 'package:cloud_radar/data/models/weather.dart';
 import 'package:cloud_radar/logic/cubit/forecast_cubit.dart';
 import 'package:cloud_radar/logic/cubit/temperature_scale_cubit.dart';

@@ -12,19 +12,19 @@ class EnjoyScreen extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: const BoxDecoration(
-        gradient: RadialGradient(colors: [
-          Color(0xfffcccd9),
-          Color(0xffffdeed),
-          Color(0xffffd89c),
-          Color(0xfffff0d9),
-          Color(0xffffc4b7)
-        ], stops: [
-          0,
-          0.39,
-          0.68,
-          0.84,
-          1
-        ], focalRadius: 0.1, radius: 2.5, center: Alignment.topCenter),
+        gradient: RadialGradient(
+          colors: [
+            Color(0xfffcccd9),
+            Color(0xffffdeed),
+            Color(0xffffd89c),
+            Color(0xfffff0d9),
+            Color(0xffffc4b7)
+          ],
+          stops: [0, 0.39, 0.68, 0.84, 1],
+          focalRadius: 0.1,
+          radius: 2.5,
+          center: Alignment.topCenter,
+        ),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -116,7 +116,8 @@ class EnjoyScreen extends StatelessWidget {
                         child: FilledCloudButton(
                           text: "Próximo",
                           onPressed: () {
-                            Navigator.pushNamedAndRemoveUntil(context, "/home", ModalRoute.withName("/"));
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, "/home", ModalRoute.withName("/"));
                           },
                         ),
                       ),
