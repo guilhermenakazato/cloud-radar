@@ -13,43 +13,40 @@ class ForecastList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: BlocBuilder<TemperatureScaleCubit, TemperatureScaleState>(
-        builder: (context, temperatureState) {
-          return SizedBox(
-            width: double.infinity,
-            height: MediaQuery.sizeOf(context).height * 0.11,
-            child: ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              itemCount: 5,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                Weather weatherPrediction = predictions[index];
-                bool forecastIsSelected =
-                    context.read<ForecastCubit>().state.selectedForecastIndex ==
-                        index;
-
-                return Prediction(
-                  day: weatherPrediction.numberDate,
-                  minTemperature: weatherPrediction.minTemperature,
-                  maxTemperature: weatherPrediction.maxTemperature,
-                  icon: CloudRadarIcons.rain,
-                  selected: forecastIsSelected,
-                  onTap: () {
-                    context.read<ForecastCubit>().changeSelectedForecast(index);
-                  },
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                  width: 2,
-                );
-              },
-            ),
-          );
-        },
-      ),
+    return BlocBuilder<TemperatureScaleCubit, TemperatureScaleState>(
+      builder: (context, temperatureState) {
+        return SizedBox(
+          width: double.infinity,
+          height: MediaQuery.sizeOf(context).height * 0.11,
+          child: ListView.separated(
+            physics: const BouncingScrollPhysics(),
+            itemCount: 5,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              Weather weatherPrediction = predictions[index];
+              bool forecastIsSelected =
+                  context.read<ForecastCubit>().state.selectedForecastIndex ==
+                      index;
+    
+              return Prediction(
+                day: weatherPrediction.numberDate,
+                minTemperature: weatherPrediction.minTemperature,
+                maxTemperature: weatherPrediction.maxTemperature,
+                icon: CloudRadarIcons.rain,
+                selected: forecastIsSelected,
+                onTap: () {
+                  context.read<ForecastCubit>().changeSelectedForecast(index);
+                },
+              );
+            },
+            separatorBuilder: (context, index) {
+              return const SizedBox(
+                width: 2,
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

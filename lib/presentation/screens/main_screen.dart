@@ -7,6 +7,7 @@ import 'package:cloud_radar/presentation/components/current_temperature_text.dar
 import 'package:cloud_radar/presentation/components/forecast_list.dart';
 import 'package:cloud_radar/presentation/components/gradient_line.dart';
 import 'package:cloud_radar/presentation/components/search_input.dart';
+import 'package:cloud_radar/presentation/components/skeleton_loading.dart';
 import 'package:cloud_radar/presentation/components/small_forecast_info.dart';
 import 'package:cloud_radar/presentation/screens/search_screen.dart';
 import 'package:cloud_radar/presentation/theme/application_colors.dart';
@@ -46,17 +47,7 @@ class _MainScreenState extends State<MainScreen> {
             child: BlocBuilder<ForecastCubit, ForecastState>(
               builder: (context, state) {
                 if (state is ForecastLoadInProgress) {
-                  return const Center(
-                    child: Text(
-                      "Loading",
-                      style: TextStyle(
-                        color: ApplicationColors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "DM Sans",
-                      ),
-                    ),
-                  );
+                  return const SkeletonLoading();
                 } else if (state is ForecastLoadSuccess) {
                   int currentForecastIndex = state.selectedForecastIndex;
                   Weather weatherPrediction =
@@ -233,11 +224,13 @@ class _MainScreenState extends State<MainScreen> {
                           bottom: MediaQuery.sizeOf(context).height * 0.04,
                         ),
                         child: Column(
+                          spacing: 8,
                           children: [
                             ForecastList(
                               predictions: state.forecast.weatherPredictions,
                             ),
                             Row(
+                              spacing: 8,
                               children: [
                                 Expanded(
                                   child: SearchInput(
@@ -257,15 +250,12 @@ class _MainScreenState extends State<MainScreen> {
                                     },
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
-                                  child: IconButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(context, "/config");
-                                    },
-                                    icon: const Icon(
-                                      CloudRadarIcons.setting,
-                                    ),
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, "/config");
+                                  },
+                                  icon: const Icon(
+                                    CloudRadarIcons.setting,
                                   ),
                                 ),
                               ],
