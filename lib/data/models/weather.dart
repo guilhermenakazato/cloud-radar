@@ -37,8 +37,7 @@ abstract class Weather {
     Map<String, dynamic> jsonMap,
     String cityName,
     int weatherPredictionOrder,
-    int currentDayTemperature,
-    String currentDayWindDirection,
+    Map<String, dynamic> wholePredictionJsonMap,
   ) {
     final numberDate = jsonMap['date'];
 
@@ -49,15 +48,15 @@ abstract class Weather {
           weekday: Formatter.getWeekdayWithAbbreviation(jsonMap['weekday']),
           numberDate: "Hoje",
           writtenDate: Formatter.numberDateToWrittenDate(numberDate),
-          weatherDescription: jsonMap['description'],
+          weatherDescription: wholePredictionJsonMap['description'],
           sunsetTime:
               Formatter.getMilitaryTimeFromStandardTime(jsonMap['sunset']),
-          windCardinal: currentDayWindDirection,
+          windCardinal: wholePredictionJsonMap['wind_cardinal'],
           minTemperature: jsonMap['min'],
           maxTemperature: jsonMap['max'],
-          currentTemperature: currentDayTemperature,
-          windSpeed: Formatter.windSpeedTextToValue(jsonMap['wind_speedy']),
-          humidity: jsonMap['humidity'],
+          currentTemperature: wholePredictionJsonMap['temp'],
+          windSpeed: Formatter.windSpeedTextToValue(wholePredictionJsonMap['wind_speedy']),
+          humidity: wholePredictionJsonMap['humidity'],
           lastUpdated: DateTime.now(),
         );
       case 1:

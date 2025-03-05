@@ -17,4 +17,8 @@ class Forecast {
 
     return returnString;
   }
+
+  factory Forecast.empty() {
+    return Forecast(weatherPredictions: List<Weather>.empty());
+  }
 }

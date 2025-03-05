@@ -73,8 +73,10 @@ class Formatter {
     }
 
     if (hour < 12 && timeType == "pm") hour += 12;
+    String formattedHour = "$hour", formattedMinute = "$minute";
+    if (minute < 10) formattedMinute = "0$formattedMinute";
 
-    return "$hour:$minute";
+    return "$formattedHour:$formattedMinute";
   }
 
   static double windSpeedTextToValue(String windSpeedText) {
