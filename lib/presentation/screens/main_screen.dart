@@ -1,8 +1,6 @@
 import 'package:cloud_radar/data/models/current_day_weather.dart';
 import 'package:cloud_radar/data/models/weather.dart';
 import 'package:cloud_radar/logic/cubit/forecast_cubit.dart';
-import 'package:cloud_radar/logic/cubit/temperature_scale_cubit.dart';
-import 'package:cloud_radar/logic/cubit/wind_unit_cubit.dart';
 import 'package:cloud_radar/presentation/components/current_temperature_text.dart';
 import 'package:cloud_radar/presentation/components/custom_refresh.dart';
 import 'package:cloud_radar/presentation/components/forecast_list.dart';
@@ -28,7 +26,13 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<ForecastCubit>().fetchForecast("Brasília,DF");
+    final forecastState = context.read<ForecastCubit>().state;
+
+    if (forecastState.weatherStatus.isSuccess) {
+      context.read<ForecastCubit>().updateForecast("Aquidauana,MS");
+    } else {
+      context.read<ForecastCubit>().fetchForecast("Brasília,DF");
+    }
   }
 
   @override
@@ -47,17 +51,18 @@ class _MainScreenState extends State<MainScreen> {
             padding: const EdgeInsets.all(12.0),
             child: BlocConsumer<ForecastCubit, ForecastState>(
               listener: (context, state) {
-                if (state is ForecastUpdateFailure) {
+                if (state.weatherStatus.updateFailure) {
                   debugPrint("Erro :(");
                 }
               },
               builder: (context, state) {
-                if (state is ForecastLoadInProgress) {
+                if (state.weatherStatus.isLoading) {
                   return const SkeletonLoading();
-                } else if (state is ForecastLoadSuccess || state is ForecastUpdateInProgress) {
+                } else if (state.weatherStatus.isSuccess ||
+                    state.weatherStatus.isUpdating) {
                   int currentForecastIndex = state.selectedForecastIndex;
                   Weather weatherPrediction =
-                      state.forecast.weatherPredictions[currentForecastIndex];
+                      state.forecast[currentForecastIndex];
                   String cityName = weatherPrediction.city,
                       date = Formatter.fullDateWithWeekdayAndDate(
                         weatherPrediction.weekday,
@@ -146,51 +151,43 @@ class _MainScreenState extends State<MainScreen> {
                                                 color: ApplicationColors.white,
                                               ),
                                             ),
-                                            BlocBuilder<TemperatureScaleCubit,
-                                                TemperatureScaleState>(
-                                              builder: (context, state) {
-                                                return Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      "Min.: $minTemperature°",
-                                                      style: const TextStyle(
-                                                        color: ApplicationColors
-                                                            .blue100,
-                                                        fontFamily: "DM Sans",
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                    weatherPrediction
-                                                            is CurrentDayWeather
-                                                        ? CurrentTemperatureText(
-                                                            currentTemperature:
-                                                                currentTemperature!,
-                                                            temperatureScale: state
-                                                                .chosenTemperatureScale
-                                                                .name,
-                                                          )
-                                                        : const GradientLine(),
-                                                    Text(
-                                                      "Máx.: $maxTemperature°",
-                                                      style: const TextStyle(
-                                                        color: ApplicationColors
-                                                            .orange100,
-                                                        fontFamily: "DM Sans",
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "Min.: $minTemperature°",
+                                                  style: const TextStyle(
+                                                    color: ApplicationColors
+                                                        .blue100,
+                                                    fontFamily: "DM Sans",
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                weatherPrediction
+                                                        is CurrentDayWeather
+                                                    ? CurrentTemperatureText(
+                                                        currentTemperature:
+                                                            currentTemperature!,
+                                                        temperatureScale: state
+                                                            .chosenTemperatureScale
+                                                            .name,
+                                                      )
+                                                    : const GradientLine(),
+                                                Text(
+                                                  "Máx.: $maxTemperature°",
+                                                  style: const TextStyle(
+                                                    color: ApplicationColors
+                                                        .orange100,
+                                                    fontFamily: "DM Sans",
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                             const Icon(CloudRadarIcons.rain),
                                             Text(
@@ -227,20 +224,13 @@ class _MainScreenState extends State<MainScreen> {
                                               children: [
                                                 weatherPrediction
                                                         is CurrentDayWeather
-                                                    ? BlocBuilder<WindUnitCubit,
-                                                        WindUnitState>(
-                                                        builder: (context,
-                                                            windUnitState) {
-                                                          return SmallForecastInfo(
-                                                            normalText:
-                                                                '$windSpeed ${windUnitState.chosenWindUnit.speedUnit}',
-                                                            boldText:
-                                                                windDirection!,
-                                                            icon:
-                                                                CloudRadarIcons
-                                                                    .wind,
-                                                          );
-                                                        },
+                                                    ? SmallForecastInfo(
+                                                        normalText:
+                                                            '${Formatter.formatFloat(windSpeed)} ${state.chosenWindUnit.speedUnit}',
+                                                        boldText:
+                                                            windDirection!,
+                                                        icon: CloudRadarIcons
+                                                            .wind,
                                                       )
                                                     : Container(),
                                                 SmallForecastInfo(
@@ -271,8 +261,7 @@ class _MainScreenState extends State<MainScreen> {
                                       spacing: 8,
                                       children: [
                                         ForecastList(
-                                          predictions:
-                                              state.forecast.weatherPredictions,
+                                          predictions: state.forecast,
                                         ),
                                         Row(
                                           spacing: 8,

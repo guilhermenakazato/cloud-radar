@@ -16,4 +16,26 @@ class OtherDayWeather extends Weather {
     required super.windCardinal,
     required super.currentTemperature,
   });
+
+  factory OtherDayWeather.fromJson(Map<String, dynamic> json) {
+    return OtherDayWeather(
+      city: json['city'],
+      weekday: json['weekday'],
+      numberDate: json['numberDate'],
+      writtenDate: json['writtenDate'],
+      weatherDescription: json['weatherDescription'],
+      sunsetTime: json['sunsetTime'],
+      windCardinal: json['windCardinal'],
+      minTemperature: json['minTemperature'],
+      maxTemperature: json['maxTemperature'],
+      currentTemperature: json['currentTemperature'],
+      windSpeed: json['windSpeed'] as double,
+      humidity: json['humidity'],
+      lastUpdated: DateTime.fromMillisecondsSinceEpoch(json['lastUpdate']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return super.toBlocJson();
+  }
 }

@@ -1,14 +1,19 @@
 import 'dart:convert';
 
-import 'package:cloud_radar/data/models/forecast.dart';
 import 'package:cloud_radar/data/providers/weather_provider.dart';
+import 'package:cloud_radar/logic/enums/temperature_scale.dart';
+import 'package:cloud_radar/logic/enums/wind_speed.dart';
 import 'package:http/http.dart';
 import '../models/weather.dart';
 
 class WeatherRepository {
   final _weatherProvider = WeatherProvider();
 
-  Future<Forecast> getFormattedForecastList(String city) async {
+  Future<List<Weather>> getFormattedForecastList(
+    String city,
+    TemperatureScale currentTemperatureScale,
+    WindSpeed currentWindUnit,
+  ) async {
     final Response predictionsApiResponse =
         await _weatherProvider.getPredictions(city);
 
@@ -24,11 +29,13 @@ class WeatherRepository {
     List<Weather> weatherPredictions = List<Weather>.from(
       forecastIterable.map(
         (unformattedWeatherPrediction) {
-          final weatherPrediction = Weather.forecastFromJson(
+          final weatherPrediction = Weather.fromApiJson(
             unformattedWeatherPrediction,
             city,
             iterableIndex,
             wholePrediction,
+            currentTemperatureScale,
+            currentWindUnit,
           );
 
           iterableIndex++;
@@ -37,10 +44,6 @@ class WeatherRepository {
       ),
     );
 
-    final forecast = Forecast(
-      weatherPredictions: weatherPredictions,
-    );
-
-    return forecast;
+    return weatherPredictions;
   }
 }

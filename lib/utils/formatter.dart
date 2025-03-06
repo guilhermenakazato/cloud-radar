@@ -90,4 +90,8 @@ class Formatter {
   static String fullDateWithWeekdayAndDate(String weekday, String writtenDate) {
     return "$weekday $writtenDate";
   }
+
+  static String formatFloat(double n) {
+    return n.toStringAsFixed(n.truncateToDouble() == n ? 0 : 2);
+  }
 }

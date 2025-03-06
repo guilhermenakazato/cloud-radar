@@ -117,7 +117,10 @@ class EnjoyScreen extends StatelessWidget {
                           text: "Próximo",
                           onPressed: () {
                             Navigator.pushNamedAndRemoveUntil(
-                                context, "/home", ModalRoute.withName("/"));
+                              context,
+                              "/home",
+                              (Route<dynamic> route) => false,
+                            );
                           },
                         ),
                       ),

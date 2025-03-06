@@ -1,6 +1,5 @@
 import 'package:cloud_radar/data/models/weather.dart';
 import 'package:cloud_radar/logic/cubit/forecast_cubit.dart';
-import 'package:cloud_radar/logic/cubit/temperature_scale_cubit.dart';
 import 'package:cloud_radar/presentation/components/prediction.dart';
 import 'package:cloud_radar/presentation/theme/cloud_radar_icons.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +12,8 @@ class ForecastList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TemperatureScaleCubit, TemperatureScaleState>(
-      builder: (context, temperatureState) {
+    return BlocBuilder<ForecastCubit, ForecastState>(
+      builder: (context, state) {
         return SizedBox(
           width: double.infinity,
           height: MediaQuery.sizeOf(context).height * 0.11,
@@ -24,10 +23,8 @@ class ForecastList extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               Weather weatherPrediction = predictions[index];
-              bool forecastIsSelected =
-                  context.read<ForecastCubit>().state.selectedForecastIndex ==
-                      index;
-    
+              bool forecastIsSelected = state.selectedForecastIndex == index;
+
               return Prediction(
                 day: weatherPrediction.numberDate,
                 minTemperature: weatherPrediction.minTemperature,

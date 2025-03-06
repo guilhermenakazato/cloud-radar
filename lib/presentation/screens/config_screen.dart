@@ -1,5 +1,4 @@
-import 'package:cloud_radar/logic/cubit/temperature_scale_cubit.dart';
-import 'package:cloud_radar/logic/cubit/wind_unit_cubit.dart';
+import 'package:cloud_radar/logic/cubit/forecast_cubit.dart';
 import 'package:cloud_radar/presentation/components/cloud_appbar.dart';
 import 'package:cloud_radar/presentation/components/list_item.dart';
 import 'package:cloud_radar/logic/enums/temperature_scale.dart';
@@ -220,7 +219,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                       )
                     ],
                   ),
-                  BlocBuilder<TemperatureScaleCubit, TemperatureScaleState>(
+                  BlocBuilder<ForecastCubit, ForecastState>(
                     builder: (context, state) {
                       return Column(
                         children: [
@@ -231,7 +230,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                                 TemperatureScale.C,
                             onTap: () {
                               context
-                                  .read<TemperatureScaleCubit>()
+                                  .read<ForecastCubit>()
                                   .changeTemperatureScale(TemperatureScale.C);
                             },
                             trailing: Radio<TemperatureScale>(
@@ -239,7 +238,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                               groupValue: state.chosenTemperatureScale,
                               onChanged: (TemperatureScale? value) {
                                 context
-                                    .read<TemperatureScaleCubit>()
+                                    .read<ForecastCubit>()
                                     .changeTemperatureScale(value!);
                               },
                             ),
@@ -251,7 +250,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                                 TemperatureScale.F,
                             onTap: () {
                               context
-                                  .read<TemperatureScaleCubit>()
+                                  .read<ForecastCubit>()
                                   .changeTemperatureScale(TemperatureScale.F);
                             },
                             trailing: Radio<TemperatureScale>(
@@ -259,7 +258,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                               groupValue: state.chosenTemperatureScale,
                               onChanged: (TemperatureScale? value) {
                                 context
-                                    .read<TemperatureScaleCubit>()
+                                    .read<ForecastCubit>()
                                     .changeTemperatureScale(value!);
                               },
                             ),
@@ -289,7 +288,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                       )
                     ],
                   ),
-                  BlocBuilder<WindUnitCubit, WindUnitState>(
+                  BlocBuilder<ForecastCubit, ForecastState>(
                     builder: (context, state) {
                       return Column(
                         children: [
@@ -299,7 +298,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                             selected: state.chosenWindUnit == WindSpeed.km,
                             onTap: () {
                               context
-                                  .read<WindUnitCubit>()
+                                  .read<ForecastCubit>()
                                   .changeWindUnit(WindSpeed.km);
                             },
                             trailing: Radio<WindSpeed>(
@@ -307,7 +306,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                               groupValue: state.chosenWindUnit,
                               onChanged: (WindSpeed? value) {
                                 context
-                                    .read<WindUnitCubit>()
+                                    .read<ForecastCubit>()
                                     .changeWindUnit(value!);
                               },
                             ),
@@ -318,7 +317,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                             selected: state.chosenWindUnit == WindSpeed.m,
                             onTap: () {
                               context
-                                  .read<WindUnitCubit>()
+                                  .read<ForecastCubit>()
                                   .changeWindUnit(WindSpeed.m);
                             },
                             trailing: Radio<WindSpeed>(
@@ -326,7 +325,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                               groupValue: state.chosenWindUnit,
                               onChanged: (WindSpeed? value) {
                                 context
-                                    .read<WindUnitCubit>()
+                                    .read<ForecastCubit>()
                                     .changeWindUnit(value!);
                               },
                             ),
@@ -337,7 +336,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                             selected: state.chosenWindUnit == WindSpeed.mph,
                             onTap: () {
                               context
-                                  .read<WindUnitCubit>()
+                                  .read<ForecastCubit>()
                                   .changeWindUnit(WindSpeed.mph);
                             },
                             trailing: Radio<WindSpeed>(
@@ -345,7 +344,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                               groupValue: state.chosenWindUnit,
                               onChanged: (WindSpeed? value) {
                                 context
-                                    .read<WindUnitCubit>()
+                                    .read<ForecastCubit>()
                                     .changeWindUnit(value!);
                               },
                             ),
